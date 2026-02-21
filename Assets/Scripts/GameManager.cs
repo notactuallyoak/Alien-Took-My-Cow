@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject); // Keeps manager alive between levels
         }
+
+        Application.targetFrameRate = 60;
     }
 
     public void CamShake(float duration, float magnitude)
