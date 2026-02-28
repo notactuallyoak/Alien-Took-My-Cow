@@ -1,11 +1,9 @@
 using UnityEngine;
 using System.Collections;
+using System.Runtime.CompilerServices;
 
 public class PlayerController : MonoBehaviour
 {
-    private Animator anim;
-    private Rigidbody2D rb;
-
     [Header("Movement")]
     public float walkSpeed = 8f;
     public float machSpeed = 10f;
@@ -63,10 +61,16 @@ public class PlayerController : MonoBehaviour
     private int animSlamHash;
     private int animSlamLandHash;
 
+    private Animator anim;
+    private Rigidbody2D rb;
+    private GhostTrail ghostTrail;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
+        ghostTrail = GetComponent<GhostTrail>();
+
         extraJumps = extraJumpValue;
 
         animSpeedHash = Animator.StringToHash("Speed");
@@ -96,12 +100,32 @@ public class PlayerController : MonoBehaviour
         float inputY = Input.GetAxisRaw("Vertical");
         if (inputY < 0 && !isGrounded && !isSlamming && !isDashing && slamCooldownTimer <= 0f)
             StartSlam();
+
+        HandleGhostEffects();
     }
 
     void FixedUpdate()
     {
         HandleMovement();
     }
+
+    // ================= GHOST EFFECTS =================
+
+    void HandleGhostEffects()
+    {
+        if (ghostTrail == null) return;
+
+        if (isSlamming)
+        {
+            ghostTrail.SpawnGhost();
+        }
+
+        else if (isRunning && isGrounded && currentSpeed > machSpeed)
+        {
+            ghostTrail.SpawnGhost();
+        }
+    }
+
 
     // ================= TIMERS =================
 
@@ -252,15 +276,24 @@ public class PlayerController : MonoBehaviour
     {
         isDashing = true;
         TriggerDashAnim();
-
-        //  cd timer start when dash starts  
         dashCooldownTimer = dashCooldown;
 
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0;
         rb.linearVelocity = new Vector2(lastFacingDir * dashForce, 0);
 
-        yield return new WaitForSeconds(dashDuration);
+        float timer = 0f;
+        while (timer < dashDuration)
+        {
+            if (ghostTrail != null) ghostTrail.SpawnGhost();
+
+            // (Optional)
+            // rb.linearVelocity = new Vector2(lastFacingDir * dashForce, 0); 
+
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        // -------------------------------------------------------------------------
 
         rb.gravityScale = originalGravity;
         isDashing = false;

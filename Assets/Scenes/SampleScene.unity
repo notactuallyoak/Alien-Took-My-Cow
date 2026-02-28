@@ -619,6 +619,7 @@ GameObject:
   - component: {fileID: 1568339569}
   - component: {fileID: 1568339567}
   - component: {fileID: 1568339570}
+  - component: {fileID: 1568339571}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -741,6 +742,21 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &1568339571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1568339564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baf720bc00672ae488e17928d90e4c38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GhostTrail
+  ghostInterval: 0.1
+  ghostFadeTime: 0.25
+  ghostColor: {r: 1, g: 1, b: 1, a: 0.5}
 --- !u!1 &2001762913
 GameObject:
   m_ObjectHideFlags: 0
