@@ -396,7 +396,7 @@ Camera:
   far clip plane: 768
   field of view: 34
   orthographic: 1
-  orthographic size: 8
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -724,16 +724,18 @@ MonoBehaviour:
   runSpeed: 16
   acceleration: 20
   deceleration: 25
-  jumpForce: 16
+  jumpForce: 18
   extraJumpValue: 1
   coyoteTime: 0.1
   jumpBufferTime: 0.1
   fallMultiplier: 2.5
   lowJumpMultiplier: 2
   fastFallMultiplier: 4
-  dashForce: 20
-  dashDuration: 0.2
+  dashForce: 25
+  dashDuration: 0.5
+  dashCooldown: 0.5
   slamForce: 25
+  slamCooldown: 1
   groundCheck: {fileID: 681575610}
   checkRadius: 0.2
   whatIsGround:

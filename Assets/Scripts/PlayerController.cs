@@ -3,78 +3,98 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
+    private Animator anim;
+    private Rigidbody2D rb;
+
     [Header("Movement")]
     public float walkSpeed = 8f;
     public float machSpeed = 10f;
     public float runSpeed = 16f;
-
     public float acceleration = 20f;
     public float deceleration = 25f;
 
     private float currentSpeed;
     private float targetSpeed;
-
     private bool isRunning;
     private float lastFacingDir = 1f;
 
     [Header("Jump")]
-    public float jumpForce = 16f;
+    public float jumpForce = 18f;
     public int extraJumpValue = 1;
-
-    [Header("Coyote Time")]
     public float coyoteTime = 0.1f;
-    private float coyoteTimeCounter;
-
-    [Header("Jump Buffer")]
     public float jumpBufferTime = 0.1f;
-    private float jumpBufferCounter;
-
-    [Header("Better Gravity")]
     public float fallMultiplier = 2.5f;
     public float lowJumpMultiplier = 2f;
-
-    [Header("Fast Fall")]
     public float fastFallMultiplier = 4f;
 
+    private float coyoteTimeCounter;
+    private float jumpBufferCounter;
+    private int extraJumps;
+
     [Header("Dash")]
-    public float dashForce = 20f;
-    public float dashDuration = 0.2f;
+    public float dashForce = 25f;
+    public float dashDuration = 0.5f;
+    public float dashCooldown = 0.5f;
+
     private bool isDashing;
+    private float dashCooldownTimer;
 
     [Header("Ground Slam")]
     public float slamForce = 25f;
+    public float slamCooldown = 1.0f;
+
     private bool isSlamming;
+    private float slamCooldownTimer;
 
     [Header("Ground Check")]
     public Transform groundCheck;
     public float checkRadius = 0.2f;
     public LayerMask whatIsGround;
 
-    private Rigidbody2D rb;
     private bool isGrounded;
     private bool facingRight = true;
-    private int extraJumps;
+
+    // Hash IDs
+    private int animSpeedHash;
+    private int animIsGroundedHash;
+    private int animYVelocityHash;
+    private int animJumpHash;
+    private int animDashHash;
+    private int animSlamHash;
+    private int animSlamLandHash;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponentInChildren<Animator>();
         extraJumps = extraJumpValue;
+
+        animSpeedHash = Animator.StringToHash("Speed");
+        animIsGroundedHash = Animator.StringToHash("IsGrounded");
+        animYVelocityHash = Animator.StringToHash("YVelocity");
+        animJumpHash = Animator.StringToHash("Jump");
+        animDashHash = Animator.StringToHash("Dash");
+        animSlamHash = Animator.StringToHash("Slam");
+        animSlamLandHash = Animator.StringToHash("SlamLand");
     }
 
     void Update()
     {
+        HandleTimers();
+
         HandleGroundCheck();
         HandleJumpBuffer();
         HandleJumpLogic();
         HandleBetterGravity();
+        UpdateAnimations();
 
-        // DASH
-        if (Input.GetKeyDown(KeyCode.X) && !isDashing)
+        // DASH INPUT
+        if (Input.GetKeyDown(KeyCode.X) && !isDashing && dashCooldownTimer <= 0f)
             StartCoroutine(Dash());
 
-        // GROUND SLAM
+        // GROUND SLAM INPUT
         float inputY = Input.GetAxisRaw("Vertical");
-        if (inputY < 0 && !isGrounded && !isSlamming)
+        if (inputY < 0 && !isGrounded && !isSlamming && !isDashing && slamCooldownTimer <= 0f)
             StartSlam();
     }
 
@@ -83,51 +103,58 @@ public class PlayerController : MonoBehaviour
         HandleMovement();
     }
 
+    // ================= TIMERS =================
+
+    void HandleTimers()
+    {
+        // ลดเวลา Timer ลงทีละนิดทุกเฟรม
+        if (dashCooldownTimer > 0f)
+            dashCooldownTimer -= Time.deltaTime;
+
+        if (slamCooldownTimer > 0f)
+            slamCooldownTimer -= Time.deltaTime;
+    }
+
+    // ================= ANIMATION LOGIC =================
+
+    void UpdateAnimations()
+    {
+        anim.SetFloat(animSpeedHash, currentSpeed);
+        anim.SetBool(animIsGroundedHash, isGrounded);
+        anim.SetFloat(animYVelocityHash, rb.linearVelocity.y);
+    }
+
+    void TriggerJumpAnim() => anim.SetTrigger(animJumpHash);
+    void TriggerDashAnim() => anim.SetTrigger(animDashHash);
+    void TriggerSlamAnim() => anim.SetTrigger(animSlamHash);
+    void TriggerSlamLandAnim() => anim.SetTrigger(animSlamLandHash);
+
     // ================= MOVEMENT =================
 
     void HandleMovement()
     {
-        // prevent
-        if (isDashing || isSlamming)
-            return;
+        if (isDashing || isSlamming) return;
 
         float inputX = Input.GetAxisRaw("Horizontal");
 
-        // save last facing dir
         if (inputX != 0)
         {
             lastFacingDir = Mathf.Sign(inputX);
-            if ((lastFacingDir > 0 && !facingRight) ||
-                (lastFacingDir < 0 && facingRight))
-            {
+            if ((lastFacingDir > 0 && !facingRight) || (lastFacingDir < 0 && facingRight))
                 Flip();
-            }
         }
 
-        // Shift = start acceleration
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            isRunning = true;
-        }
-        else
-        {
-            isRunning = false;
-        }
+        isRunning = Input.GetKey(KeyCode.LeftShift);
 
-        // set target speed
         if (isRunning)
         {
-            if (currentSpeed < machSpeed)
-                targetSpeed = machSpeed;
-            else
-                targetSpeed = runSpeed;
+            targetSpeed = (currentSpeed < machSpeed) ? machSpeed : runSpeed;
         }
         else
         {
             targetSpeed = Mathf.Abs(inputX) > 0 ? walkSpeed : 0f;
         }
 
-        // smooth acceleration / smooth deceleration
         if (currentSpeed < targetSpeed)
             currentSpeed += acceleration * Time.fixedDeltaTime;
         else
@@ -135,7 +162,6 @@ public class PlayerController : MonoBehaviour
 
         currentSpeed = Mathf.Clamp(currentSpeed, 0, runSpeed);
 
-        // if running mode -> use lastFacingDir
         float moveDir = isRunning ? lastFacingDir : inputX;
 
         rb.linearVelocity = new Vector2(moveDir * currentSpeed, rb.linearVelocity.y);
@@ -149,15 +175,11 @@ public class PlayerController : MonoBehaviour
         transform.localScale = scale;
     }
 
-    // ================= GROUND =================
+    // ================= GROUND & JUMP =================
 
     void HandleGroundCheck()
     {
-        isGrounded = Physics2D.OverlapCircle(
-            groundCheck.position,
-            checkRadius,
-            whatIsGround
-        );
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
 
         if (isGrounded)
         {
@@ -167,7 +189,9 @@ public class PlayerController : MonoBehaviour
             if (isSlamming)
             {
                 isSlamming = false;
-                // camshake
+                TriggerSlamLandAnim();
+                // cd timer start when slam hits the ground
+                slamCooldownTimer = slamCooldown;
             }
         }
         else
@@ -175,8 +199,6 @@ public class PlayerController : MonoBehaviour
             coyoteTimeCounter -= Time.deltaTime;
         }
     }
-
-    // ================= JUMP BUFFER =================
 
     void HandleJumpBuffer()
     {
@@ -186,19 +208,15 @@ public class PlayerController : MonoBehaviour
             jumpBufferCounter -= Time.deltaTime;
     }
 
-    // ================= JUMP LOGIC =================
-
     void HandleJumpLogic()
     {
         if (jumpBufferCounter > 0)
         {
-            // Normal jump (Coyote Time)
             if (coyoteTimeCounter > 0)
             {
                 Jump();
                 jumpBufferCounter = 0;
             }
-            // Air jump
             else if (extraJumps > 0)
             {
                 Jump();
@@ -210,34 +228,36 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
+        TriggerJumpAnim();
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         coyoteTimeCounter = 0;
     }
 
-    // ================= BETTER GRAVITY + FAST FALL =================
-
     void HandleBetterGravity()
     {
-        // Falling
         if (rb.linearVelocity.y < 0)
         {
             float multiplier = Input.GetKey(KeyCode.S) ? fastFallMultiplier : fallMultiplier;
-
             rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (multiplier - 1) * Time.deltaTime;
         }
-        // Short hop
         else if (rb.linearVelocity.y > 0 && !Input.GetKey(KeyCode.Space))
         {
             rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
     }
+
+    // ================= DASH & SLAM =================
+
     IEnumerator Dash()
     {
         isDashing = true;
+        TriggerDashAnim();
+
+        //  cd timer start when dash starts  
+        dashCooldownTimer = dashCooldown;
 
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0;
-
         rb.linearVelocity = new Vector2(lastFacingDir * dashForce, 0);
 
         yield return new WaitForSeconds(dashDuration);
@@ -249,6 +269,7 @@ public class PlayerController : MonoBehaviour
     void StartSlam()
     {
         isSlamming = true;
+        TriggerSlamAnim();
         rb.linearVelocity = new Vector2(0, -slamForce);
     }
 
