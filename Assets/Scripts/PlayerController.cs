@@ -52,10 +52,10 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;
     private bool facingRight = true;
 
-    // Hash IDs
+    // Hash IDs for performance
     private int animSpeedHash;
     private int animIsGroundedHash;
-    private int animYVelocityHash;
+    //private int animYVelocityHash;
     private int animJumpHash;
     private int animDashHash;
     private int animSlamHash;
@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
 
         animSpeedHash = Animator.StringToHash("Speed");
         animIsGroundedHash = Animator.StringToHash("IsGrounded");
-        animYVelocityHash = Animator.StringToHash("YVelocity");
+        //animYVelocityHash = Animator.StringToHash("YVelocity");
         animJumpHash = Animator.StringToHash("Jump");
         animDashHash = Animator.StringToHash("Dash");
         animSlamHash = Animator.StringToHash("Slam");
@@ -145,7 +145,7 @@ public class PlayerController : MonoBehaviour
     {
         anim.SetFloat(animSpeedHash, currentSpeed);
         anim.SetBool(animIsGroundedHash, isGrounded);
-        anim.SetFloat(animYVelocityHash, rb.linearVelocity.y);
+        //anim.SetFloat(animYVelocityHash, rb.linearVelocity.y);
     }
 
     void TriggerJumpAnim() => anim.SetTrigger(animJumpHash);
