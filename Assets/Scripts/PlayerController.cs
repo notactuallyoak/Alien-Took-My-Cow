@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using System.Runtime.CompilerServices;
 
 public class PlayerController : MonoBehaviour
 {
@@ -256,7 +255,7 @@ public class PlayerController : MonoBehaviour
             {
                 isSlamming = false;
                 anim.SetTrigger(animSlamLandHash);
-
+                StartCoroutine(Wait(0.1f));
                 // cd timer start when slam hits the ground
                 slamCooldownTimer = slamCooldown;
             }
@@ -382,5 +381,10 @@ public class PlayerController : MonoBehaviour
                 Destroy(col.gameObject);
             }
         }
+    }
+
+    private IEnumerator Wait(float sec = 0.1f)
+    {
+        yield return new WaitForSeconds(sec);
     }
 }
