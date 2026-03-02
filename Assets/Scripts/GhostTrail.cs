@@ -11,7 +11,7 @@ public class GhostTrail : MonoBehaviour
     private SpriteRenderer playerSprite;
 
     private GameObject[] ghostPool;
-    private int poolSize = 10;
+    private int poolSize = 9;
     private int currentIndex = 0;
 
     private float timer;

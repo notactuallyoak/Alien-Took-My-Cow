@@ -4,12 +4,13 @@ using System.Runtime.CompilerServices;
 
 public class PlayerController : MonoBehaviour
 {
+    // movement variables
     [Header("Movement")]
-    public float walkSpeed = 8f;
-    public float machSpeed = 10f;
-    public float runSpeed = 16f;
-    public float acceleration = 20f;
-    public float deceleration = 25f;
+    public float walkSpeed;
+    public float machSpeed;
+    public float runSpeed;
+    public float acceleration;
+    public float deceleration;
 
     private float currentSpeed;
     private float targetSpeed;
@@ -17,40 +18,47 @@ public class PlayerController : MonoBehaviour
     private float lastFacingDir = 1f;
 
     [Header("Jump")]
-    public float jumpForce = 18f;
-    public int extraJumpValue = 1;
-    public float coyoteTime = 0.1f;
-    public float jumpBufferTime = 0.1f;
-    public float fallMultiplier = 2.5f;
-    public float lowJumpMultiplier = 2f;
-    public float fastFallMultiplier = 4f;
+    public float jumpForce;
+    public int extraJumpValue;
+    public float coyoteTime;
+    public float jumpBufferTime;
+    public float fallMultiplier;
+    public float lowJumpMultiplier;
 
     private float coyoteTimeCounter;
     private float jumpBufferCounter;
     private int extraJumps;
 
     [Header("Dash")]
-    public float dashForce = 25f;
-    public float dashDuration = 0.5f;
-    public float dashCooldown = 0.5f;
+    public float dashForce;
+    public float dashDuration;
+    public float dashCooldown;
 
     private bool isDashing;
     private float dashCooldownTimer;
 
     [Header("Ground Slam")]
-    public float slamForce = 25f;
-    public float slamCooldown = 1.0f;
+    public float slamForce;
+    public float slamCooldown;
 
     private bool isSlamming;
     private float slamCooldownTimer;
 
     [Header("Ground Check")]
     public Transform groundCheck;
-    public float checkRadius = 0.2f;
+    public float checkRadius;
     public LayerMask whatIsGround;
 
     private bool isGrounded;
     private bool facingRight = true;
+
+    // hit variables 
+    [Header("Knockback Settings")]
+    public float knockbackForceX;
+    public float knockbackForceY;
+    public float hurtDuration;  // uncontrollable time after hit
+
+    private bool isHurt = false;
 
     // Hash IDs for performance
     private int animSpeedHash;
@@ -98,7 +106,7 @@ public class PlayerController : MonoBehaviour
 
         // GROUND SLAM INPUT
         float inputY = Input.GetAxisRaw("Vertical");
-        if (inputY < 0 && !isGrounded && !isSlamming && !isDashing && slamCooldownTimer <= 0f)
+        if (inputY < 0 && !isGrounded && !isSlamming && slamCooldownTimer <= 0f)
             StartSlam();
 
         HandleGhostEffects();
@@ -109,18 +117,58 @@ public class PlayerController : MonoBehaviour
         HandleMovement();
     }
 
+    // ================= KNOCKBACK =================
+
+    // for other to called
+    public void TakeDamage(Vector2 enemyPosition)
+    {
+        if (isHurt || isDashing || isSlamming) return;
+
+        // cancel other action
+        isDashing = false;
+        isSlamming = false;
+        StopAllCoroutines();
+
+        // decrease points or time
+        //GameManager.Instance.OnPlayerHit();
+
+        StartCoroutine(PerformKnockback(enemyPosition));
+    }
+
+    private IEnumerator PerformKnockback(Vector2 hitSource)
+    {
+        isHurt = true;
+
+        // calc knockback dir (away from enemy position)
+        Vector2 knockbackDir = (transform.position - (Vector3)hitSource).normalized;
+
+        if (knockbackDir == Vector2.zero)
+        {
+            knockbackDir = new Vector2(-lastFacingDir, 1).normalized;
+        }
+
+        rb.linearVelocity = Vector2.zero;
+        rb.AddForce(new Vector2(knockbackDir.x * knockbackForceX, knockbackForceY), ForceMode2D.Impulse);
+
+        // anim.SetTrigger("Hurt");
+
+        yield return new WaitForSeconds(hurtDuration);
+        isHurt = false;
+    }
+
+
     // ================= GHOST EFFECTS =================
 
     void HandleGhostEffects()
     {
         if (ghostTrail == null) return;
 
-        if (isSlamming)
+        if (isSlamming || (isDashing && !isHurt))
         {
             ghostTrail.SpawnGhost();
         }
 
-        else if (isRunning && isGrounded && currentSpeed > machSpeed)
+        else if (isRunning && isGrounded && currentSpeed > machSpeed && !isHurt)
         {
             ghostTrail.SpawnGhost();
         }
@@ -131,7 +179,6 @@ public class PlayerController : MonoBehaviour
 
     void HandleTimers()
     {
-        // ลดเวลา Timer ลงทีละนิดทุกเฟรม
         if (dashCooldownTimer > 0f)
             dashCooldownTimer -= Time.deltaTime;
 
@@ -148,16 +195,11 @@ public class PlayerController : MonoBehaviour
         //anim.SetFloat(animYVelocityHash, rb.linearVelocity.y);
     }
 
-    void TriggerJumpAnim() => anim.SetTrigger(animJumpHash);
-    void TriggerDashAnim() => anim.SetTrigger(animDashHash);
-    void TriggerSlamAnim() => anim.SetTrigger(animSlamHash);
-    void TriggerSlamLandAnim() => anim.SetTrigger(animSlamLandHash);
-
     // ================= MOVEMENT =================
 
     void HandleMovement()
     {
-        if (isDashing || isSlamming) return;
+        if (isDashing || isSlamming || isHurt) return;
 
         float inputX = Input.GetAxisRaw("Horizontal");
 
@@ -213,7 +255,8 @@ public class PlayerController : MonoBehaviour
             if (isSlamming)
             {
                 isSlamming = false;
-                TriggerSlamLandAnim();
+                anim.SetTrigger(animSlamLandHash);
+
                 // cd timer start when slam hits the ground
                 slamCooldownTimer = slamCooldown;
             }
@@ -252,17 +295,18 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        TriggerJumpAnim();
+        anim.SetTrigger(animJumpHash);
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         coyoteTimeCounter = 0;
     }
 
     void HandleBetterGravity()
     {
+        if (isHurt) return;
+
         if (rb.linearVelocity.y < 0)
         {
-            float multiplier = Input.GetKey(KeyCode.S) ? fastFallMultiplier : fallMultiplier;
-            rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (multiplier - 1) * Time.deltaTime;
+            rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
         else if (rb.linearVelocity.y > 0 && !Input.GetKey(KeyCode.Space))
         {
@@ -275,7 +319,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator Dash()
     {
         isDashing = true;
-        TriggerDashAnim();
+        anim.SetTrigger(animDashHash);
         dashCooldownTimer = dashCooldown;
 
         float originalGravity = rb.gravityScale;
@@ -302,18 +346,41 @@ public class PlayerController : MonoBehaviour
     void StartSlam()
     {
         isSlamming = true;
-        TriggerSlamAnim();
+        anim.SetTrigger(animSlamHash);
         rb.linearVelocity = new Vector2(0, -slamForce);
     }
 
     // ================= DEBUG =================
-
     void OnDrawGizmosSelected()
     {
         if (groundCheck != null)
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(groundCheck.position, checkRadius);
+        }
+    }
+
+    // ================= COLLISION DETECTION =================
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            TakeDamage(other.transform.position);
+        }
+        else if (other.gameObject.CompareTag("Hazard"))
+        {
+            TakeDamage(other.transform.position);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.CompareTag("Breakable"))
+        {
+            if (isSlamming || isDashing || currentSpeed >= machSpeed)
+            {
+                Destroy(col.gameObject);
+            }
         }
     }
 }
