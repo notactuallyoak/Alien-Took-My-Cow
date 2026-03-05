@@ -4,14 +4,14 @@ using System.Collections;
 public class GhostTrail : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] private float ghostInterval = 0.05f; // clone every
-    [SerializeField] private float ghostFadeTime = 0.5f;  // slowly fade 
+    private float ghostInterval;
+    private float ghostFadeTime;
     [SerializeField] private Color ghostColor = new Color(1f, 1f, 1f, 0.5f);
 
     private SpriteRenderer playerSprite;
 
     private GameObject[] ghostPool;
-    private int poolSize = 9;
+    private int poolSize = 7;
     private int currentIndex = 0;
 
     private float timer;
@@ -37,8 +37,11 @@ public class GhostTrail : MonoBehaviour
     }
 
     // called by PlayerController
-    public void SpawnGhost()
+    public void SpawnGhost(float gInterval = 0.1f, float gFadeTime = 0.1f)
     {
+        ghostInterval = gInterval;
+        ghostFadeTime = gFadeTime;
+
         // timer prevent spawn too fast
         if (Time.time < timer) return;
         timer = Time.time + ghostInterval;

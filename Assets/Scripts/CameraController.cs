@@ -2,40 +2,78 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    public static CameraController Instance { get; private set; }
+
     public Transform target;
-    public float smoothSpeed = 0.25f;
-    public Vector3 offset = new Vector3(0, 2, -10);
+    public float smoothSpeed;
+    public Vector3 offset;
 
     [Header("Look Ahead")]
-    public float lookAheadDistance = 4f;
-    public float lookAheadSpeed = 2f;
+    public float lookAheadDistance;
+    public float lookAheadSpeed;
 
     private float currentLookAhead;
     private Rigidbody2D targetRb;
 
-    void Start()
+    // cam shake
+    private Vector2 shakeOffset;
+    private float shakeTimeRemaining;
+    private float shakePower;
+    private float shakeFadeTime;
+
+    private void Awake()
     {
-        if (target != null) targetRb = target.GetComponent<Rigidbody2D>();
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
     }
 
-    void LateUpdate()
+    private void Start()
+    {
+        if (target != null) targetRb = target.GetComponent<Rigidbody2D>();
+        shakeOffset = Vector2.zero;
+    }
+    private void LateUpdate()
     {
         if (target == null) return;
 
-        // 1. Determine direction based on player velocity
+        // determine direction based on player velocity
         float targetLookAhead = 0;
         if (Mathf.Abs(targetRb.linearVelocity.x) > 1f)
         {
             targetLookAhead = Mathf.Sign(targetRb.linearVelocity.x) * lookAheadDistance;
-        }
+        }   
 
-        // 2. Smoothly interpolate the look-ahead offset
+        // smoothly interpolate the look-ahead offset
         currentLookAhead = Mathf.Lerp(currentLookAhead, targetLookAhead, lookAheadSpeed * Time.deltaTime);
 
-        // 3. Calculate final position
-        Vector3 desiredPosition = target.position + offset + new Vector3(currentLookAhead, 0, 0);
+        // cam shake logic
+        if (shakeTimeRemaining > 0)
+        {
+            shakeTimeRemaining -= Time.deltaTime;
 
-        // 4. Smooth follow
+            float currentPower = Mathf.Lerp(shakePower, 0, 1 - (shakeTimeRemaining / shakeFadeTime));
+            shakeOffset = Random.insideUnitCircle.normalized * currentPower;
+        }
+        else
+        {
+            shakeOffset = Vector2.Lerp(shakeOffset, Vector2.zero, smoothSpeed * Time.deltaTime);
+        }
+
+        // calc final desired position with look-ahead + offset
+        Vector3 desiredPosition = target.position + offset + new Vector3(currentLookAhead, 0, 0) + (Vector3)shakeOffset;
         transform.position = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
+    }
+
+    public void CamShake(float intensity = 0.1f, float duration = 0.1f)
+    {
+        shakePower = intensity;
+        shakeTimeRemaining = duration;
+        shakeFadeTime = duration;
     }
 }

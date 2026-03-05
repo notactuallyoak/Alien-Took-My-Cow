@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
     public float dashDuration;
     public float dashCooldown;
 
-    private bool isDashing;
+    [HideInInspector] public bool isDashing;
     private float dashCooldownTimer;
 
     [Header("Ground Slam")]
@@ -49,20 +49,12 @@ public class PlayerController : MonoBehaviour
     public LayerMask whatIsGround;
 
     private bool isGrounded;
-    private bool facingRight = true;
-
-    // hit variables 
-    [Header("Knockback Settings")]
-    public float knockbackForceX;
-    public float knockbackForceY;
-    public float hurtDuration;  // uncontrollable time after hit
-
-    private bool isHurt = false;
+    [HideInInspector] public bool facingRight = true;
+    [HideInInspector] public bool isHurt = false;
 
     // Hash IDs for performance
     private int animSpeedHash;
     private int animIsGroundedHash;
-    //private int animYVelocityHash;
     private int animJumpHash;
     private int animDashHash;
     private int animSlamHash;
@@ -82,7 +74,6 @@ public class PlayerController : MonoBehaviour
 
         animSpeedHash = Animator.StringToHash("Speed");
         animIsGroundedHash = Animator.StringToHash("IsGrounded");
-        //animYVelocityHash = Animator.StringToHash("YVelocity");
         animJumpHash = Animator.StringToHash("Jump");
         animDashHash = Animator.StringToHash("Dash");
         animSlamHash = Animator.StringToHash("Slam");
@@ -116,65 +107,20 @@ public class PlayerController : MonoBehaviour
         HandleMovement();
     }
 
-    // ================= KNOCKBACK =================
-
-    // for other to called
-    public void TakeDamage(Vector2 enemyPosition)
-    {
-        if (isHurt || isDashing || isSlamming) return;
-
-        // cancel other action
-        isDashing = false;
-        isSlamming = false;
-        StopAllCoroutines();
-
-        // decrease points or time
-        //GameManager.Instance.OnPlayerHit();
-
-        StartCoroutine(PerformKnockback(enemyPosition));
-    }
-
-    private IEnumerator PerformKnockback(Vector2 hitSource)
-    {
-        isHurt = true;
-
-        // calc knockback dir (away from enemy position)
-        Vector2 knockbackDir = (transform.position - (Vector3)hitSource).normalized;
-
-        if (knockbackDir == Vector2.zero)
-        {
-            knockbackDir = new Vector2(-lastFacingDir, 1).normalized;
-        }
-
-        rb.linearVelocity = Vector2.zero;
-        rb.AddForce(new Vector2(knockbackDir.x * knockbackForceX, knockbackForceY), ForceMode2D.Impulse);
-
-        // anim.SetTrigger("Hurt");
-
-        yield return new WaitForSeconds(hurtDuration);
-        isHurt = false;
-    }
-
-
-    // ================= GHOST EFFECTS =================
-
     void HandleGhostEffects()
     {
         if (ghostTrail == null) return;
 
-        if (isSlamming || (isDashing && !isHurt))
+        if (isSlamming)
         {
-            ghostTrail.SpawnGhost();
+            ghostTrail.SpawnGhost(0.05f, 0.15f);
         }
 
         else if (isRunning && isGrounded && currentSpeed > machSpeed && !isHurt)
         {
-            ghostTrail.SpawnGhost();
+            ghostTrail.SpawnGhost(0.2f, 0.5f);
         }
     }
-
-
-    // ================= TIMERS =================
 
     void HandleTimers()
     {
@@ -185,16 +131,12 @@ public class PlayerController : MonoBehaviour
             slamCooldownTimer -= Time.deltaTime;
     }
 
-    // ================= ANIMATION LOGIC =================
-
     void UpdateAnimations()
     {
         anim.SetFloat(animSpeedHash, currentSpeed);
         anim.SetBool(animIsGroundedHash, isGrounded);
         //anim.SetFloat(animYVelocityHash, rb.linearVelocity.y);
     }
-
-    // ================= MOVEMENT =================
 
     void HandleMovement()
     {
@@ -210,7 +152,6 @@ public class PlayerController : MonoBehaviour
         }
 
         isRunning = Input.GetKey(KeyCode.LeftShift);
-
         if (isRunning)
         {
             targetSpeed = (currentSpeed < machSpeed) ? machSpeed : runSpeed;
@@ -221,12 +162,14 @@ public class PlayerController : MonoBehaviour
         }
 
         if (currentSpeed < targetSpeed)
+        {
             currentSpeed += acceleration * Time.fixedDeltaTime;
+        }
         else
+        {
             currentSpeed -= deceleration * Time.fixedDeltaTime;
-
+        }
         currentSpeed = Mathf.Clamp(currentSpeed, 0, runSpeed);
-
         float moveDir = isRunning ? lastFacingDir : inputX;
 
         rb.linearVelocity = new Vector2(moveDir * currentSpeed, rb.linearVelocity.y);
@@ -240,8 +183,6 @@ public class PlayerController : MonoBehaviour
         transform.localScale = scale;
     }
 
-    // ================= GROUND & JUMP =================
-
     void HandleGroundCheck()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
@@ -254,10 +195,11 @@ public class PlayerController : MonoBehaviour
             if (isSlamming)
             {
                 isSlamming = false;
+
                 anim.SetTrigger(animSlamLandHash);
-                StartCoroutine(Wait(0.1f));
-                // cd timer start when slam hits the ground
-                slamCooldownTimer = slamCooldown;
+                CameraController.Instance?.CamShake(0.2f, 0.2f);
+
+                slamCooldownTimer = slamCooldown;   // cd timer start when slam hits the ground
             }
         }
         else
@@ -276,6 +218,8 @@ public class PlayerController : MonoBehaviour
 
     void HandleJumpLogic()
     {
+        if (isHurt) return;
+
         if (jumpBufferCounter > 0)
         {
             if (coyoteTimeCounter > 0)
@@ -295,6 +239,8 @@ public class PlayerController : MonoBehaviour
     void Jump()
     {
         anim.SetTrigger(animJumpHash);
+        CameraController.Instance?.CamShake(0.1f, 0.1f);
+
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         coyoteTimeCounter = 0;
     }
@@ -313,8 +259,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // ================= DASH & SLAM =================
-
     IEnumerator Dash()
     {
         isDashing = true;
@@ -328,7 +272,7 @@ public class PlayerController : MonoBehaviour
         float timer = 0f;
         while (timer < dashDuration)
         {
-            if (ghostTrail != null) ghostTrail.SpawnGhost();
+            if (ghostTrail != null) ghostTrail.SpawnGhost(0.05f, 0.1f);
 
             // (Optional)
             // rb.linearVelocity = new Vector2(lastFacingDir * dashForce, 0); 
@@ -336,7 +280,6 @@ public class PlayerController : MonoBehaviour
             timer += Time.deltaTime;
             yield return null;
         }
-        // -------------------------------------------------------------------------
 
         rb.gravityScale = originalGravity;
         isDashing = false;
@@ -349,7 +292,16 @@ public class PlayerController : MonoBehaviour
         rb.linearVelocity = new Vector2(0, -slamForce);
     }
 
-    // ================= DEBUG =================
+    // hurt
+    public void CancelActions()
+    {
+        isDashing = false;
+        isSlamming = false;
+        isRunning = false;
+        StopAllCoroutines();
+    }
+
+    // debug
     void OnDrawGizmosSelected()
     {
         if (groundCheck != null)
@@ -357,34 +309,5 @@ public class PlayerController : MonoBehaviour
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(groundCheck.position, checkRadius);
         }
-    }
-
-    // ================= COLLISION DETECTION =================
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            TakeDamage(other.transform.position);
-        }
-        else if (other.gameObject.CompareTag("Hazard"))
-        {
-            TakeDamage(other.transform.position);
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D col)
-    {
-        if (col.gameObject.CompareTag("Breakable"))
-        {
-            if (isSlamming || isDashing || currentSpeed >= machSpeed)
-            {
-                Destroy(col.gameObject);
-            }
-        }
-    }
-
-    private IEnumerator Wait(float sec = 0.1f)
-    {
-        yield return new WaitForSeconds(sec);
     }
 }

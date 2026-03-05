@@ -17,6 +17,6 @@ public class GameManager : MonoBehaviour
 
         // SETTINGS
         Application.targetFrameRate = 60;
-        Screen.SetResolution(640, 360, true);
+        Screen.SetResolution(1920, 1080, true);
     }
 }
