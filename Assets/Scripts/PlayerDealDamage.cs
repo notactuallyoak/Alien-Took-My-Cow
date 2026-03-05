@@ -12,11 +12,16 @@ public class PlayerDealDamage : MonoBehaviour
 
     [Header("Ranges")]
     public float attackRange;
+    public float dashRange;
     public float slamRange;
+    public float shotgunRange;
 
     [Header("Radius")]
     public float attackRadius;
+    public float dashRadius;
     public float slamRadius;
+    public float shotgunRadius;
+
 
     Transform player;
 
@@ -59,9 +64,9 @@ public class PlayerDealDamage : MonoBehaviour
 
         RaycastHit2D[] hits = Physics2D.CircleCastAll(
             player.position,
-            attackRadius,
+            dashRadius,
             dir,
-            attackRange,
+            dashRange,
             whatIsDamagable
         );
 
@@ -104,9 +109,9 @@ public class PlayerDealDamage : MonoBehaviour
     {
         RaycastHit2D[] hits = Physics2D.CircleCastAll(
             player.position,
-            attackRadius,
+            shotgunRadius,
             Vector2.down,
-            attackRange,
+            shotgunRange,
             whatIsDamagable
         );
 
@@ -132,12 +137,16 @@ public class PlayerDealDamage : MonoBehaviour
         Vector3 forwardEnd = pos + new Vector3(dir * attackRange, 0, 0);
         Gizmos.DrawWireSphere(forwardEnd, attackRadius);
 
+        Gizmos.color = Color.green;
+        Vector3 dashEnd = pos + new Vector3(dir * dashRange, 0, 0);
+        Gizmos.DrawWireSphere(dashEnd, dashRadius);
+
         Gizmos.color = Color.blue;
         Vector3 slamEnd = pos + Vector3.down * slamRange;
         Gizmos.DrawWireSphere(slamEnd, slamRadius);
 
         Gizmos.color = Color.yellow;
-        Vector3 sjEnd = pos + Vector3.down * attackRange;
-        Gizmos.DrawWireSphere(sjEnd, attackRadius);
+        Vector3 sjEnd = pos + Vector3.down * shotgunRange;
+        Gizmos.DrawWireSphere(sjEnd, shotgunRadius);
     }
 }

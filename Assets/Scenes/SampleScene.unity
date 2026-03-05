@@ -30385,10 +30385,14 @@ MonoBehaviour:
   dashDamage: 2
   slamDamage: 3
   shotgunJumpDamage: 5
-  attackRange: 0.7
-  slamRange: 0.5
-  attackRadius: 0.6
-  slamRadius: 0.65
+  attackRange: 0.5
+  dashRange: 0.45
+  slamRange: 0.35
+  shotgunRange: 0.7
+  attackRadius: 0.55
+  dashRadius: 0.45
+  slamRadius: 0.6
+  shotgunRadius: 0.5
 --- !u!1001 &2131336092
 PrefabInstance:
   m_ObjectHideFlags: 0
