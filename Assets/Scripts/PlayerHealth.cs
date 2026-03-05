@@ -42,6 +42,7 @@ public class PlayerHealth : MonoBehaviour
         if (isInvincible || currentHealth <= 1) return;
 
         currentHealth -= damage;
+        CameraController.Instance?.CamShake(0.1f, 0.1f);
         UpdateHeartUI();
 
         ApplyKnockback(enemyPosition);
@@ -74,6 +75,8 @@ public class PlayerHealth : MonoBehaviour
 
         if (playerSprite != null) playerSprite.enabled = true;
         if (playerController != null) playerController.CancelActions();
+
+        if (rb != null) rb.gravityScale = 4; // reset gravity in case player got hurt during dash
 
         Vector2 dir = (transform.position - (Vector3)hitSource).normalized;
         if (dir == Vector2.zero) dir = Vector2.up;

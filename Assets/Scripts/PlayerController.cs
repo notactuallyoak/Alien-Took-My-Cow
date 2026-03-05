@@ -298,6 +298,9 @@ public class PlayerController : MonoBehaviour
         isDashing = false;
         isSlamming = false;
         isRunning = false;
+
+        if (rb != null) rb.gravityScale = 4; // reset gravity in case player got hurt during dash
+
         StopAllCoroutines();
     }
 

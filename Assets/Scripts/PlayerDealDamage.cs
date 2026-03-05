@@ -30,7 +30,7 @@ public class PlayerDealDamage : MonoBehaviour
     {
         Vector2 dir = new Vector2(player.localScale.x, 0);
 
-        RaycastHit2D hit = Physics2D.CircleCast(
+        RaycastHit2D[] hits = Physics2D.CircleCastAll(
             player.position,
             attackRadius,
             dir,
@@ -38,14 +38,17 @@ public class PlayerDealDamage : MonoBehaviour
             whatIsDamagable
         );
 
-        if (hit.collider != null)
+        foreach (RaycastHit2D hit in hits)
         {
-            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Breakable"))
+            if (hit.collider != null)
             {
-                CameraController.Instance?.CamShake(0.1f, 0.1f);
-                Destroy(hit.collider.gameObject);
+                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Breakable"))
+                {
+                    CameraController.Instance?.CamShake(0.1f, 0.1f);
+                    Destroy(hit.collider.gameObject);
+                }
+                hit.collider.GetComponent<Enemy>()?.TakeDamage(runDamage);
             }
-            hit.collider.GetComponent<Enemy>()?.TakeDamage(runDamage);
         }
     }
 
@@ -54,7 +57,7 @@ public class PlayerDealDamage : MonoBehaviour
     {
         Vector2 dir = new Vector2(player.localScale.x, 0);
 
-        RaycastHit2D hit = Physics2D.CircleCast(
+        RaycastHit2D[] hits = Physics2D.CircleCastAll(
             player.position,
             attackRadius,
             dir,
@@ -62,16 +65,19 @@ public class PlayerDealDamage : MonoBehaviour
             whatIsDamagable
         );
 
-        if (hit.collider != null)
+        foreach (RaycastHit2D hit in hits)
         {
-            hit.collider.GetComponent<Enemy>()?.TakeDamage(dashDamage);
+            if (hit.collider != null)
+            {
+                hit.collider.GetComponent<Enemy>()?.TakeDamage(dashDamage);
+            }
         }
     }
 
     // SLAM
     public void SlamHit()
     {
-        RaycastHit2D hit = Physics2D.CircleCast(
+        RaycastHit2D[] hits = Physics2D.CircleCastAll(
             player.position,
             slamRadius,
             Vector2.down,
@@ -79,21 +85,24 @@ public class PlayerDealDamage : MonoBehaviour
             whatIsDamagable
         );
 
-        if (hit.collider != null)
+        foreach (RaycastHit2D hit in hits)
         {
-            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Breakable"))
+            if (hit.collider != null)
             {
-                CameraController.Instance?.CamShake(0.1f, 0.1f);
-                Destroy(hit.collider.gameObject);
+                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Breakable"))
+                {
+                    CameraController.Instance?.CamShake(0.1f, 0.1f);
+                    Destroy(hit.collider.gameObject);
+                }
+                hit.collider.GetComponent<Enemy>()?.TakeDamage(slamDamage);
             }
-            hit.collider.GetComponent<Enemy>()?.TakeDamage(slamDamage);
         }
     }
 
     // SHOTGUN JUMP
     public void ShotgunJumpHit()
     {
-        RaycastHit2D hit = Physics2D.CircleCast(
+        RaycastHit2D[] hits = Physics2D.CircleCastAll(
             player.position,
             attackRadius,
             Vector2.down,
@@ -101,36 +110,32 @@ public class PlayerDealDamage : MonoBehaviour
             whatIsDamagable
         );
 
-        if (hit.collider != null)
+        foreach (RaycastHit2D hit in hits)
         {
-            hit.collider.GetComponent<Enemy>()?.TakeDamage(shotgunJumpDamage);
+            if (hit.collider != null)
+            {
+                hit.collider.GetComponent<Enemy>()?.TakeDamage(shotgunJumpDamage);
+            }
         }
     }
 
-    // -------- GIZMOS --------
-
+    // gizmo
     void OnDrawGizmosSelected()
     {
         if (transform.root == null) return;
 
         Transform p = transform.root;
-
         Vector3 pos = p.position;
-
-        // forward direction
         float dir = p.localScale.x >= 0 ? 1 : -1;
 
-        // RUN / DASH
         Gizmos.color = Color.red;
         Vector3 forwardEnd = pos + new Vector3(dir * attackRange, 0, 0);
         Gizmos.DrawWireSphere(forwardEnd, attackRadius);
 
-        // SLAM
         Gizmos.color = Color.blue;
         Vector3 slamEnd = pos + Vector3.down * slamRange;
         Gizmos.DrawWireSphere(slamEnd, slamRadius);
 
-        // SHOTGUN JUMP
         Gizmos.color = Color.yellow;
         Vector3 sjEnd = pos + Vector3.down * attackRange;
         Gizmos.DrawWireSphere(sjEnd, attackRadius);
