@@ -44,7 +44,7 @@ public class PlayerDealDamage : MonoBehaviour
             {
                 if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Breakable"))
                 {
-                    CameraController.Instance?.CamShake(0.1f, 0.1f);
+                    CameraController.Instance?.CamShake(0.15f, 0.1f);
                     Destroy(hit.collider.gameObject);
                 }
                 hit.collider.GetComponent<Enemy>()?.TakeDamage(runDamage);
@@ -91,7 +91,7 @@ public class PlayerDealDamage : MonoBehaviour
             {
                 if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Breakable"))
                 {
-                    CameraController.Instance?.CamShake(0.1f, 0.1f);
+                    CameraController.Instance?.CamShake(0.15f, 0.1f);
                     Destroy(hit.collider.gameObject);
                 }
                 hit.collider.GetComponent<Enemy>()?.TakeDamage(slamDamage);

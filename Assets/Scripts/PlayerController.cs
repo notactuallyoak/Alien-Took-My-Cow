@@ -197,7 +197,7 @@ public class PlayerController : MonoBehaviour
                 isSlamming = false;
 
                 anim.SetTrigger(animSlamLandHash);
-                CameraController.Instance?.CamShake(0.2f, 0.2f);
+                CameraController.Instance?.CamShake(0.15f, 0.2f);
 
                 slamCooldownTimer = slamCooldown;   // cd timer start when slam hits the ground
             }
@@ -239,7 +239,7 @@ public class PlayerController : MonoBehaviour
     void Jump()
     {
         anim.SetTrigger(animJumpHash);
-        CameraController.Instance?.CamShake(0.1f, 0.1f);
+        CameraController.Instance?.CamShake(0.1f, 0.15f);
 
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         coyoteTimeCounter = 0;
