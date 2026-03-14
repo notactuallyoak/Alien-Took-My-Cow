@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour
 
         // GROUND SLAM INPUT
         float inputY = Input.GetAxisRaw("Vertical");
-        if (inputY < 0 && !isGrounded && !isSlamming && slamCooldownTimer <= 0f)
+        if (inputY < 0 && !isGrounded && !isSlamming && slamCooldownTimer <= 0f && rb.linearVelocity.y > 0.25f)
             StartSlam();
 
         HandleGhostEffects();
@@ -239,7 +239,7 @@ public class PlayerController : MonoBehaviour
     void Jump()
     {
         anim.SetTrigger(animJumpHash);
-        CameraController.Instance?.CamShake(0.1f, 0.15f);
+        CameraController.Instance?.CamShake(0.15f, 0.15f);
 
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         coyoteTimeCounter = 0;

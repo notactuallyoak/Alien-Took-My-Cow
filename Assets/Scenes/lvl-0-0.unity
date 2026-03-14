@@ -32556,17 +32556,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c07e86c6cf51e0429f7a0fd79e96dea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
-  heartImage: {fileID: 1893643330}
-  heartSprites:
-  - {fileID: -3785299851454407233, guid: b4b365cc39389c046b82aa017edb5a5d, type: 3}
-  - {fileID: -1671108250301758, guid: b4b365cc39389c046b82aa017edb5a5d, type: 3}
-  - {fileID: -2579715425090093146, guid: b4b365cc39389c046b82aa017edb5a5d, type: 3}
-  - {fileID: -7175444228520715500, guid: b4b365cc39389c046b82aa017edb5a5d, type: 3}
-  - {fileID: 9083448292304367095, guid: b4b365cc39389c046b82aa017edb5a5d, type: 3}
-  - {fileID: 8623635483324914103, guid: b4b365cc39389c046b82aa017edb5a5d, type: 3}
-  - {fileID: 8463884587485194349, guid: b4b365cc39389c046b82aa017edb5a5d, type: 3}
-  - {fileID: -1022411098275215547, guid: b4b365cc39389c046b82aa017edb5a5d, type: 3}
-  - {fileID: 29088373779291288, guid: b4b365cc39389c046b82aa017edb5a5d, type: 3}
   heartAnimator: {fileID: 1893643332}
   invincibilityDuration: 1.1
   blinkInterval: 0.025
@@ -33123,7 +33112,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2011037615
 Transform:
   m_ObjectHideFlags: 0

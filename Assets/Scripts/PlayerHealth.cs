@@ -4,13 +4,11 @@ using System.Collections;
 
 public class PlayerHealth : MonoBehaviour
 {
-    private int maxHealth = 9;
+    private int maxHealth = 8;
     private int currentHealth;
     private int previousHealth = -1;
 
     [Header("UI Reference")]
-    public Image heartImage;
-    public Sprite[] heartSprites;
     public Animator heartAnimator;
 
     [Header("Invincibility Settings")]
@@ -35,22 +33,23 @@ public class PlayerHealth : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         playerController = GetComponent<PlayerController>();
 
-        UpdateHeartUI();
+        UpdateHeart();
     }
 
     public void TakeDamage(int damage, Vector2 enemyPosition)
     {
-        if (isInvincible || currentHealth <= 1) return;
+        if (isInvincible || currentHealth <= 0) return;
 
         currentHealth -= damage;
         CameraController.Instance?.CamShake(0.1f, 0.1f);
-        UpdateHeartUI();
+        UpdateHeart();
 
         ApplyKnockback(enemyPosition);
 
-        if (currentHealth <= 1)
+        if (currentHealth <= 0)
         {
-            Die();
+            // die
+            GameManager.Instance.GameOver();
         } 
     }
 
@@ -59,20 +58,13 @@ public class PlayerHealth : MonoBehaviour
         TakeDamage(damage, transform.position);
     }
 
-    void UpdateHeartUI()
+    void UpdateHeart()
     {
         // only update if health changed
         if (currentHealth == previousHealth) return;
 
-        if (heartSprites.Length == 0 || heartImage == null) return;
-
-        // prevent index out of range
-        int index = maxHealth - currentHealth;
-        if (index >= heartSprites.Length) index = heartSprites.Length - 1;
-
-        heartImage.sprite = heartSprites[index];
-
-        heartAnimator.SetInteger("Health", currentHealth - 1);
+        // update anim parameter
+        heartAnimator.SetInteger("Health", currentHealth);
 
         previousHealth = currentHealth;
     }
@@ -129,11 +121,5 @@ public class PlayerHealth : MonoBehaviour
         if (playerSprite != null) playerSprite.enabled = true;
 
         isInvincible = false;
-    }
-
-    void Die()
-    {
-        Debug.Log("Player Died!");
-        GameManager.Instance.GameOver();
     }
 }
