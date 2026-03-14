@@ -52,7 +52,8 @@ public class PlayerDealDamage : MonoBehaviour
                     CameraController.Instance?.CamShake(0.15f, 0.1f);
                     Destroy(hit.collider.gameObject);
                 }
-                hit.collider.GetComponent<Enemy>()?.TakeDamage(runDamage);
+                hit.collider.GetComponent<EnemyBase>()?.TakeDamage(runDamage);
+                CameraController.Instance?.CamShake(0.15f, 0.1f);
             }
         }
     }
@@ -74,7 +75,8 @@ public class PlayerDealDamage : MonoBehaviour
         {
             if (hit.collider != null)
             {
-                hit.collider.GetComponent<Enemy>()?.TakeDamage(dashDamage);
+                hit.collider.GetComponent<EnemyBase>()?.TakeDamage(dashDamage);
+                CameraController.Instance?.CamShake(0.15f, 0.1f);
             }
         }
     }
@@ -99,7 +101,8 @@ public class PlayerDealDamage : MonoBehaviour
                     CameraController.Instance?.CamShake(0.15f, 0.1f);
                     Destroy(hit.collider.gameObject);
                 }
-                hit.collider.GetComponent<Enemy>()?.TakeDamage(slamDamage);
+                hit.collider.GetComponent<EnemyBase>()?.TakeDamage(slamDamage);
+                CameraController.Instance?.CamShake(0.15f, 0.1f);
             }
         }
     }
@@ -119,7 +122,8 @@ public class PlayerDealDamage : MonoBehaviour
         {
             if (hit.collider != null)
             {
-                hit.collider.GetComponent<Enemy>()?.TakeDamage(shotgunJumpDamage);
+                hit.collider.GetComponent<EnemyBase>()?.TakeDamage(shotgunJumpDamage);
+                CameraController.Instance?.CamShake(0.2f, 0.1f);
             }
         }
     }

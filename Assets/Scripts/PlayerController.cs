@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
     public float slamForce;
     public float slamCooldown;
 
-    private bool isSlamming;
+    [HideInInspector] public bool isSlamming;
     private float slamCooldownTimer;
 
     [Header("Ground Check")]
@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour
 
         // GROUND SLAM INPUT
         float inputY = Input.GetAxisRaw("Vertical");
-        if (inputY < 0 && !isGrounded && !isSlamming && slamCooldownTimer <= 0f && rb.linearVelocity.y > 0.25f)
+        if (inputY < 0 && !isGrounded && !isSlamming && slamCooldownTimer <= 0f && rb.linearVelocity.y > 0.15f)
             StartSlam();
 
         HandleGhostEffects();
@@ -309,7 +309,7 @@ public class PlayerController : MonoBehaviour
     {
         if (groundCheck != null)
         {
-            Gizmos.color = Color.yellow;
+            Gizmos.color = Color.white;
             Gizmos.DrawWireSphere(groundCheck.position, checkRadius);
         }
     }
