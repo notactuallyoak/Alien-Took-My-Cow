@@ -36,23 +36,10 @@ public class PlayerHealth : MonoBehaviour
         UpdateHeart();
     }
 
-    public void Update()
-    {
-        PlayerController playerController = GetComponent<PlayerController>();
-
-        if (playerController.isDashing || playerController.isHurt || playerController.isSlamming)
-        {
-            isInvincible = true;
-        }
-        else
-        {
-            isInvincible = false;
-        }
-    }
-
     public void TakeDamage(int damage, Vector2 enemyPosition)
     {
         if (isInvincible || currentHealth <= 0) return;
+        if (playerController.isDashing || playerController.isSlamming || playerController.isHurt) return;
 
         currentHealth -= damage;
         CameraController.Instance?.CamShake(0.1f, 0.1f);

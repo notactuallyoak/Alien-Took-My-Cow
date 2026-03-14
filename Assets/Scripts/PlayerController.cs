@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEditor.U2D.Sprites;
 
 public class PlayerController : MonoBehaviour
 {
@@ -52,6 +53,13 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public bool facingRight = true;
     [HideInInspector] public bool isHurt = false;
 
+    private float runParticleInterval = 0.2f;
+    private float runParticleTimer;
+    private bool wasHurt;
+    private bool wasGrounded;
+    private bool wasRunning;
+    private bool wasSlamming;
+
     // Hash IDs for performance
     private int animSpeedHash;
     private int animIsGroundedHash;
@@ -64,7 +72,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private GhostTrail ghostTrail;
 
-    void Start()
+    private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
@@ -80,65 +88,101 @@ public class PlayerController : MonoBehaviour
         animSlamLandHash = Animator.StringToHash("SlamLand");
     }
 
-    void Update()
+    private void Update()
     {
         HandleTimers();
-
         HandleGroundCheck();
+        HandleParticles();
         HandleJumpBuffer();
         HandleJumpLogic();
         HandleBetterGravity();
         UpdateAnimations();
 
-        // DASH INPUT
+        // dash input
         if (Input.GetKeyDown(KeyCode.X) && !isDashing && dashCooldownTimer <= 0f)
             StartCoroutine(Dash());
 
-        // GROUND SLAM INPUT
+        // slam input
         float inputY = Input.GetAxisRaw("Vertical");
-        if (inputY < 0 && !isGrounded && !isSlamming && slamCooldownTimer <= 0f && rb.linearVelocity.y > 0.15f)
+        if (inputY < 0 && !isGrounded && !isSlamming && slamCooldownTimer <= 0f)
             StartSlam();
 
         HandleGhostEffects();
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         HandleMovement();
     }
 
-    void HandleGhostEffects()
+    private void HandleGhostEffects()
     {
         if (ghostTrail == null) return;
 
-        if (isSlamming)
-        {
-            ghostTrail.SpawnGhost(0.05f, 0.15f);
-        }
-
-        else if (isRunning && isGrounded && currentSpeed > machSpeed && !isHurt)
-        {
-            ghostTrail.SpawnGhost(0.2f, 0.5f);
-        }
+        if (isSlamming) ghostTrail.SpawnGhost(0.05f, 0.15f);
+        else if (isRunning && isGrounded && currentSpeed > machSpeed && !isHurt) ghostTrail.SpawnGhost(0.2f, 0.5f);
     }
 
-    void HandleTimers()
+    private void HandleTimers()
     {
         if (dashCooldownTimer > 0f)
             dashCooldownTimer -= Time.deltaTime;
 
         if (slamCooldownTimer > 0f)
             slamCooldownTimer -= Time.deltaTime;
+
+        if (runParticleTimer > 0f)
+            runParticleTimer -= Time.deltaTime;
     }
 
-    void UpdateAnimations()
+    private void UpdateAnimations()
     {
         anim.SetFloat(animSpeedHash, currentSpeed);
         anim.SetBool(animIsGroundedHash, isGrounded);
-        //anim.SetFloat(animYVelocityHash, rb.linearVelocity.y);
     }
 
-    void HandleMovement()
+    private void HandleParticles()
+    {
+        if (isHurt && !wasHurt)
+        {
+            ParticleEmitter.Instance.Emit("WhiteFlash", transform.position, Quaternion.identity);
+        }
+        wasHurt = isHurt;
+
+        if (isGrounded && !wasGrounded && !isSlamming)
+        {
+            ParticleEmitter.Instance.Emit("LittleSmoke", groundCheck.position, Quaternion.identity);
+        }
+        wasGrounded = isGrounded;
+
+        if (isRunning && !wasRunning && isGrounded)
+        {
+            ParticleEmitter.Instance.Emit("PreRun", groundCheck.position, !facingRight);
+        }
+        wasRunning = isRunning;
+
+        if (isGrounded && !isHurt && currentSpeed > walkSpeed)
+        {
+            if (runParticleTimer <= 0f)
+            {
+                if (currentSpeed > walkSpeed && currentSpeed < machSpeed)
+                {
+                    ParticleEmitter.Instance.Emit("LittleSmoke", groundCheck.position, Quaternion.identity);
+                }
+                else if (currentSpeed >= machSpeed)
+                {
+                    ParticleEmitter.Instance.Emit("Mach", groundCheck.position, !facingRight);
+                }
+                else if (isRunning)
+                {
+                    ParticleEmitter.Instance.Emit("Run", groundCheck.position, !facingRight);
+                }
+                runParticleTimer = runParticleInterval;
+            }
+        }
+    }
+
+    private void HandleMovement()
     {
         if (isDashing || isSlamming || isHurt) return;
 
@@ -175,7 +219,7 @@ public class PlayerController : MonoBehaviour
         rb.linearVelocity = new Vector2(moveDir * currentSpeed, rb.linearVelocity.y);
     }
 
-    void Flip()
+    private void Flip()
     {
         facingRight = !facingRight;
         Vector3 scale = transform.localScale;
@@ -183,8 +227,9 @@ public class PlayerController : MonoBehaviour
         transform.localScale = scale;
     }
 
-    void HandleGroundCheck()
+    private void HandleGroundCheck()
     {
+        wasSlamming = isSlamming;
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
 
         if (isGrounded)
@@ -199,6 +244,8 @@ public class PlayerController : MonoBehaviour
                 anim.SetTrigger(animSlamLandHash);
                 CameraController.Instance?.CamShake(0.15f, 0.2f);
 
+                ParticleEmitter.Instance.Emit("SlamLand", groundCheck.position, !facingRight);
+
                 slamCooldownTimer = slamCooldown;   // cd timer start when slam hits the ground
             }
         }
@@ -208,7 +255,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void HandleJumpBuffer()
+    private void HandleJumpBuffer()
     {
         if (Input.GetKeyDown(KeyCode.Space))
             jumpBufferCounter = jumpBufferTime;
@@ -216,7 +263,7 @@ public class PlayerController : MonoBehaviour
             jumpBufferCounter -= Time.deltaTime;
     }
 
-    void HandleJumpLogic()
+    private void HandleJumpLogic()
     {
         if (isHurt) return;
 
@@ -236,16 +283,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Jump()
+    private void Jump()
     {
         anim.SetTrigger(animJumpHash);
         CameraController.Instance?.CamShake(0.15f, 0.15f);
 
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         coyoteTimeCounter = 0;
+
+        ParticleEmitter.Instance.Emit("MuzzleFlash", groundCheck.position, !facingRight);
+        ParticleEmitter.Instance.Emit("ShotgunFire", groundCheck.position, !facingRight);
     }
 
-    void HandleBetterGravity()
+    private void HandleBetterGravity()
     {
         if (isHurt) return;
 
@@ -259,11 +309,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    IEnumerator Dash()
+    private IEnumerator Dash()
     {
         isDashing = true;
         anim.SetTrigger(animDashHash);
         dashCooldownTimer = dashCooldown;
+
+        ParticleEmitter.Instance.Emit("DashSmoke", transform.position, Quaternion.identity);
 
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0;
@@ -285,10 +337,13 @@ public class PlayerController : MonoBehaviour
         isDashing = false;
     }
 
-    void StartSlam()
+    private void StartSlam()
     {
         isSlamming = true;
         anim.SetTrigger(animSlamHash);
+
+        ParticleEmitter.Instance.Emit("LittleSmoke", transform.position, !facingRight);
+
         rb.linearVelocity = new Vector2(0, -slamForce);
     }
 
@@ -305,7 +360,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // debug
-    void OnDrawGizmosSelected()
+    private void OnDrawGizmosSelected()
     {
         if (groundCheck != null)
         {

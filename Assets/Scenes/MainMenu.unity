@@ -119,6 +119,104 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &118095178
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 118095180}
+  - component: {fileID: 118095179}
+  m_Layer: 0
+  m_Name: ParticleEmitter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &118095179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118095178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20a98e712720cb74795d9410398e2867, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ParticleEmitter
+  particles:
+  - name: LittleSmoke
+    prefab: {fileID: 3994709804568237268, guid: 14eb9ceef05ec5a4ab8e4b419e72cfad, type: 3}
+  - name: BigSmoke
+    prefab: {fileID: 1501766071169571222, guid: 123babf6bbf417944b9cbc5be812ecbc, type: 3}
+  - name: DashSmoke
+    prefab: {fileID: 5465186869124257122, guid: 0ccfe1a0bf0786b45ae704ac5a886ccd, type: 3}
+  - name: Mach
+    prefab: {fileID: 8946005716187663007, guid: 11b5a5a3ebf980c49aa449c050d85920, type: 3}
+  - name: PreRun
+    prefab: {fileID: 5931276994517073606, guid: 6b52ac0940feaaf4cbc54cb121b44da7, type: 3}
+  - name: Run
+    prefab: {fileID: 249539361049762453, guid: 581baa00380a2ec488634611edbaa7d0, type: 3}
+  - name: MuzzleFlash
+    prefab: {fileID: 2265567535770810276, guid: 9db86a67c26a6ae48a497fbd6fed0355, type: 3}
+  - name: ShotgunFire
+    prefab: {fileID: 1245191626843769724, guid: 8f0ca3c8f321ddd4b82f2ffe9cea6bc2, type: 3}
+  - name: SlamLand
+    prefab: {fileID: 3885011516658798902, guid: b2c397133263e964c84d462890e37432, type: 3}
+  - name: WhiteFlash
+    prefab: {fileID: 180045026420131878, guid: 0119aefd275323747bf3a5c1cf68e940, type: 3}
+  - name: DeadStar
+    prefab: {fileID: 2721222633268246068, guid: bdc312452f365ec4fbaba94a53d2a21c, type: 3}
+--- !u!4 &118095180
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118095178}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &131406462
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 131406463}
+  m_Layer: 0
+  m_Name: ----------
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &131406463
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131406462}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &203119232
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,7 +507,7 @@ GameObject:
   - component: {fileID: 570818630}
   - component: {fileID: 570818629}
   m_Layer: 5
-  m_Name: MenuBg
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -447,7 +545,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.69803923, g: 0.69803923, b: 0.69803923, a: 1}
+  m_Color: {r: 0.898, g: 0.898, b: 0.898, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1643,7 +1741,9 @@ MonoBehaviour:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1937208936}
   - {fileID: 836828107}
+  - {fileID: 118095180}
+  - {fileID: 131406463}
+  - {fileID: 1937208936}
   - {fileID: 1242298067}
   - {fileID: 1546251507}

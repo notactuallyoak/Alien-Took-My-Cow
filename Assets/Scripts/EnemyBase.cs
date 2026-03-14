@@ -1,5 +1,7 @@
 using System.Collections;
+using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
+using UnityEngineInternal;
 
 public class EnemyBase : MonoBehaviour
 {
@@ -14,7 +16,7 @@ public class EnemyBase : MonoBehaviour
 
         StartCoroutine(DoDamage(dmg));
 
-        if (health <= 0) Destroy(gameObject);
+        if (health <= 0) Die();
     }
 
     private IEnumerator DoDamage(int dmg)
@@ -33,5 +35,14 @@ public class EnemyBase : MonoBehaviour
 
         sr.color = Color.white;
         canTakeDamage = true;
+    }
+
+    private void Die()
+    {
+        ParticleEmitter.Instance.Emit("WhiteFlash", transform.position, Quaternion.identity);
+        ParticleEmitter.Instance.Emit("BigSmoke", transform.position, Quaternion.identity);
+        ParticleEmitter.Instance.Emit("DeadStar", transform.position, Quaternion.identity);
+
+        Destroy(gameObject);
     }
 }

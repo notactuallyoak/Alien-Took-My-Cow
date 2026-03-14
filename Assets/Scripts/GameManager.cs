@@ -12,9 +12,8 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
         Instance = this;
-        DontDestroyOnLoad(gameObject); // persist between scenes
+        DontDestroyOnLoad(gameObject);
 
         // SETTINGS
         Application.targetFrameRate = 60;
