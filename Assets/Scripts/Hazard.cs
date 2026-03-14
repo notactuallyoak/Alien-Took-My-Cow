@@ -2,12 +2,11 @@ using UnityEngine;
 
 public class Hazard : MonoBehaviour
 {
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.collider.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
-            collision.collider.GetComponent<PlayerHealth>()?.TakeDamage(1, transform.position);
+            collision.GetComponent<PlayerHealth>()?.TakeDamage(1, transform.position);
         }
-
     }
 }

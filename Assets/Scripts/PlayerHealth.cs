@@ -4,13 +4,14 @@ using System.Collections;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [Header("Health Settings")]
-    public int maxHealth;
+    private int maxHealth = 9;
     private int currentHealth;
+    private int previousHealth = -1;
 
     [Header("UI Reference")]
     public Image heartImage;
     public Sprite[] heartSprites;
+    public Animator heartAnimator;
 
     [Header("Invincibility Settings")]
     public float invincibilityDuration;
@@ -48,7 +49,9 @@ public class PlayerHealth : MonoBehaviour
         ApplyKnockback(enemyPosition);
 
         if (currentHealth <= 1)
+        {
             Die();
+        } 
     }
 
     public void TakeDamage(int damage) // overload
@@ -58,6 +61,9 @@ public class PlayerHealth : MonoBehaviour
 
     void UpdateHeartUI()
     {
+        // only update if health changed
+        if (currentHealth == previousHealth) return;
+
         if (heartSprites.Length == 0 || heartImage == null) return;
 
         // prevent index out of range
@@ -65,6 +71,10 @@ public class PlayerHealth : MonoBehaviour
         if (index >= heartSprites.Length) index = heartSprites.Length - 1;
 
         heartImage.sprite = heartSprites[index];
+
+        heartAnimator.SetInteger("Health", currentHealth - 1);
+
+        previousHealth = currentHealth;
     }
 
     void ApplyKnockback(Vector2 hitSource)
@@ -124,8 +134,6 @@ public class PlayerHealth : MonoBehaviour
     void Die()
     {
         Debug.Log("Player Died!");
-        // Logic Game Over
-        // GameManager.Instance.GameOver();
-        gameObject.SetActive(false);
+        GameManager.Instance.GameOver();
     }
 }

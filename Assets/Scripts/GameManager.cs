@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class GameManager : MonoBehaviour
     {
         if (Instance != null && Instance != this)
         {
-            Destroy(gameObject); // destroy duplicate
+            Destroy(gameObject);
             return;
         }
 
@@ -18,5 +19,11 @@ public class GameManager : MonoBehaviour
         // SETTINGS
         Application.targetFrameRate = 60;
         Screen.SetResolution(1920, 1080, true);
+    }
+
+    public void GameOver()
+    {
+        // reload current scene
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

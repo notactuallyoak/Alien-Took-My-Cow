@@ -1,148 +1,109 @@
 fileFormatVersion: 2
-guid: 0b79f07f01ae2304a8dcd62a3483ee39
+guid: 247d1c60a511df84797e8a03f7b3ba3d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2273262987894464175
-    second: PlayerSheet_0
+      213: -5153139018097368475
+    second: Enemy_Carrot-Sheet_0
   - first:
-      213: -8348016747007819476
-    second: PlayerSheet_1
+      213: -103179124148649793
+    second: Enemy_Carrot-Sheet_1
   - first:
-      213: 8113368496836147963
-    second: PlayerSheet_2
+      213: 1250450321442129392
+    second: Enemy_Carrot-Sheet_2
   - first:
-      213: 3871034404151536601
-    second: PlayerSheet_3
+      213: -6658218406132324933
+    second: Enemy_Carrot-Sheet_3
   - first:
-      213: -1410163375985073761
-    second: PlayerSheet_4
+      213: 3247697757271869230
+    second: Enemy_Carrot-Sheet_4
   - first:
-      213: 4141560478706699254
-    second: PlayerSheet_5
+      213: -5743944308306539294
+    second: Enemy_Carrot-Sheet_5
   - first:
-      213: -9109787565581802862
-    second: PlayerSheet_6
+      213: -5867894388905820598
+    second: Enemy_Carrot-Sheet_6
   - first:
-      213: -2338228917321944555
-    second: PlayerSheet_7
+      213: 1359938323931028765
+    second: Enemy_Carrot-Sheet_7
   - first:
-      213: 4828674790627598971
-    second: PlayerSheet_8
+      213: -7493034658119867566
+    second: Enemy_Carrot-Sheet_8
   - first:
-      213: -4811918958777200042
-    second: PlayerSheet_9
+      213: -4970234580864938614
+    second: Enemy_Carrot-Sheet_9
   - first:
-      213: 6700423760998985612
-    second: PlayerSheet_10
+      213: 2200279577139650082
+    second: Enemy_Carrot-Sheet_10
   - first:
-      213: -8043958568527013971
-    second: PlayerSheet_11
+      213: 1242079184154637604
+    second: Enemy_Carrot-Sheet_11
   - first:
-      213: 1669469482060702276
-    second: PlayerSheet_12
+      213: 6996742680767133037
+    second: Enemy_Carrot-Sheet_12
   - first:
-      213: 1118642482974434133
-    second: PlayerSheet_13
+      213: 959119487279973335
+    second: Enemy_Carrot-Sheet_13
   - first:
-      213: 7403079152156433754
-    second: PlayerSheet_14
+      213: -4526495469076401198
+    second: Enemy_Carrot-Sheet_14
   - first:
-      213: 724422300144628181
-    second: PlayerSheet_15
+      213: 2724141432114214450
+    second: Enemy_Carrot-Sheet_15
   - first:
-      213: -2743468169375247853
-    second: PlayerSheet_16
+      213: 1585880459277968197
+    second: Enemy_Carrot-Sheet_16
   - first:
-      213: 3906517477132223184
-    second: PlayerSheet_17
+      213: -1765147148466380471
+    second: Enemy_Carrot-Sheet_17
   - first:
-      213: 9168824694763364499
-    second: PlayerSheet_18
+      213: 664857922618005362
+    second: Enemy_Carrot-Sheet_18
   - first:
-      213: -7933338735522678928
-    second: PlayerSheet_19
+      213: 1877559795280162406
+    second: Enemy_Carrot-Sheet_19
   - first:
-      213: -5149129607194351882
-    second: PlayerSheet_20
+      213: -5964941542507404543
+    second: Enemy_Carrot-Sheet_20
   - first:
-      213: 8427836745426372490
-    second: PlayerSheet_21
+      213: -313349316762578646
+    second: Enemy_Carrot-Sheet_21
   - first:
-      213: 1751312006897510990
-    second: PlayerSheet_22
+      213: -7923342617252140357
+    second: Enemy_Carrot-Sheet_22
   - first:
-      213: -9073200009514084869
-    second: PlayerSheet_23
+      213: -8748698889779303661
+    second: Enemy_Carrot-Sheet_23
   - first:
-      213: -6033619838194342215
-    second: PlayerSheet_24
+      213: -6709076956495302699
+    second: Enemy_Carrot-Sheet_24
   - first:
-      213: 3316993520736528115
-    second: PlayerSheet_25
+      213: -4209995614947208121
+    second: Enemy_Carrot-Sheet_25
   - first:
-      213: -5710942945440211458
-    second: PlayerSheet_26
+      213: 5210403024254382098
+    second: Enemy_Carrot-Sheet_26
   - first:
-      213: 1088275711033388842
-    second: PlayerSheet_27
+      213: -526065127481809691
+    second: Enemy_Carrot-Sheet_27
   - first:
-      213: -8381325456585054715
-    second: PlayerSheet_28
+      213: 5064818297583219618
+    second: Enemy_Carrot-Sheet_28
   - first:
-      213: 6893105578746733385
-    second: PlayerSheet_29
+      213: -4889423277018574006
+    second: Enemy_Carrot-Sheet_29
   - first:
-      213: 6574421961511360539
-    second: PlayerSheet_30
+      213: -4544925507240068837
+    second: Enemy_Carrot-Sheet_30
   - first:
-      213: -4799376263540030767
-    second: PlayerSheet_31
+      213: 4766898673555365100
+    second: Enemy_Carrot-Sheet_31
   - first:
-      213: 2001570285269250473
-    second: PlayerSheet_32
+      213: 9152740990838521278
+    second: Enemy_Carrot-Sheet_32
   - first:
-      213: -4017171434636976061
-    second: PlayerSheet_33
-  - first:
-      213: -8606704807831271697
-    second: PlayerSheet_34
-  - first:
-      213: 8158561906585921546
-    second: PlayerSheet_35
-  - first:
-      213: 1466886138275708787
-    second: PlayerSheet_36
-  - first:
-      213: 5041542450934783512
-    second: PlayerSheet_37
-  - first:
-      213: -7277963017884422653
-    second: PlayerSheet_38
-  - first:
-      213: 5673269957183841139
-    second: PlayerSheet_39
-  - first:
-      213: -9196575079933542319
-    second: PlayerSheet_40
-  - first:
-      213: 342155409421042053
-    second: PlayerSheet_41
-  - first:
-      213: -8145157536096258255
-    second: PlayerSheet_42
-  - first:
-      213: -1082889762191670437
-    second: PlayerSheet_43
-  - first:
-      213: -4733151648625724343
-    second: PlayerSheet_44
-  - first:
-      213: 7538654020451015730
-    second: PlayerSheet_45
-  - first:
-      213: -8549462813426761532
-    second: PlayerSheet_46
+      213: -1429746863337945896
+    second: Enemy_Carrot-Sheet_33
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -189,7 +150,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 80
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -213,7 +174,7 @@ TextureImporter:
     maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -251,7 +212,447 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PlayerSheet_19
+      name: Enemy_Carrot-Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 400
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 562e9149d5f5c78b0800000000000000
+      internalID: -5153139018097368475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Carrot-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 400
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb042ec122f619ef0800000000000000
+      internalID: -103179124148649793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Carrot-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 400
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f5c4d231fd7a5110800000000000000
+      internalID: 1250450321442129392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Carrot-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 400
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb5e389e2a14993a0800000000000000
+      internalID: -6658218406132324933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Carrot-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 400
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e27c50837e3221d20800000000000000
+      internalID: 3247697757271869230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Carrot-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 400
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ec03c595196940b0800000000000000
+      internalID: -5743944308306539294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Carrot-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 400
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4eb2c9842d019ea0800000000000000
+      internalID: -5867894388905820598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Carrot-Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 320
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1d595a43b87fd210800000000000000
+      internalID: 1359938323931028765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Carrot-Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 320
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2532311ada4630890800000000000000
+      internalID: -7493034658119867566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Carrot-Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 320
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8dce2d6bfd260bb0800000000000000
+      internalID: -4970234580864938614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Carrot-Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 320
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22e94f92e96f88e10800000000000000
+      internalID: 2200279577139650082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Carrot-Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 320
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 425b17aef60cc3110800000000000000
+      internalID: 1242079184154637604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Carrot-Sheet_12
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 320
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6570f7d56c691160800000000000000
+      internalID: 6996742680767133037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Carrot-Sheet_13
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 240
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d34a70971a7f4d00800000000000000
+      internalID: 959119487279973335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Carrot-Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 240
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d339407a58ae21c0800000000000000
+      internalID: -4526495469076401198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Carrot-Sheet_15
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 240
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 236771b03381ec520800000000000000
+      internalID: 2724141432114214450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Carrot-Sheet_16
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 240
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5432f7710ed220610800000000000000
+      internalID: 1585880459277968197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Carrot-Sheet_17
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 240
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9412e574500f087e0800000000000000
+      internalID: -1765147148466380471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Carrot-Sheet_18
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 240
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27710cf02cc0a3900800000000000000
+      internalID: 664857922618005362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Carrot-Sheet_19
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 240
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66eaa32afae6e0a10800000000000000
+      internalID: 1877559795280162406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Carrot-Sheet_20
       rect:
         serializedVersion: 2
         x: 0
@@ -266,14 +667,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 077f252e37e17e190800000000000000
-      internalID: -7933338735522678928
+      spriteID: 10320ec4545483da0800000000000000
+      internalID: -5964941542507404543
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerSheet_20
+      name: Enemy_Carrot-Sheet_21
       rect:
         serializedVersion: 2
         x: 80
@@ -288,14 +689,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6f6ebbc47ed9a88b0800000000000000
-      internalID: -5149129607194351882
+      spriteID: a2151c3e472c6abf0800000000000000
+      internalID: -313349316762578646
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerSheet_21
+      name: Enemy_Carrot-Sheet_22
       rect:
         serializedVersion: 2
         x: 160
@@ -310,14 +711,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a878f1c0ed0b5f470800000000000000
-      internalID: 8427836745426372490
+      spriteID: bbae8f88ed1aa0290800000000000000
+      internalID: -7923342617252140357
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerSheet_22
+      name: Enemy_Carrot-Sheet_23
       rect:
         serializedVersion: 2
         x: 240
@@ -332,14 +733,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e4aa00ecdf8ed4810800000000000000
-      internalID: 1751312006897510990
+      spriteID: 31ba9db56b0669680800000000000000
+      internalID: -8748698889779303661
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerSheet_23
+      name: Enemy_Carrot-Sheet_24
       rect:
         serializedVersion: 2
         x: 320
@@ -354,14 +755,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bf597d8c9a4851280800000000000000
-      internalID: -9073200009514084869
+      spriteID: 5dfa655ed0294e2a0800000000000000
+      internalID: -6709076956495302699
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerSheet_24
+      name: Enemy_Carrot-Sheet_25
       rect:
         serializedVersion: 2
         x: 400
@@ -376,14 +777,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9b62da289b6444ca0800000000000000
-      internalID: -6033619838194342215
+      spriteID: 7449e113b471395c0800000000000000
+      internalID: -4209995614947208121
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerSheet_25
+      name: Enemy_Carrot-Sheet_26
       rect:
         serializedVersion: 2
         x: 480
@@ -398,84 +799,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3f6e5cd6804580e20800000000000000
-      internalID: 3316993520736528115
+      spriteID: 210bd45d1f11f4840800000000000000
+      internalID: 5210403024254382098
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerSheet_27
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 80
-        width: 80
-        height: 80
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a2fa4d54ef45a1f00800000000000000
-      internalID: 1088275711033388842
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerSheet_28
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 80
-        width: 80
-        height: 80
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5062f4547ec8fab80800000000000000
-      internalID: -8381325456585054715
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerSheet_29
-      rect:
-        serializedVersion: 2
-        x: 240
-        y: 80
-        width: 80
-        height: 80
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 943667ca00b39af50800000000000000
-      internalID: 6893105578746733385
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerSheet_30
+      name: Enemy_Carrot-Sheet_27
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 80
         width: 80
         height: 80
       alignment: 0
@@ -486,18 +821,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b185963f0f90d3b50800000000000000
-      internalID: 6574421961511360539
+      spriteID: 5e4e9b3cd8a03b8f0800000000000000
+      internalID: -526065127481809691
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerSheet_31
+      name: Enemy_Carrot-Sheet_28
       rect:
         serializedVersion: 2
         x: 80
-        y: 0
+        y: 80
         width: 80
         height: 80
       alignment: 0
@@ -508,18 +843,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1d2414c67b0356db0800000000000000
-      internalID: -4799376263540030767
+      spriteID: 2a3b8573869d94640800000000000000
+      internalID: 5064818297583219618
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerSheet_32
+      name: Enemy_Carrot-Sheet_29
       rect:
         serializedVersion: 2
         x: 160
-        y: 0
+        y: 80
         width: 80
         height: 80
       alignment: 0
@@ -530,18 +865,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9a17376d19107cb10800000000000000
-      internalID: 2001570285269250473
+      spriteID: a4318c05f67452cb0800000000000000
+      internalID: -4889423277018574006
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerSheet_33
+      name: Enemy_Carrot-Sheet_30
       rect:
         serializedVersion: 2
         x: 240
-        y: 0
+        y: 80
         width: 80
         height: 80
       alignment: 0
@@ -552,18 +887,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 340ed943dd32048c0800000000000000
-      internalID: -4017171434636976061
+      spriteID: b19f75ac45e2de0c0800000000000000
+      internalID: -4544925507240068837
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerSheet_34
+      name: Enemy_Carrot-Sheet_31
       rect:
         serializedVersion: 2
         x: 320
-        y: 0
+        y: 80
         width: 80
         height: 80
       alignment: 0
@@ -574,18 +909,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fe6029ad397de8880800000000000000
-      internalID: -8606704807831271697
+      spriteID: cec5c85661d672240800000000000000
+      internalID: 4766898673555365100
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerSheet_35
+      name: Enemy_Carrot-Sheet_32
       rect:
         serializedVersion: 2
         x: 400
-        y: 0
+        y: 80
         width: 80
         height: 80
       alignment: 0
@@ -596,18 +931,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a08661004d8093170800000000000000
-      internalID: 8158561906585921546
+      spriteID: ebd36181071150f70800000000000000
+      internalID: 9152740990838521278
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerSheet_36
+      name: Enemy_Carrot-Sheet_33
       rect:
         serializedVersion: 2
         x: 480
-        y: 0
+        y: 80
         width: 80
         height: 80
       alignment: 0
@@ -618,18 +953,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 37f3eddbb2d6b5410800000000000000
-      internalID: 1466886138275708787
+      spriteID: 8d4430c8dc4882ce0800000000000000
+      internalID: -1429746863337945896
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerSheet_0
+      name: Enemy_Carrot-Sheet_34
       rect:
         serializedVersion: 2
         x: 0
-        y: 400
+        y: 0
         width: 80
         height: 80
       alignment: 0
@@ -640,18 +975,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 28d0baf66ac3b9d488865fbb9e05b161
-      internalID: -2273262987894464175
+      spriteID: 8219bd543b8f369428606d4ca3b010d7
+      internalID: 1726946531
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerSheet_1
+      name: Enemy_Carrot-Sheet_35
       rect:
         serializedVersion: 2
         x: 80
-        y: 400
+        y: 0
         width: 80
         height: 80
       alignment: 0
@@ -662,404 +997,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bea9b4ebb0791fd40ac63ecb2923e6bb
-      internalID: -8348016747007819476
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerSheet_2
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 400
-        width: 80
-        height: 80
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: df314a54403c50e44a50041f939485e2
-      internalID: 8113368496836147963
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerSheet_3
-      rect:
-        serializedVersion: 2
-        x: 240
-        y: 400
-        width: 80
-        height: 80
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ebc03847c3c20ec4d8a3e9b69cca081b
-      internalID: 3871034404151536601
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerSheet_4
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 400
-        width: 80
-        height: 80
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a8306533d66d519479f8e6cc4db20e0e
-      internalID: -1410163375985073761
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerSheet_5
-      rect:
-        serializedVersion: 2
-        x: 400
-        y: 400
-        width: 80
-        height: 80
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 04c1f25f4ee6dfd4697e82b8287b1ba3
-      internalID: 4141560478706699254
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerSheet_6
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 320
-        width: 80
-        height: 80
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d3eed7f3a8067754c8583da9b380960b
-      internalID: -9109787565581802862
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerSheet_7
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 320
-        width: 80
-        height: 80
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 731663eab76485f4e93e3068daa10b03
-      internalID: -2338228917321944555
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerSheet_8
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 320
-        width: 80
-        height: 80
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e02ad34062fdb0a45ad8e24cf84cd69d
-      internalID: 4828674790627598971
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerSheet_9
-      rect:
-        serializedVersion: 2
-        x: 240
-        y: 320
-        width: 80
-        height: 80
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7e0c9a3bf6e4c9b4d81f10630796ade2
-      internalID: -4811918958777200042
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerSheet_10
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 320
-        width: 80
-        height: 80
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ed2a23d5c88677c4487e395967552b01
-      internalID: 6700423760998985612
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerSheet_11
-      rect:
-        serializedVersion: 2
-        x: 400
-        y: 320
-        width: 80
-        height: 80
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b2216ee725729814a8003a8a2cd37466
-      internalID: -8043958568527013971
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerSheet_12
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 240
-        width: 80
-        height: 80
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: af111ab55952b2d49adfaf616b69d655
-      internalID: 1669469482060702276
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerSheet_13
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 240
-        width: 80
-        height: 80
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 25b188db055143843ba06983734caf07
-      internalID: 1118642482974434133
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerSheet_14
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 240
-        width: 80
-        height: 80
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2c39e16391d0e1442b5d817ba672b85e
-      internalID: 7403079152156433754
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerSheet_15
-      rect:
-        serializedVersion: 2
-        x: 240
-        y: 240
-        width: 80
-        height: 80
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: efc52b889a8139c4b9e653425d046550
-      internalID: 724422300144628181
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerSheet_16
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 240
-        width: 80
-        height: 80
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: aa9d6375fc58bc64db5ddb69c26a50d0
-      internalID: -2743468169375247853
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerSheet_17
-      rect:
-        serializedVersion: 2
-        x: 400
-        y: 240
-        width: 80
-        height: 80
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ab3cffa4234699a4b8e2d856ca6c65cb
-      internalID: 3906517477132223184
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerSheet_18
-      rect:
-        serializedVersion: 2
-        x: 480
-        y: 240
-        width: 80
-        height: 80
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 30d066eb5bdd1be40804fe116891e716
-      internalID: 9168824694763364499
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerSheet_26
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 80
-        width: 80
-        height: 80
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 804d98ec5d7364341824772d90b8d31b
-      internalID: -5710942945440211458
+      spriteID: a10e7707276885e4b8b9d0af0cb0dda0
+      internalID: 857965935
       vertices: []
       indices: 
       edges: []
@@ -1068,7 +1007,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 3f19ee7f0e7ca8c4eb82d232a01bc0ec
+    spriteID: 3858166c994ac2e42b6ff3bc23f84fc2
     internalID: 0
     vertices: []
     indices: 
@@ -1078,47 +1017,44 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":80.0,"y":80.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
-      - key: SpriteEditor.SliceOnImport
-        value: False
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":7.0,"y":6.0},"gridSpriteSize":{"x":80.0,"y":80.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      PlayerSheet_0: -2273262987894464175
-      PlayerSheet_1: -8348016747007819476
-      PlayerSheet_10: 6700423760998985612
-      PlayerSheet_11: -8043958568527013971
-      PlayerSheet_12: 1669469482060702276
-      PlayerSheet_13: 1118642482974434133
-      PlayerSheet_14: 7403079152156433754
-      PlayerSheet_15: 724422300144628181
-      PlayerSheet_16: -2743468169375247853
-      PlayerSheet_17: 3906517477132223184
-      PlayerSheet_18: 9168824694763364499
-      PlayerSheet_19: -7933338735522678928
-      PlayerSheet_2: 8113368496836147963
-      PlayerSheet_20: -5149129607194351882
-      PlayerSheet_21: 8427836745426372490
-      PlayerSheet_22: 1751312006897510990
-      PlayerSheet_23: -9073200009514084869
-      PlayerSheet_24: -6033619838194342215
-      PlayerSheet_25: 3316993520736528115
-      PlayerSheet_26: -5710942945440211458
-      PlayerSheet_27: 1088275711033388842
-      PlayerSheet_28: -8381325456585054715
-      PlayerSheet_29: 6893105578746733385
-      PlayerSheet_3: 3871034404151536601
-      PlayerSheet_30: 6574421961511360539
-      PlayerSheet_31: -4799376263540030767
-      PlayerSheet_32: 2001570285269250473
-      PlayerSheet_33: -4017171434636976061
-      PlayerSheet_34: -8606704807831271697
-      PlayerSheet_35: 8158561906585921546
-      PlayerSheet_36: 1466886138275708787
-      PlayerSheet_4: -1410163375985073761
-      PlayerSheet_5: 4141560478706699254
-      PlayerSheet_6: -9109787565581802862
-      PlayerSheet_7: -2338228917321944555
-      PlayerSheet_8: 4828674790627598971
-      PlayerSheet_9: -4811918958777200042
+      Enemy_Carrot-Sheet_0: -5153139018097368475
+      Enemy_Carrot-Sheet_1: -103179124148649793
+      Enemy_Carrot-Sheet_10: 2200279577139650082
+      Enemy_Carrot-Sheet_11: 1242079184154637604
+      Enemy_Carrot-Sheet_12: 6996742680767133037
+      Enemy_Carrot-Sheet_13: 959119487279973335
+      Enemy_Carrot-Sheet_14: -4526495469076401198
+      Enemy_Carrot-Sheet_15: 2724141432114214450
+      Enemy_Carrot-Sheet_16: 1585880459277968197
+      Enemy_Carrot-Sheet_17: -1765147148466380471
+      Enemy_Carrot-Sheet_18: 664857922618005362
+      Enemy_Carrot-Sheet_19: 1877559795280162406
+      Enemy_Carrot-Sheet_2: 1250450321442129392
+      Enemy_Carrot-Sheet_20: -5964941542507404543
+      Enemy_Carrot-Sheet_21: -313349316762578646
+      Enemy_Carrot-Sheet_22: -7923342617252140357
+      Enemy_Carrot-Sheet_23: -8748698889779303661
+      Enemy_Carrot-Sheet_24: -6709076956495302699
+      Enemy_Carrot-Sheet_25: -4209995614947208121
+      Enemy_Carrot-Sheet_26: 5210403024254382098
+      Enemy_Carrot-Sheet_27: -526065127481809691
+      Enemy_Carrot-Sheet_28: 5064818297583219618
+      Enemy_Carrot-Sheet_29: -4889423277018574006
+      Enemy_Carrot-Sheet_3: -6658218406132324933
+      Enemy_Carrot-Sheet_30: -4544925507240068837
+      Enemy_Carrot-Sheet_31: 4766898673555365100
+      Enemy_Carrot-Sheet_32: 9152740990838521278
+      Enemy_Carrot-Sheet_33: -1429746863337945896
+      Enemy_Carrot-Sheet_34: 1726946531
+      Enemy_Carrot-Sheet_35: 857965935
+      Enemy_Carrot-Sheet_4: 3247697757271869230
+      Enemy_Carrot-Sheet_5: -5743944308306539294
+      Enemy_Carrot-Sheet_6: -5867894388905820598
+      Enemy_Carrot-Sheet_7: 1359938323931028765
+      Enemy_Carrot-Sheet_8: -7493034658119867566
+      Enemy_Carrot-Sheet_9: -4970234580864938614
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
