@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
 
     private float currentSpeed;
     private float targetSpeed;
-    private bool isRunning;
+    [HideInInspector] public bool isRunning;
     private float lastFacingDir = 1f;
 
     [Header("Jump")]

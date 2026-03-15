@@ -5,12 +5,12 @@ public class MenuButton : MonoBehaviour
 {
     public void StartGame()
     {
-        SceneManager.LoadScene("lvl-0-0");
+        LevelLoader.instance.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void Option()
     {
-        Debug.Log("Option button clicked");
+        Debug.Log("WIP");
     }
 
     public void QuitGame()

@@ -23,7 +23,6 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         // reload current scene
-        Debug.Log("Game Over! Reloading scene...");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        LevelLoader.instance.LoadLevel(SceneManager.GetActiveScene().buildIndex);
     }
 }

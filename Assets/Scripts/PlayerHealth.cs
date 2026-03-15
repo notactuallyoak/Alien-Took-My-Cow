@@ -14,7 +14,7 @@ public class PlayerHealth : MonoBehaviour
     [Header("Invincibility Settings")]
     public float invincibilityDuration;
     public float blinkInterval;
-    private bool isInvincible = false;
+    [HideInInspector] public bool isInvincible = false;
 
     [Header("Knockback Settings")]
     public float knockbackForceX;
@@ -49,7 +49,6 @@ public class PlayerHealth : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            // die
             GameManager.Instance.GameOver();
         } 
     }
@@ -122,5 +121,10 @@ public class PlayerHealth : MonoBehaviour
         if (playerSprite != null) playerSprite.enabled = true;
 
         isInvincible = false;
+    }
+
+    public int GetHealth()
+    {
+        return currentHealth;
     }
 }
