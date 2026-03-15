@@ -171,6 +171,14 @@ MonoBehaviour:
     prefab: {fileID: 180045026420131878, guid: 0119aefd275323747bf3a5c1cf68e940, type: 3}
   - name: DeadStar
     prefab: {fileID: 2721222633268246068, guid: bdc312452f365ec4fbaba94a53d2a21c, type: 3}
+  - name: AlienGunCharge
+    prefab: {fileID: 6557468436870603045, guid: eb345b90cafdd37428cffdf58cacb345, type: 3}
+  - name: AlienGunLaser
+    prefab: {fileID: 3483720592152660759, guid: f66c96ebd22599c41bfc57be473e7fdb, type: 3}
+  - name: AlienGunMuzzleFlash
+    prefab: {fileID: 4745432220766746062, guid: 1e5450376653cf0488f3434512d2aad0, type: 3}
+  - name: BlockBreak
+    prefab: {fileID: 5254306854481339465, guid: 976140cf211c1fe4ca547a8d6934ce8b, type: 3}
 --- !u!4 &118095180
 Transform:
   m_ObjectHideFlags: 0

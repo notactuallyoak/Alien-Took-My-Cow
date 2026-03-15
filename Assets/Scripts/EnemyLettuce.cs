@@ -1,14 +1,11 @@
 using UnityEngine;
 
-public class EnemySimplePatrol : MonoBehaviour
+public class EnemyLettuce : MonoBehaviour
 {
     [Header("Movement Settings")]
     public float speed;
     public float checkDistance;
-
-    [Header("References")]
     public LayerMask groundLayer;
-    public int damage;
 
     private bool movingRight = true;
 
@@ -44,11 +41,7 @@ public class EnemySimplePatrol : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
-
-            if (playerHealth != null)
-            {
-                playerHealth.TakeDamage(damage, transform.position);
-            }
+            playerHealth.TakeDamage(1, transform.position);
         }
     }
 
@@ -56,11 +49,8 @@ public class EnemySimplePatrol : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Vector2 rayDirection = movingRight ? Vector2.right : Vector2.left;
-
-        // Draw Wall Check
         Gizmos.DrawRay(transform.position, rayDirection * checkDistance);
 
-        // Draw Ground Check
         Vector2 groundCheckPos = (Vector2)transform.position + rayDirection * checkDistance;
         Gizmos.DrawRay(groundCheckPos, Vector2.down * checkDistance);
     }
