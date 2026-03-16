@@ -68,6 +68,7 @@ public class EnemyCarrot : MonoBehaviour
     IEnumerator AttackRoutine()
     {
         isAttacking = true;
+        yield return new WaitForSeconds(1f);
 
         // hide in ground
         anim.SetTrigger("PreAttack");

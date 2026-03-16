@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: b6fce5348eb4af84aa01f3310f0746a2
+guid: 5452eb51de0047f40b1bdb2de1228ac2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5416401230242441384
-    second: MainMenu_Emission_0
+      213: 3901333750411442158
+    second: UFO_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -77,7 +77,7 @@ TextureImporter:
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
-    crunchedCompression: 1
+    crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
     ignorePlatformSupport: 0
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MainMenu_Emission_0
+      name: UFO_0
       rect:
         serializedVersion: 2
-        x: 584
-        y: 278
-        width: 715
-        height: 564
+        x: 722
+        y: 782
+        width: 714
+        height: 229
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8a8e699b83cea2b40800000000000000
-      internalID: 5416401230242441384
+      spriteID: ee734873062542630800000000000000
+      internalID: 3901333750411442158
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      MainMenu_Emission_0: 5416401230242441384
+      UFO_0: 3901333750411442158
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

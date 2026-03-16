@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: 95bb7e713cdf5524ea5268642eae2f78
+guid: 725550adb3b127f43903c51999c9298e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3451699440861859892
-    second: MainMenu_0
+      213: -8663071220326804633
+    second: CowGround_0
+  - first:
+      213: 7048988829907105107
+    second: CowGround_1
+  - first:
+      213: 3258126590065280086
+    second: CowGround_2
+  - first:
+      213: -2215605081273120847
+    second: CowGround_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +46,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -77,7 +86,7 @@ TextureImporter:
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
-    crunchedCompression: 1
+    crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
     ignorePlatformSupport: 0
@@ -113,13 +122,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MainMenu_0
+      name: CowGround_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1920
-        height: 1080
+        x: 191
+        y: 154
+        width: 360
+        height: 182
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +137,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ccfa30c75a91910d0800000000000000
-      internalID: -3451699440861859892
+      spriteID: 763d280cf9696c780800000000000000
+      internalID: -8663071220326804633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CowGround_1
+      rect:
+        serializedVersion: 2
+        x: 597
+        y: 278
+        width: 151
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3553f406ef903d160800000000000000
+      internalID: 7048988829907105107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CowGround_2
+      rect:
+        serializedVersion: 2
+        x: 1184
+        y: 274
+        width: 159
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65488121fd0373d20800000000000000
+      internalID: 3258126590065280086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CowGround_3
+      rect:
+        serializedVersion: 2
+        x: 1393
+        y: 172
+        width: 288
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b74a28dae69041e0800000000000000
+      internalID: -2215605081273120847
       vertices: []
       indices: 
       edges: []
@@ -148,7 +223,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      MainMenu_0: -3451699440861859892
+      CowGround_0: -8663071220326804633
+      CowGround_1: 7048988829907105107
+      CowGround_2: 3258126590065280086
+      CowGround_3: -2215605081273120847
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
