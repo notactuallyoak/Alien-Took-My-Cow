@@ -123,7 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LevelLoader
   loadingScreen: {fileID: 2596336824429816974}
   fadeImage: {fileID: 1760524083076650203}
-  fadeSpeed: 3
+  fadeSpeed: 2
 --- !u!1 &2596336824429816974
 GameObject:
   m_ObjectHideFlags: 0

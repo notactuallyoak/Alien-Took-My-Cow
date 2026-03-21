@@ -15,6 +15,8 @@ public class Goal : MonoBehaviour
 
     private IEnumerator ReachGoal(Collider2D collision)
     {
+        GameManager.Instance.StopLevelTimer();
+
         anim.SetTrigger("Goal");
         goalCollider.enabled = false;
 

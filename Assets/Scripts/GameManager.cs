@@ -50,7 +50,6 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            // entered game level, timer started
             StartLevelTimer();
         }
     }
@@ -69,28 +68,92 @@ public class GameManager : MonoBehaviour
 
     public void FinishLevel()
     {
-        StopLevelTimer();
+        string currentSceneName = SceneManager.GetActiveScene().name;
 
-        string levelKey = "BestTime_" + SceneManager.GetActiveScene().name;
+        string bestTimeKey = "BestTime_" + currentSceneName;
+        string lastTimeKey = "LastTime_" + currentSceneName;
 
-        // load saved best time (huge number is bad)
-        float savedBest = PlayerPrefs.GetFloat(levelKey, 99999f);
+        // save last time
+        PlayerPrefs.SetFloat(lastTimeKey, currentLevelTime);
 
-        // Check if current time is better (lower)
+        // save best timme
+        float savedBest = PlayerPrefs.GetFloat(bestTimeKey, 99999f);
         if (currentLevelTime < savedBest)
         {
-            PlayerPrefs.SetFloat(levelKey, currentLevelTime);
+            PlayerPrefs.SetFloat(bestTimeKey, currentLevelTime);
             PlayerPrefs.Save();
             Debug.Log($"New Record! Time: {GetFormattedTime(currentLevelTime)}");
         }
         else
         {
-            Debug.Log($"Level Finished. Time: {GetFormattedTime(currentLevelTime)}. Best: {GetFormattedTime(savedBest)}");
+            PlayerPrefs.Save(); // mamke sure lasttime is saved
+            Debug.Log($"Level Finished. Time: {GetFormattedTime(currentLevelTime)}.");
+        }
+
+        // unlock next level
+        int currentLevelNum = GetLevelNumber(currentSceneName);
+        if (currentLevelNum > 0)
+        {
+            int nextLevelNum = currentLevelNum + 1;
+            int highestUnlocked = PlayerPrefs.GetInt("UnlockedLevel", 1);
+            if (nextLevelNum > highestUnlocked)
+            {
+                PlayerPrefs.SetInt("UnlockedLevel", nextLevelNum);
+                PlayerPrefs.Save();
+            }
         }
 
         LevelLoader.instance.LoadLevel("LevelSelector");
     }
 
+
+    // get number from scene name (e.g., "Level1" -> 1)
+    private int GetLevelNumber(string sceneName)
+    {
+        if (sceneName.StartsWith("Level"))
+        {
+            string numPart = sceneName.Substring(5); // Removes "Level"
+            int num;
+            if (int.TryParse(numPart, out num))
+            {
+                return num;
+            }
+        }
+        return 0;
+    }
+
+    // returns true if the level index is unlocked
+    public bool IsLevelUnlocked(int levelIndex)
+    {
+        int highestUnlocked = PlayerPrefs.GetInt("UnlockedLevel", 1);
+        return levelIndex <= highestUnlocked;
+    }
+
+    public string GetLastTime(string sceneName)
+    {
+        string key = "LastTime_" + sceneName;
+        float time = PlayerPrefs.GetFloat(key, 99999f);
+
+        // If time is still default, return dashes
+        if (time >= 99999f) return "--:--:--";
+        return GetFormattedTime(time);
+    }
+
+    // Returns formatted string "00:00:00" or "--:--:--" if not beaten
+    public string GetBestTime(string sceneName)
+    {
+        string key = "BestTime_" + sceneName;
+        float time = PlayerPrefs.GetFloat(key, 99999f);
+
+        if (time < 99999f)
+        {
+            return GetFormattedTime(time);
+        }
+        else
+        {
+            return "--:--:--";
+        }
+    }
 
     public string GetFormattedTime(float time)
     {
@@ -104,7 +167,6 @@ public class GameManager : MonoBehaviour
     {
         return GetFormattedTime(currentLevelTime);
     }
-
 
     public void GameOver()
     {
