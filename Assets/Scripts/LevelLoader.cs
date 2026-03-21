@@ -9,7 +9,7 @@ public class LevelLoader : MonoBehaviour
 
     [Header("UI References")]
     public GameObject loadingScreen;
-    public Image fadeImage; 
+    public Image fadeImage;
     public float fadeSpeed;
 
     private void Awake()
@@ -36,24 +36,24 @@ public class LevelLoader : MonoBehaviour
         }
     }
 
-    public void LoadLevel(int sceneIndex)
+    public void LoadLevel(string sceneName)
     {
-        StartCoroutine(LoadAsynchronously(sceneIndex));
+        StartCoroutine(LoadAsynchronously(sceneName));
     }
 
-    IEnumerator LoadAsynchronously(int sceneIndex)
+    IEnumerator LoadAsynchronously(string sceneName)
     {
-        loadingScreen.SetActive(true);
+        if (loadingScreen != null) loadingScreen.SetActive(true);
 
         yield return Fade(1f);
 
-        SceneManager.LoadScene(sceneIndex);
+        SceneManager.LoadScene(sceneName);
 
         yield return new WaitForEndOfFrame();
 
         yield return Fade(0f);
 
-        loadingScreen.SetActive(false);
+        if (loadingScreen != null) loadingScreen.SetActive(false);
     }
 
     IEnumerator Fade(float targetAlpha)
@@ -62,11 +62,12 @@ public class LevelLoader : MonoBehaviour
 
         Color startColor = fadeImage.color;
         float timer = 0f;
+        float duration = 1f / fadeSpeed;
 
-        while (timer < (1f / fadeSpeed))
+        while (timer < duration)
         {
             timer += Time.deltaTime;
-            float alpha = Mathf.Lerp(startColor.a, targetAlpha, timer * fadeSpeed);
+            float alpha = Mathf.Lerp(startColor.a, targetAlpha, timer / duration);
             fadeImage.color = new Color(startColor.r, startColor.g, startColor.b, alpha);
             yield return null;
         }

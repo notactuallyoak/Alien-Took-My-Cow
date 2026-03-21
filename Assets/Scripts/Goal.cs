@@ -18,9 +18,8 @@ public class Goal : MonoBehaviour
         anim.SetTrigger("Goal");
         goalCollider.enabled = false;
 
-        yield return new WaitForSeconds(4f);
-
-        LevelLoader.instance.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
+        yield return new WaitForSeconds(3f);
+        GameManager.Instance.FinishLevel();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

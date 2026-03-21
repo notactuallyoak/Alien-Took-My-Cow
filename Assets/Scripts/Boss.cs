@@ -146,7 +146,7 @@ public class Boss : MonoBehaviour
         {
             Vector2 spawnPos = target.position;
 
-            RaycastHit2D hit = Physics2D.Raycast(target.position, Vector2.down, 10f, groundLayer);
+            RaycastHit2D hit = Physics2D.Raycast(target.position, Vector2.down, 13f, groundLayer);
 
             if (hit.collider != null)
             {
@@ -166,7 +166,7 @@ public class Boss : MonoBehaviour
             Vector2 randomOffset = Random.insideUnitCircle * Random.Range(-7f, 10f);
             Vector2 spawnPos = (Vector2)target.position + randomOffset;
 
-            float randomAngle = Random.Range(0f, 360f);
+            float randomAngle = Random.Range(30f, 270f);
             Quaternion spawnRotation = Quaternion.Euler(0, 0, randomAngle);
 
             // spawn Laser

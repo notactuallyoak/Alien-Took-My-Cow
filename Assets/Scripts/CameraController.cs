@@ -38,7 +38,7 @@ public class CameraController : MonoBehaviour
         if (target != null) targetRb = target.GetComponent<Rigidbody2D>();
         shakeOffset = Vector2.zero;
     }
-    private void LateUpdate()
+    private void Update()
     {
         if (target == null) return;
 

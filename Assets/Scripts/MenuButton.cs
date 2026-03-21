@@ -5,7 +5,7 @@ public class MenuButton : MonoBehaviour
 {
     public void StartGame()
     {
-        LevelLoader.instance.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
+        LevelLoader.instance.LoadLevel("LevelSelector");
     }
 
     public void Option()
