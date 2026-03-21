@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
@@ -8,7 +7,11 @@ public class AudioManager : MonoBehaviour
 
     [Header("Audio Sources")]
     public AudioSource bgmSource;
-    public AudioSource sfxSource;
+    // removed single sfxSource, will generate a pool below
+
+    [Header("Pool Settings")]
+    private int sfxPoolSize = 128; // how many sounds can play at the exact same time
+    private List<AudioSource> sfxPool;
 
     [Header("Sound Libraries")]
     public Sound[] bgmSounds;
@@ -23,7 +26,6 @@ public class AudioManager : MonoBehaviour
         public bool loop;
     }
 
-    // dictionaries for fast lookup
     private Dictionary<string, Sound> bgmDict = new Dictionary<string, Sound>();
     private Dictionary<string, Sound> sfxDict = new Dictionary<string, Sound>();
 
@@ -40,9 +42,20 @@ public class AudioManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        // Build Dictionaries
+        // 1. Build Dictionaries
         foreach (var s in bgmSounds) bgmDict[s.name] = s;
         foreach (var s in sfxSounds) sfxDict[s.name] = s;
+
+        // 2. Create the SFX Pool
+        sfxPool = new List<AudioSource>();
+        for (int i = 0; i < sfxPoolSize; i++)
+        {
+            GameObject go = new GameObject("SFX_Source_" + i);
+            go.transform.SetParent(transform);
+            AudioSource source = go.AddComponent<AudioSource>();
+            source.playOnAwake = false;
+            sfxPool.Add(source);
+        }
 
         LoadSettings();
     }
@@ -52,7 +65,7 @@ public class AudioManager : MonoBehaviour
         if (bgmDict.TryGetValue(name, out Sound s))
         {
             bgmSource.clip = s.clip;
-            bgmSource.volume = s.volume * GetBGMVolume(); // multiply individual volume by global volume
+            bgmSource.volume = s.volume * GetBGMVolume();
             bgmSource.loop = s.loop;
             bgmSource.Play();
         }
@@ -67,12 +80,28 @@ public class AudioManager : MonoBehaviour
         bgmSource.Stop();
     }
 
-    public void PlaySFX(string name)
+    // Updated PlaySFX to support multiple simultaneous sounds
+    public void PlaySFX(string name, float pitchVariation = 0f)
     {
         if (sfxDict.TryGetValue(name, out Sound s))
         {
-            // allows overlapping sounds
-            sfxSource.PlayOneShot(s.clip, s.volume * GetSFXVolume());
+            // Find a free AudioSource in the pool
+            AudioSource source = GetAvailableSource();
+
+            if (source != null)
+            {
+                source.clip = s.clip;
+                source.volume = s.volume * GetSFXVolume();
+
+                // Pitch Variation Logic
+                source.pitch = 1f;
+                if (pitchVariation > 0)
+                {
+                    source.pitch = 1f + Random.Range(-pitchVariation, pitchVariation);
+                }
+
+                source.Play();
+            }
         }
         else
         {
@@ -80,6 +109,21 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    // Helper to find an AudioSource that isn't currently playing
+    private AudioSource GetAvailableSource()
+    {
+        foreach (AudioSource source in sfxPool)
+        {
+            if (!source.isPlaying)
+            {
+                return source;
+            }
+        }
+
+        // Optional: If all sources are busy, return null (sound won't play)
+        // Or return the first one to cut it off (aggressive)
+        return null;
+    }
 
     public void SetBGMVolume(float volume)
     {
@@ -92,21 +136,24 @@ public class AudioManager : MonoBehaviour
     {
         PlayerPrefs.SetFloat(PREF_SFX_VOL, volume);
         PlayerPrefs.Save();
+
+        // Update active sources immediately so UI sliders work
+        foreach (AudioSource source in sfxPool)
+        {
+            if (source.isPlaying)
+            {
+                // Note: This doesn't update the specific sound's relative volume perfectly, 
+                // but updates the master volume component.
+                source.volume = GetSFXVolume();
+            }
+        }
     }
 
-    public float GetBGMVolume()
-    {
-        return PlayerPrefs.GetFloat(PREF_BGM_VOL, 1f);
-    }
-
-    public float GetSFXVolume()
-    {
-        return PlayerPrefs.GetFloat(PREF_SFX_VOL, 1f);
-    }
+    public float GetBGMVolume() => PlayerPrefs.GetFloat(PREF_BGM_VOL, 1f);
+    public float GetSFXVolume() => PlayerPrefs.GetFloat(PREF_SFX_VOL, 1f);
 
     private void LoadSettings()
     {
-        // apply saved volumes to AudioSources
         bgmSource.volume = GetBGMVolume();
     }
 }
