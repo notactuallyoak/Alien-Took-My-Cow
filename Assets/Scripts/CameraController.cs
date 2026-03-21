@@ -62,7 +62,7 @@ public class CameraController : MonoBehaviour
         }
         else
         {
-            shakeOffset = Vector2.Lerp(shakeOffset, Vector2.zero, smoothSpeed * Time.deltaTime);
+            shakeOffset = Vector2.Lerp(shakeOffset, Vector2.zero, smoothSpeed * Time.unscaledDeltaTime);
         }
 
         // calc final desired position with look-ahead + offset

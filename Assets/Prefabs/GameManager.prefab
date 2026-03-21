@@ -44,3 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13eaee36f10710c42a070b85ef7d97bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  nonGameScenes:
+  - LevelSelector
+  - MainMenu
+  - SplashScreen
