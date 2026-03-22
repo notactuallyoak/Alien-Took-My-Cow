@@ -30,9 +30,6 @@ public class Boss : MonoBehaviour
     private Transform target;
     
 
-    private bool firstTimeMet = true;
-    private int bossPhase = 1;
-
     private void Start()
     {
         if (transform.localScale.x < 0) facingDirection = -1;
@@ -52,12 +49,6 @@ public class Boss : MonoBehaviour
         else
         {
             target = null;
-        }
-
-        EnemyBase enemyBase = GetComponent<EnemyBase>();
-        if (enemyBase.health <= 0)
-        {
-            LevelLoader.instance.LoadLevel("Credit");
         }
     }
 
