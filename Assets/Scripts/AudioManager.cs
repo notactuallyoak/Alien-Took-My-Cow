@@ -10,7 +10,7 @@ public class AudioManager : MonoBehaviour
     // removed single sfxSource, will generate a pool below
 
     [Header("Pool Settings")]
-    private int sfxPoolSize = 128; // how many sounds can play at the exact same time
+    private int sfxPoolSize = 64; // how many sounds can play at the exact same time
     private List<AudioSource> sfxPool;
 
     [Header("Sound Libraries")]

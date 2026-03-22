@@ -143,5 +143,133 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
   bgmSource: {fileID: 3152111223915045722}
-  bgmSounds: []
-  sfxSounds: []
+  bgmSounds:
+  - name: MainMenu
+    clip: {fileID: 8300000, guid: c7e358c6e0f674846ae649d950f5f938, type: 3}
+    volume: 0.5
+    loop: 1
+  - name: LevelSelector
+    clip: {fileID: 8300000, guid: 9c7b2d2f25b94c54fbe30c2b6441250b, type: 3}
+    volume: 0.5
+    loop: 1
+  - name: Level1
+    clip: {fileID: 8300000, guid: 773ee94a4d7610d438590ff8a52f16ef, type: 3}
+    volume: 0.5
+    loop: 1
+  - name: Level2
+    clip: {fileID: 8300000, guid: de0617e797cfdb749a11e86e0cd7718a, type: 3}
+    volume: 0.5
+    loop: 1
+  - name: Level3
+    clip: {fileID: 8300000, guid: f744f815c01b30346a923a06a806f238, type: 3}
+    volume: 0.5
+    loop: 1
+  - name: Level4
+    clip: {fileID: 8300000, guid: bc9a60bcd631a124893211eb7c2bb93b, type: 3}
+    volume: 0.5
+    loop: 1
+  - name: Level5
+    clip: {fileID: 8300000, guid: 8fbac69c21c34d44fb3a1b45be031451, type: 3}
+    volume: 0.5
+    loop: 1
+  - name: Level6
+    clip: {fileID: 8300000, guid: 966184e48da88a0438cc4dcabe0fdec6, type: 3}
+    volume: 0.5
+    loop: 1
+  - name: Level7
+    clip: {fileID: 8300000, guid: 0540caebcbbf02644afa8d1b8ac39685, type: 3}
+    volume: 0.5
+    loop: 1
+  - name: Level8
+    clip: {fileID: 8300000, guid: ddee2f4a66087b548837cffc7e6c2c79, type: 3}
+    volume: 0.5
+    loop: 1
+  - name: Level10
+    clip: {fileID: 8300000, guid: aae1c52a2dd729c488e5dab254270acf, type: 3}
+    volume: 0.5
+    loop: 1
+  - name: Level11
+    clip: {fileID: 8300000, guid: e43b0d2bc35001e47b65d56710f6bbe8, type: 3}
+    volume: 0.5
+    loop: 1
+  - name: Level12
+    clip: {fileID: 8300000, guid: 93edf18415345844f9b728e8c5b58a39, type: 3}
+    volume: 0.5
+    loop: 1
+  - name: Level12BossIntro
+    clip: {fileID: 8300000, guid: 43f23f93b6a3edd43a4481d2c8f74c8b, type: 3}
+    volume: 0.5
+    loop: 1
+  - name: Level12BossPhase1
+    clip: {fileID: 8300000, guid: 4b587481f2dc14d429c6f3c4b5b2fa58, type: 3}
+    volume: 0.5
+    loop: 1
+  - name: Level12BossPhase2
+    clip: {fileID: 8300000, guid: c989d5e710122414393e66b8599ff6fa, type: 3}
+    volume: 0.5
+    loop: 1
+  - name: Credit
+    clip: {fileID: 8300000, guid: 03eb17306e59fbb4e98666d388d40c4b, type: 3}
+    volume: 0.5
+    loop: 1
+  sfxSounds:
+  - name: PlayerWalk
+    clip: {fileID: 8300000, guid: 70d7a13f6f1efd243a00f832a6c0c741, type: 3}
+    volume: 0.5
+    loop: 0
+  - name: PlayerJump
+    clip: {fileID: 8300000, guid: 3477059976f6a7441946a55b352194bd, type: 3}
+    volume: 0.5
+    loop: 0
+  - name: PlayerShotgun
+    clip: {fileID: 8300000, guid: ecae211f8dc5a3b42b3efab18f68caf7, type: 3}
+    volume: 0.5
+    loop: 0
+  - name: PlaayerSlam
+    clip: {fileID: 8300000, guid: ef8df217e9f3f0348a6248535ffe4986, type: 3}
+    volume: 0.5
+    loop: 0
+  - name: PlayerSlamLand
+    clip: {fileID: 8300000, guid: a596660645e672b4bba8afcd713fa542, type: 3}
+    volume: 0.5
+    loop: 0
+  - name: PlayerHit
+    clip: {fileID: 8300000, guid: 49205b08fa93cce4ba447e47ca48c8bf, type: 3}
+    volume: 0.5
+    loop: 0
+  - name: PlayerHurt
+    clip: {fileID: 8300000, guid: fb4c0c6ea93861544bcd5242d4d8771b, type: 3}
+    volume: 0.5
+    loop: 0
+  - name: PlayerDash
+    clip: {fileID: 8300000, guid: cf54254e675b2194b8a612ca32db1a4b, type: 3}
+    volume: 0.5
+    loop: 0
+  - name: PlayerDeath
+    clip: {fileID: 8300000, guid: c9b44baa249d3504582c95324fe7836a, type: 3}
+    volume: 0.5
+    loop: 0
+  - name: EnemyDead
+    clip: {fileID: 8300000, guid: 0c53a876833fa4341ac8a0b171793c23, type: 3}
+    volume: 0.5
+    loop: 0
+  - name: BlockBreak
+    clip: {fileID: 8300000, guid: 91282664a276d1242b2074796fd5ffe6, type: 3}
+    volume: 0.5
+    loop: 0
+  - name: ButtonHover
+    clip: {fileID: 8300000, guid: 81816e77a029c154d91ae4abc0f9d32e, type: 3}
+    volume: 0.5
+    loop: 0
+  - name: ButtonClick
+    clip: {fileID: 8300000, guid: a5ba02d9c6d440542889ba1a146418f8, type: 3}
+    volume: 0.5
+    loop: 0
+  - name: AlienShoot
+    clip: {fileID: 8300000, guid: 631f8592643106a4aab651caeda6c899, type: 3}
+    volume: 0.5
+    loop: 0
+  - name: BossLaser
+    clip: {fileID: 8300000, guid: 93248e953914da140ba7e0ff78fdf1f5, type: 3}
+    volume: 0.5
+    loop: 0
