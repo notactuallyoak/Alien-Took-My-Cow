@@ -41769,7 +41769,7 @@ SpriteRenderer:
   m_SortingOrder: -98
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: c04d68be2a4ee404c89a4ea80397dfe0, type: 3}
-  m_Color: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+  m_Color: {r: 0.3, g: 0.3, b: 0.3, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
@@ -42326,7 +42326,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.07058824, g: 0.11764707, b: 0.19215688, a: 0}
+  m_BackGroundColor: {r: 0.121568635, g: 0.18431373, b: 0.2901961, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -42394,7 +42394,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a083cd0fe960e14b84f946e962dc5ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraController
-  target: {fileID: 0}
   smoothSpeed: 1
   offset: {x: 0, y: 1, z: -10}
   lookAheadDistance: 2
@@ -44013,7 +44012,7 @@ SpriteRenderer:
   m_SortingOrder: -99
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 5a74573c7140bea4da633a47620fbee2, type: 3}
-  m_Color: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+  m_Color: {r: 0.3, g: 0.3, b: 0.3, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
@@ -44253,7 +44252,7 @@ SpriteRenderer:
   m_SortingOrder: -96
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 8e85136441fd8d34dae50bf1c4e16752, type: 3}
-  m_Color: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+  m_Color: {r: 0.3, g: 0.3, b: 0.3, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
@@ -44796,7 +44795,7 @@ SpriteRenderer:
   m_SortingOrder: -95
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: dad7772a95978aa4eab387fa4d33d973, type: 3}
-  m_Color: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+  m_Color: {r: 0.3, g: 0.3, b: 0.3, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
@@ -45540,7 +45539,7 @@ SpriteRenderer:
   m_SortingOrder: -94
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 5ae3911a8e7f99c40b94232f3b4eb96f, type: 3}
-  m_Color: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+  m_Color: {r: 0.3, g: 0.3, b: 0.3, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
@@ -45760,7 +45759,7 @@ SpriteRenderer:
   m_SortingOrder: -97
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: f4028e1f8490d8c40b5f41a648118921, type: 3}
-  m_Color: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+  m_Color: {r: 0.3, g: 0.3, b: 0.3, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
