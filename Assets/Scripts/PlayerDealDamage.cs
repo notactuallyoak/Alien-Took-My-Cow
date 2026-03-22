@@ -47,13 +47,6 @@ public class PlayerDealDamage : MonoBehaviour
         {
             if (hit.collider != null)
             {
-                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Breakable"))
-                {
-                    CameraController.Instance?.CamShake(0.15f, 0.1f);
-                    ParticleEmitter.Instance.Emit("BlockBreak", hit.collider.gameObject.transform.position, Quaternion.identity);
-                    AudioManager.Instance.PlaySFX("BlockBreak");
-                    Destroy(hit.collider.gameObject);
-                }
                 hit.collider.GetComponent<EnemyBase>()?.TakeDamage(runDamage);
                 CameraController.Instance?.CamShake(0.15f, 0.1f);
             }
