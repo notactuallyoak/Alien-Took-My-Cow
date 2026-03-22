@@ -9,7 +9,6 @@ public class MenuButtons : MonoBehaviour
     public Slider sfxSlider;
 
     public GameObject optionsPanel;
-
     // these keys MUST match exactly what is inside your AudioManager script
     private const string PREF_BGM_VOL = "BGMVolume";
     private const string PREF_SFX_VOL = "SFXVolume";
@@ -101,6 +100,11 @@ public class MenuButtons : MonoBehaviour
         if (!isInMainMenu) Time.timeScale = 1f;
 
         PlayerPrefs.Save(); 
+    }
+
+    public void Leave()
+    {
+        LevelLoader.instance.LoadLevel("LevelSelector");
     }
 
     public void QuitGame()

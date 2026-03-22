@@ -7704,6 +7704,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1565743284}
     m_Modifications:
+    - target: {fileID: 651074525785726026, guid: afb61f33c903d1f42bef42ebd9b73b33, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 651074525785726026, guid: afb61f33c903d1f42bef42ebd9b73b33, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1285619058250410229, guid: afb61f33c903d1f42bef42ebd9b73b33, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1285619058250410229, guid: afb61f33c903d1f42bef42ebd9b73b33, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1285619058250410229, guid: afb61f33c903d1f42bef42ebd9b73b33, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1585668755378514050, guid: afb61f33c903d1f42bef42ebd9b73b33, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1585668755378514050, guid: afb61f33c903d1f42bef42ebd9b73b33, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1585668755378514050, guid: afb61f33c903d1f42bef42ebd9b73b33, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3093007969683474905, guid: afb61f33c903d1f42bef42ebd9b73b33, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -7795,6 +7827,42 @@ PrefabInstance:
     - target: {fileID: 3633615098456153282, guid: afb61f33c903d1f42bef42ebd9b73b33, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: CloseOptions
+      objectReference: {fileID: 0}
+    - target: {fileID: 5572633317785857835, guid: afb61f33c903d1f42bef42ebd9b73b33, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5572633317785857835, guid: afb61f33c903d1f42bef42ebd9b73b33, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6345400582038533943, guid: afb61f33c903d1f42bef42ebd9b73b33, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6345400582038533943, guid: afb61f33c903d1f42bef42ebd9b73b33, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6345400582038533943, guid: afb61f33c903d1f42bef42ebd9b73b33, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1565743285}
+    - target: {fileID: 6345400582038533943, guid: afb61f33c903d1f42bef42ebd9b73b33, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6345400582038533943, guid: afb61f33c903d1f42bef42ebd9b73b33, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Leave
+      objectReference: {fileID: 0}
+    - target: {fileID: 6345400582038533943, guid: afb61f33c903d1f42bef42ebd9b73b33, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MenuButtons, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6345400582038533943, guid: afb61f33c903d1f42bef42ebd9b73b33, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
