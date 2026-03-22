@@ -43,12 +43,14 @@ public class PlayerHealth : MonoBehaviour
 
         currentHealth -= damage;
         CameraController.Instance?.CamShake(0.1f, 0.1f);
+        AudioManager.Instance.PlaySFX("PlayerHurt");
         UpdateHeart();
 
         ApplyKnockback(enemyPosition);
 
         if (currentHealth <= 0)
         {
+            AudioManager.Instance.PlaySFX("PlayerDeath");
             GameManager.Instance.GameOver();
         } 
     }

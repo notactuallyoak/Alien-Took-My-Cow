@@ -51,6 +51,7 @@ public class PlayerDealDamage : MonoBehaviour
                 {
                     CameraController.Instance?.CamShake(0.15f, 0.1f);
                     ParticleEmitter.Instance.Emit("BlockBreak", hit.collider.gameObject.transform.position, Quaternion.identity);
+                    AudioManager.Instance.PlaySFX("BlockBreak");
                     Destroy(hit.collider.gameObject);
                 }
                 hit.collider.GetComponent<EnemyBase>()?.TakeDamage(runDamage);
@@ -80,6 +81,7 @@ public class PlayerDealDamage : MonoBehaviour
                 {
                     CameraController.Instance?.CamShake(0.15f, 0.1f);
                     ParticleEmitter.Instance.Emit("BlockBreak", hit.collider.gameObject.transform.position, Quaternion.identity);
+                    AudioManager.Instance.PlaySFX("BlockBreak");
                     Destroy(hit.collider.gameObject);
                 }
                 hit.collider.GetComponent<EnemyBase>()?.TakeDamage(dashDamage);
@@ -107,6 +109,7 @@ public class PlayerDealDamage : MonoBehaviour
                 {
                     CameraController.Instance?.CamShake(0.15f, 0.1f);
                     ParticleEmitter.Instance.Emit("BlockBreak", hit.collider.gameObject.transform.position, Quaternion.identity);
+                    AudioManager.Instance.PlaySFX("BlockBreak");
                     Destroy(hit.collider.gameObject);
                 }
                 hit.collider.GetComponent<EnemyBase>()?.TakeDamage(slamDamage);
@@ -134,6 +137,7 @@ public class PlayerDealDamage : MonoBehaviour
                 {
                     CameraController.Instance?.CamShake(0.15f, 0.1f);
                     ParticleEmitter.Instance.Emit("BlockBreak", hit.collider.gameObject.transform.position, Quaternion.identity);
+                    AudioManager.Instance.PlaySFX("BlockBreak");
                     Destroy(hit.collider.gameObject);
                 }
                 hit.collider.GetComponent<EnemyBase>()?.TakeDamage(shotgunJumpDamage);

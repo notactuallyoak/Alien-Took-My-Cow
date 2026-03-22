@@ -24,6 +24,8 @@ public class Laser : MonoBehaviour
 
     private IEnumerator LaserRoutine()
     {
+        AudioManager.Instance.PlaySFX("BossLaser");
+
         // blink
         for (int i = 0; i < blinkCount; i++)
         {

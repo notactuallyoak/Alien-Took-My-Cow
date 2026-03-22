@@ -152,6 +152,7 @@ public class PlayerController : MonoBehaviour
         if (isGrounded && !wasGrounded && !isSlamming)
         {
             ParticleEmitter.Instance.Emit("LittleSmoke", groundCheck.position, Quaternion.identity);
+            AudioManager.Instance.PlaySFX("PlayerWalk");
         }
         wasGrounded = isGrounded;
 
@@ -168,6 +169,7 @@ public class PlayerController : MonoBehaviour
                 if (currentSpeed > walkSpeed && currentSpeed < machSpeed)
                 {
                     ParticleEmitter.Instance.Emit("LittleSmoke", groundCheck.position, Quaternion.identity);
+                    AudioManager.Instance.PlaySFX("PlayerWalk");
                 }
                 else if (currentSpeed >= machSpeed)
                 {
@@ -245,6 +247,7 @@ public class PlayerController : MonoBehaviour
                 CameraController.Instance?.CamShake(0.15f, 0.2f);
 
                 ParticleEmitter.Instance.Emit("SlamLand", groundCheck.position, !facingRight);
+                AudioManager.Instance.PlaySFX("PlayerSlamLand");
 
                 slamCooldownTimer = slamCooldown;   // cd timer start when slam hits the ground
             }
@@ -286,6 +289,7 @@ public class PlayerController : MonoBehaviour
     private void Jump()
     {
         anim.SetTrigger(animJumpHash);
+        AudioManager.Instance.PlaySFX("PlayerJump");
         CameraController.Instance?.CamShake(0.15f, 0.15f);
 
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
@@ -293,6 +297,7 @@ public class PlayerController : MonoBehaviour
 
         ParticleEmitter.Instance.Emit("MuzzleFlash", groundCheck.position, !facingRight);
         ParticleEmitter.Instance.Emit("ShotgunFire", groundCheck.position, !facingRight);
+        AudioManager.Instance.PlaySFX("PlayerShotgun");
     }
 
     private void HandleBetterGravity()
@@ -316,6 +321,7 @@ public class PlayerController : MonoBehaviour
         dashCooldownTimer = dashCooldown;
 
         ParticleEmitter.Instance.Emit("DashSmoke", transform.position, Quaternion.identity);
+        AudioManager.Instance.PlaySFX("PlayerDash");
 
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0;
@@ -343,6 +349,7 @@ public class PlayerController : MonoBehaviour
         anim.SetTrigger(animSlamHash);
 
         ParticleEmitter.Instance.Emit("LittleSmoke", transform.position, !facingRight);
+        AudioManager.Instance.PlaySFX("PlayerSlam");
 
         rb.linearVelocity = new Vector2(0, -slamForce);
     }

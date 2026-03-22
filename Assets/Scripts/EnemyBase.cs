@@ -42,6 +42,7 @@ public class EnemyBase : MonoBehaviour
         ParticleEmitter.Instance.Emit("WhiteFlash", transform.position, Quaternion.identity);
         ParticleEmitter.Instance.Emit("BigSmoke", transform.position, Quaternion.identity);
         ParticleEmitter.Instance.Emit("DeadStar", transform.position, Quaternion.identity);
+        AudioManager.Instance.PlaySFX("EnemyDead");
 
         Destroy(gameObject);
     }

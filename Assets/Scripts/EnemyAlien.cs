@@ -94,6 +94,7 @@ public class EnemyAlien : MonoBehaviour
         anim.SetTrigger("Attack");
         ParticleEmitter.Instance.Emit("AlienGunMuzzleFlash", gunPoint.position, !movingRight);
         ParticleEmitter.Instance.Emit("AlienGunLaser", gunPoint.position, !movingRight);
+        AudioManager.Instance.PlaySFX("AlienShoot");
 
         if (attackHitbox != null) attackHitbox.enabled = true;
         yield return new WaitForSeconds(0.125f); // hit active time
