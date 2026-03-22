@@ -1046,12 +1046,12 @@ ParticleSystem:
         - serializedVersion: 3
           time: 0
           value: 1
-          inSlope: -2
-          outSlope: -2
+          inSlope: -6.121249
+          outSlope: -6.121249
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
-          outWeight: 0
+          outWeight: 0.09547325
         - serializedVersion: 3
           time: 1
           value: 0
