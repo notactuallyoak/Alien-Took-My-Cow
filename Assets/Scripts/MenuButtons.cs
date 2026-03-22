@@ -104,6 +104,7 @@ public class MenuButtons : MonoBehaviour
 
     public void Leave()
     {
+        Time.timeScale = 1f;
         LevelLoader.instance.LoadLevel("LevelSelector");
     }
 

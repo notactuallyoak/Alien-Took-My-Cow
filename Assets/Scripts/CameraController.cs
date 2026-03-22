@@ -4,7 +4,7 @@ public class CameraController : MonoBehaviour
 {
     public static CameraController Instance { get; private set; }
 
-    public Transform target;
+    private Transform target;
     public float smoothSpeed;
     public Vector3 offset;
 
@@ -35,6 +35,8 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
+        target = GameObject.FindGameObjectWithTag("Player").transform;
+
         if (target != null) targetRb = target.GetComponent<Rigidbody2D>();
         shakeOffset = Vector2.zero;
     }
