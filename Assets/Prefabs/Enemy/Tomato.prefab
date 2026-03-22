@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fafe7d61c054c494d8788386ae3a4011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBase
-  health: 1
+  health: 2
 --- !u!114 &3694968797420488616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,7 +225,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 832
-  detectionRadius: 1
+  detectionRadius: 1.125
   explosionRadius: 1.5
   fuseTime: 1.5
   playerLayer:

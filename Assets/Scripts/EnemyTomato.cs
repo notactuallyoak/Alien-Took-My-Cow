@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class EnemySimplePatrol : MonoBehaviour
+public class EnemyTomato : MonoBehaviour
 {
     [Header("Movement Settings")]
     public float speed;
@@ -58,6 +58,7 @@ public class EnemySimplePatrol : MonoBehaviour
     {
         isAttacking = true; // stop moving
         anim.SetTrigger("Attack");
+        AudioManager.Instance.PlaySFX("EnemyTomatoFuse");
 
         yield return new WaitForSeconds(fuseTime);
 
@@ -69,6 +70,7 @@ public class EnemySimplePatrol : MonoBehaviour
         ParticleEmitter.Instance.Emit("MuzzleFlash", transform.position, Quaternion.identity);
         ParticleEmitter.Instance.Emit("BigSmoke", transform.position, Quaternion.identity);
         ParticleEmitter.Instance.Emit("DeadStar", transform.position, Quaternion.identity);
+        AudioManager.Instance.PlaySFX("EnemyTomatoExplode");
 
         // deal area damage
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, explosionRadius, playerLayer);

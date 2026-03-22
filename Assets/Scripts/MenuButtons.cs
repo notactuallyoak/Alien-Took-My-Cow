@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class MenuButton : MonoBehaviour
+public class MenuButtons : MonoBehaviour
 {
     [Header("UI References")]
     public Slider bgmSlider;
