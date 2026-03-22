@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         // SETTINGS
-        Application.targetFrameRate = 60;
+        Application.targetFrameRate = 90;
         Screen.SetResolution(1920, 1080, true);
 
         SceneManager.sceneLoaded += OnSceneLoaded;
