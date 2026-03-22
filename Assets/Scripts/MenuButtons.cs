@@ -108,6 +108,12 @@ public class MenuButtons : MonoBehaviour
         LevelLoader.instance.LoadLevel("LevelSelector");
     }
 
+    public void MainMenu()
+    {
+        Time.timeScale = 1f;
+        LevelLoader.instance.LoadLevel("MainMenu");
+    }
+
     public void QuitGame()
     {
         PlayerPrefs.Save();

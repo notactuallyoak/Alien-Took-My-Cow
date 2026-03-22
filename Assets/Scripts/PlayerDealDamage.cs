@@ -5,22 +5,22 @@ public class PlayerDealDamage : MonoBehaviour
     public LayerMask whatIsDamagable;
 
     [Header("Damage")]
-    public int runDamage;
-    public int dashDamage;
-    public int slamDamage;
-    public int shotgunJumpDamage;
+    private int runDamage = 1;
+    private int dashDamage = 3;
+    private int slamDamage = 2;
+    private int shotgunJumpDamage = 5;
 
     [Header("Ranges")]
-    public float attackRange;
-    public float dashRange;
-    public float slamRange;
-    public float shotgunRange;
+    private float attackRange = 0.7f;
+    private float dashRange = 0.65f;
+    private float slamRange = 0.5f;
+    private float shotgunRange = 1.35f;
 
     [Header("Radius")]
-    public float attackRadius;
-    public float dashRadius;
-    public float slamRadius;
-    public float shotgunRadius;
+    private float attackRadius = 0.7f;
+    private float dashRadius = 0.65f;
+    private float slamRadius = 0.8f;
+    private float shotgunRadius = 0.8f;
 
 
     Transform player;

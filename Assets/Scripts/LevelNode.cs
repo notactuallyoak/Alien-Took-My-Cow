@@ -17,10 +17,10 @@ public class LevelNode : MonoBehaviour
 
     private void Start()
     {
-        SetupButton();
+        UpdateButton();
     }
 
-    void SetupButton()
+    public void UpdateButton()
     {
         bool isUnlocked = GameManager.Instance.IsLevelUnlocked(levelIndex);
 

@@ -1,61 +1,10 @@
 fileFormatVersion: 2
-guid: 4cd13ad88d3e69f41a14376042c4f410
+guid: 418edb7ff1dcbe64eb7799836fd5a774
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7718468297911012302
-    second: altmc_restart_0
-  - first:
-      213: 2407128939697066405
-    second: altmc_restart_1
-  - first:
-      213: 1884523877765862917
-    second: altmc_restart_2
-  - first:
-      213: 8632841515615663681
-    second: altmc_restart_3
-  - first:
-      213: 1558188596889675373
-    second: altmc_restart_4
-  - first:
-      213: 2257078800015674544
-    second: altmc_restart_5
-  - first:
-      213: 3287452775122413808
-    second: altmc_restart_6
-  - first:
-      213: 2627806164280201311
-    second: altmc_restart_7
-  - first:
-      213: 5111030516112631164
-    second: altmc_restart_8
-  - first:
-      213: 4477883635383136956
-    second: altmc_restart_9
-  - first:
-      213: 1407601226908021045
-    second: altmc_restart_10
-  - first:
-      213: -850298689098077252
-    second: altmc_restart_11
-  - first:
-      213: -6365940231335411200
-    second: altmc_restart_12
-  - first:
-      213: 982445841937220544
-    second: altmc_restart_13
-  - first:
-      213: 8452007374194055585
-    second: altmc_restart_14
-  - first:
-      213: 8774917869980493592
-    second: altmc_restart_15
-  - first:
-      213: 7096074046745966901
-    second: altmc_restart_16
-  - first:
-      213: -2265043574998631014
-    second: altmc_restart_17
+      213: 756868550891124256
+    second: Logo_640x_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -97,9 +46,9 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -164,45 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: altmc_restart_0
+      name: Logo_640x_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 128
-        width: 512
-        height: 128
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 23476ec2afd72e490800000000000000
-      internalID: -7718468297911012302
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: altmc_restart_1
-      rect:
-        serializedVersion: 2
-        x: 0
+        x: 9
         y: 0
-        width: 512
-        height: 128
+        width: 622
+        height: 640
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5a1d4336407d76120800000000000000
-      internalID: 2407128939697066405
+      spriteID: 026b78ddfefe08a00800000000000000
+      internalID: 756868550891124256
       vertices: []
       indices: 
       edges: []
@@ -211,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 4de46d907ffd1b54ea4efa32952bf64d
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -219,12 +146,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries:
-      - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":2.0},"gridSpriteSize":{"x":512.0,"y":128.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+      entries: []
     nameFileIdTable:
-      altmc_restart_0: -7718468297911012302
-      altmc_restart_1: 2407128939697066405
+      Logo_640x_0: 756868550891124256
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
