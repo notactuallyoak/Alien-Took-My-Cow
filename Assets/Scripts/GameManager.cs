@@ -83,6 +83,7 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetFloat(bestTimeKey, currentLevelTime);
             PlayerPrefs.Save();
             Debug.Log($"New Record! Time: {GetFormattedTime(currentLevelTime)}");
+            AudioManager.Instance.PlaySFX("PlayerBestTimer");
         }
         else
         {

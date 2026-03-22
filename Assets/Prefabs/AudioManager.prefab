@@ -225,7 +225,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: ecae211f8dc5a3b42b3efab18f68caf7, type: 3}
     volume: 0.5
     loop: 0
-  - name: PlaayerSlam
+  - name: PlayerSlam
     clip: {fileID: 8300000, guid: ef8df217e9f3f0348a6248535ffe4986, type: 3}
     volume: 0.5
     loop: 0
@@ -271,5 +271,9 @@ MonoBehaviour:
     loop: 0
   - name: BossLaser
     clip: {fileID: 8300000, guid: 93248e953914da140ba7e0ff78fdf1f5, type: 3}
+    volume: 0.5
+    loop: 0
+  - name: PlayerBestTimer
+    clip: {fileID: 8300000, guid: 4dfa2a2fa9a3b2d45a619c6eab0d0513, type: 3}
     volume: 0.5
     loop: 0
