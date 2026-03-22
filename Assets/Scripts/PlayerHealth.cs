@@ -36,6 +36,16 @@ public class PlayerHealth : MonoBehaviour
         UpdateHeart();
     }
 
+    public void Heal(int amount)
+    {
+        currentHealth += amount;
+
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+    }
+
     public void TakeDamage(int damage, Vector2 enemyPosition)
     {
         if (isInvincible || currentHealth <= 0) return;
