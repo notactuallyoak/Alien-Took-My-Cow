@@ -72780,11 +72780,27 @@ MonoBehaviour:
   slamForce: 5
   slamCooldown: 0.5
   isSlamming: 0
-  groundCheck: {fileID: 2136858658}
+  groundCheckOffset: {x: 0, y: -0.5}
   checkRadius: 0.2
   whatIsGround:
     serializedVersion: 2
     m_Bits: 832
+  whatIsDamageable:
+    serializedVersion: 2
+    m_Bits: 384
+  runAttackDistance: 1
+  runHitboxSize: {x: 1, y: 1}
+  dashAttackDistance: 1.5
+  dashHitboxSize: {x: 1, y: 0.9}
+  rayCount: 5
+  spreadAngle: 30
+  rayDistance: 2
+  slamSmallRadius: 0.6
+  slamBigRadius: 1
+  runDamage: 1
+  dashDamage: 1
+  jumpDamage: 2
+  slamDamage: 3
   facingRight: 1
   isHurt: 0
 --- !u!50 &1297092276
@@ -72865,7 +72881,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2036643923}
-  - {fileID: 2136858658}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1326612201
@@ -75580,7 +75595,6 @@ GameObject:
   - component: {fileID: 2036643923}
   - component: {fileID: 2036643926}
   - component: {fileID: 2036643925}
-  - component: {fileID: 2036643924}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -75603,21 +75617,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1297092278}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2036643924
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2036643922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c51189d17128ad8448edf907ce3844fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerDealDamage
-  whatIsDamagable:
-    serializedVersion: 2
-    m_Bits: 384
 --- !u!95 &2036643925
 Animator:
   serializedVersion: 7
@@ -75927,37 +75926,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b77e7b60e3b922e4b82d6dc6d304ae3d, type: 3}
---- !u!1 &2136858657
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2136858658}
-  m_Layer: 0
-  m_Name: GroundCheck
-  m_TagString: Untagged
-  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2136858658
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2136858657}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1297092278}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2145550454
 PrefabInstance:
   m_ObjectHideFlags: 0

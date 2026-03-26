@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8597075660704645758}
   - component: {fileID: 7770298158606806825}
   - component: {fileID: 5662824399556159060}
+  - component: {fileID: 2495081206597525233}
   m_Layer: 8
   m_Name: BreakableGrass
   m_TagString: Untagged
@@ -138,3 +139,15 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.9, y: 0.9}
   m_EdgeRadius: 0
+--- !u!114 &2495081206597525233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7751795506179477180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4af5ceecb13dcc640a8719da6f84c6a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Breakable

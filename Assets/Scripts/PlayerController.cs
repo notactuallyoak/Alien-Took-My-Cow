@@ -1,5 +1,6 @@
-using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -44,9 +45,35 @@ public class PlayerController : MonoBehaviour
     private float slamCooldownTimer;
 
     [Header("Ground Check")]
-    public Transform groundCheck;
+    public Vector2 groundCheckOffset;
     public float checkRadius;
     public LayerMask whatIsGround;
+    private Vector2 GroundCheckPosition => (Vector2)transform.position + groundCheckOffset;
+
+    [Header("Combat Settings")]
+    public LayerMask whatIsDamageable;
+    [Space]
+    public float runAttackDistance;
+    public Vector2 runHitboxSize;
+    [Space]
+    public float dashAttackDistance;
+    public Vector2 dashHitboxSize;
+    [Space]
+    public int rayCount;
+    public float spreadAngle;
+    public float rayDistance;
+    [Space]
+    public float slamSmallRadius;
+    public float slamBigRadius;
+
+    [Header("Damage Values")]
+    public int runDamage;
+    public int dashDamage;
+    public int jumpDamage;
+    public int slamDamage;
+
+    private float runAttackTimer;
+    private List<Collider2D> dashingHitEnemies = new List<Collider2D>(); // Track hits during dash
 
     private bool isGrounded;
     [HideInInspector] public bool facingRight = true;
@@ -112,6 +139,106 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         HandleMovement();
+        HandleRunCombat();
+
+        if (isSlamming) HandleSlamCombat();
+    }
+
+    private void TryApplyDamage(Collider2D hitCollider, int damage)
+    {
+        EnemyBase enemy = hitCollider.GetComponent<EnemyBase>();
+        if (enemy != null)
+        {
+            enemy.TakeDamage(damage);
+        }
+
+        Breakable breakable = hitCollider.GetComponent<Breakable>();
+        if (breakable != null)
+        {
+            breakable.TakeDamage();
+        }
+    }
+
+    private void HandleRunCombat()
+    {
+        // only attack if moving at max speed
+        if (currentSpeed >= runSpeed && isGrounded && !isHurt)
+        {
+            if (runAttackTimer <= 0)
+            {
+                Vector2 origin = (Vector2)transform.position + Vector2.right * lastFacingDir * (runAttackDistance / 2);
+                RaycastHit2D[] hits = Physics2D.BoxCastAll(origin, runHitboxSize, 0f, Vector2.right * lastFacingDir, runAttackDistance, whatIsDamageable);
+
+                foreach (var hit in hits)
+                {
+                    if (hit.collider != null)
+                    {
+                        TryApplyDamage(hit.collider, runDamage);
+                    }
+                }
+                runAttackTimer = 0.1f; // hit interval cd
+            }
+            else
+            {
+                runAttackTimer -= Time.fixedDeltaTime;
+            }
+        }
+    }
+
+    private void HandleDashCombat()
+    {
+        Vector2 origin = (Vector2)transform.position;
+        RaycastHit2D[] hits = Physics2D.BoxCastAll(origin, dashHitboxSize, 0f, Vector2.right * lastFacingDir, dashAttackDistance, whatIsDamageable);
+
+        foreach (var hit in hits)
+        {
+            if (!dashingHitEnemies.Contains(hit.collider))
+            {
+                TryApplyDamage(hit.collider, dashDamage);
+                dashingHitEnemies.Add(hit.collider);
+            }
+        }
+    }
+
+    private void HandleJumpCombat()
+    {
+        float startAngle = -spreadAngle / 2;
+        float angleStep = spreadAngle / (rayCount - 1); 
+        Vector2 origin = GroundCheckPosition;
+
+        for (int i = 0; i < rayCount; i++)
+        {
+            float currentAngle = startAngle + (angleStep * i);
+            Vector2 dir = Quaternion.Euler(0, 0, currentAngle) * Vector2.down;
+            RaycastHit2D hit = Physics2D.Raycast(origin, dir, rayDistance, whatIsDamageable);
+
+            if (hit.collider != null)
+            {
+                TryApplyDamage(hit.collider, jumpDamage);
+            }
+        }
+    }
+
+    private void HandleSlamCombat()
+    {
+        // Small circle constant damage while falling
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, slamSmallRadius, whatIsDamageable);
+        foreach (var hit in hits)
+        {
+            TryApplyDamage(hit, runDamage);
+        }
+    }
+
+    // Called when slam lands
+    private void HandleSlamLandCombat()
+    {
+        // Big circle impact
+        Collider2D[] hits = Physics2D.OverlapCircleAll(GroundCheckPosition, slamBigRadius, whatIsDamageable);
+        foreach (var hit in hits)
+        {
+            Vector2 dir = (hit.transform.position - transform.position).normalized;
+            TryApplyDamage(hit, slamDamage);
+        }
     }
 
     private void HandleGhostEffects()
@@ -124,14 +251,9 @@ public class PlayerController : MonoBehaviour
 
     private void HandleTimers()
     {
-        if (dashCooldownTimer > 0f)
-            dashCooldownTimer -= Time.deltaTime;
-
-        if (slamCooldownTimer > 0f)
-            slamCooldownTimer -= Time.deltaTime;
-
-        if (runParticleTimer > 0f)
-            runParticleTimer -= Time.deltaTime;
+        if (dashCooldownTimer > 0f) dashCooldownTimer -= Time.deltaTime;
+        if (slamCooldownTimer > 0f) slamCooldownTimer -= Time.deltaTime;
+        if (runParticleTimer > 0f) runParticleTimer -= Time.deltaTime;
     }
 
     private void UpdateAnimations()
@@ -150,14 +272,14 @@ public class PlayerController : MonoBehaviour
 
         if (isGrounded && !wasGrounded && !isSlamming)
         {
-            ParticleEmitter.Instance.Emit("LittleSmoke", groundCheck.position, Quaternion.identity);
+            ParticleEmitter.Instance.Emit("LittleSmoke", GroundCheckPosition, Quaternion.identity);
             AudioManager.Instance.PlaySFX("PlayerWalk");
         }
         wasGrounded = isGrounded;
 
         if (isRunning && !wasRunning && isGrounded)
         {
-            ParticleEmitter.Instance.Emit("PreRun", groundCheck.position, !facingRight);
+            ParticleEmitter.Instance.Emit("PreRun", GroundCheckPosition, !facingRight);
         }
         wasRunning = isRunning;
 
@@ -167,16 +289,16 @@ public class PlayerController : MonoBehaviour
             {
                 if (currentSpeed > walkSpeed && currentSpeed < machSpeed)
                 {
-                    ParticleEmitter.Instance.Emit("LittleSmoke", groundCheck.position, Quaternion.identity);
+                    ParticleEmitter.Instance.Emit("LittleSmoke", GroundCheckPosition, Quaternion.identity);
                     AudioManager.Instance.PlaySFX("PlayerWalk");
                 }
                 else if (currentSpeed >= machSpeed)
                 {
-                    ParticleEmitter.Instance.Emit("Mach", groundCheck.position, !facingRight);
+                    ParticleEmitter.Instance.Emit("Mach", GroundCheckPosition, !facingRight);
                 }
                 else if (isRunning)
                 {
-                    ParticleEmitter.Instance.Emit("Run", groundCheck.position, !facingRight);
+                    ParticleEmitter.Instance.Emit("Run", GroundCheckPosition, !facingRight);
                 }
                 runParticleTimer = runParticleInterval;
             }
@@ -231,7 +353,7 @@ public class PlayerController : MonoBehaviour
     private void HandleGroundCheck()
     {
         wasSlamming = isSlamming;
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
+        isGrounded = Physics2D.OverlapCircle(GroundCheckPosition, checkRadius, whatIsGround);
 
         if (isGrounded)
         {
@@ -245,7 +367,9 @@ public class PlayerController : MonoBehaviour
                 anim.SetTrigger(animSlamLandHash);
                 CameraController.Instance?.CamShake(0.15f, 0.2f);
 
-                ParticleEmitter.Instance.Emit("SlamLand", groundCheck.position, !facingRight);
+                HandleSlamLandCombat();
+
+                ParticleEmitter.Instance.Emit("SlamLand", GroundCheckPosition, !facingRight);
                 AudioManager.Instance.PlaySFX("PlayerSlamLand");
 
                 slamCooldownTimer = slamCooldown;   // cd timer start when slam hits the ground
@@ -294,9 +418,11 @@ public class PlayerController : MonoBehaviour
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         coyoteTimeCounter = 0;
 
-        ParticleEmitter.Instance.Emit("MuzzleFlash", groundCheck.position, !facingRight);
-        ParticleEmitter.Instance.Emit("ShotgunFire", groundCheck.position, !facingRight);
+        ParticleEmitter.Instance.Emit("MuzzleFlash", GroundCheckPosition, !facingRight);
+        ParticleEmitter.Instance.Emit("ShotgunFire", GroundCheckPosition, !facingRight);
         AudioManager.Instance.PlaySFX("PlayerShotgun");
+
+        HandleJumpCombat();
     }
 
     private void HandleBetterGravity()
@@ -326,13 +452,14 @@ public class PlayerController : MonoBehaviour
         rb.gravityScale = 0;
         rb.linearVelocity = new Vector2(lastFacingDir * dashForce, 0);
 
+        dashingHitEnemies.Clear();
+
         float timer = 0f;
         while (timer < dashDuration)
         {
             if (ghostTrail != null) ghostTrail.SpawnGhost(0.05f, 0.1f);
 
-            // (Optional)
-            // rb.linearVelocity = new Vector2(lastFacingDir * dashForce, 0); 
+            HandleDashCombat();
 
             timer += Time.deltaTime;
             yield return null;
@@ -365,13 +492,40 @@ public class PlayerController : MonoBehaviour
         StopAllCoroutines();
     }
 
-    // debug
     private void OnDrawGizmosSelected()
     {
-        if (groundCheck != null)
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireSphere(GroundCheckPosition, checkRadius);
+
+        // COMBAT GIZMO   
+        // run hitbox
+        Gizmos.color = Color.red;
+        Vector2 runOrigin = (Vector2)transform.position + Vector2.right * lastFacingDir * (runAttackDistance / 2);
+        Gizmos.DrawWireCube(runOrigin, runHitboxSize);
+
+        // dash hitbox
+        Gizmos.color = Color.yellow;
+        Vector2 dashCenter = (Vector2)transform.position + Vector2.right * lastFacingDir * (dashAttackDistance / 2);
+        Gizmos.DrawWireCube(dashCenter, dashHitboxSize);
+
+        // shotgun hitbox
+        Gizmos.color = Color.green;
+        float startAngle = -spreadAngle / 2;
+        float angleStep = spreadAngle / (rayCount - 1);
+
+        for (int i = 0; i < rayCount; i++)
         {
-            Gizmos.color = Color.white;
-            Gizmos.DrawWireSphere(groundCheck.position, checkRadius);
+            float currentAngle = startAngle + (angleStep * i);
+            Vector2 dir = Quaternion.Euler(0, 0, currentAngle) * Vector2.down;
+            Gizmos.DrawRay(GroundCheckPosition, dir * rayDistance);
         }
+
+        // slam impact hitbox
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(GroundCheckPosition, slamBigRadius);
+
+        // slam falling hitbox
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, slamSmallRadius);
     }
 }
