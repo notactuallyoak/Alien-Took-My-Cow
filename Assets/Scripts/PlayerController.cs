@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using UnityEditor.U2D.Sprites;
 
 public class PlayerController : MonoBehaviour
 {
@@ -96,7 +95,6 @@ public class PlayerController : MonoBehaviour
         HandleJumpBuffer();
         HandleJumpLogic();
         HandleBetterGravity();
-        UpdateAnimations();
 
         // dash input
         if (Input.GetKeyDown(KeyCode.X) && !isDashing && dashCooldownTimer <= 0f)
@@ -108,6 +106,7 @@ public class PlayerController : MonoBehaviour
             StartSlam();
 
         HandleGhostEffects();
+        UpdateAnimations();
     }
 
     private void FixedUpdate()
