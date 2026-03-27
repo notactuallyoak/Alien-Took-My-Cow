@@ -13,20 +13,11 @@ public class EnemyCarrot : MonoBehaviour
     public float detectionRadius;
     public LayerMask playerLayer;
 
-    [Header("References")]
     public Animator anim;
-    public Collider2D bodyCollider;
-    public Collider2D spikeCollider;
 
     private bool movingRight = true;
     private bool isAttacking = false;
     private Transform target;
-
-    void Start()
-    {
-        if (spikeCollider != null) spikeCollider.enabled = false;
-        if (bodyCollider != null) bodyCollider.enabled = true;
-    }
 
     private void Update()
     {
@@ -68,12 +59,10 @@ public class EnemyCarrot : MonoBehaviour
     IEnumerator AttackRoutine()
     {
         isAttacking = true;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.75f); // small delay after detect
 
         // hide in ground
         anim.SetTrigger("PreAttack");
-
-        if (bodyCollider != null) bodyCollider.enabled = false;
         yield return new WaitForSeconds(0.8f);
 
         // teleport exactly to player pos
@@ -83,6 +72,7 @@ public class EnemyCarrot : MonoBehaviour
 
             if (groundBelowPlayer.collider != null)
             {
+                // snap X pos to player, keep Y pos (since we are underground)
                 Vector3 newPos = transform.position;
                 newPos.x = target.position.x;
                 transform.position = newPos;
@@ -92,20 +82,14 @@ public class EnemyCarrot : MonoBehaviour
 
         // spike up
         anim.SetTrigger("Attack");
-        yield return new WaitForSeconds(2f); // wind up before spikes come up
-
-        if (spikeCollider != null) spikeCollider.enabled = true;
-        yield return new WaitForSeconds(0.3f); // spike active time
-        if (spikeCollider != null) spikeCollider.enabled = false;
-
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f); // wind up before spikes come up
+        yield return new WaitForSeconds(0.2f); // spike active time
 
         // backup from ground
         anim.SetTrigger("PostAttack");
         yield return new WaitForSeconds(0.8f);
 
         // reset
-        if (bodyCollider != null) bodyCollider.enabled = true;
         isAttacking = false;
     }
 
@@ -115,14 +99,6 @@ public class EnemyCarrot : MonoBehaviour
         Vector3 scaler = transform.localScale;
         scaler.x *= -1;
         transform.localScale = scaler;
-    }
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
-            playerHealth.TakeDamage(1, transform.position);
-        }
     }
 
     void OnDrawGizmosSelected()

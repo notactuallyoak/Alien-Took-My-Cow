@@ -16,7 +16,6 @@ public class EnemyAlien : MonoBehaviour
 
     [Header("Attack Settings")]
     public float attackCooldown;
-    public Collider2D attackHitbox;
 
     [Header("References")]
     public Animator anim;
@@ -26,10 +25,9 @@ public class EnemyAlien : MonoBehaviour
     private bool isAttacking = false;
     private float attackTimer;
 
-    void Start()
+    private void Start()
     {
         attackTimer = 0f;
-        if (attackHitbox != null) attackHitbox.enabled = false;
     }
 
     private void Update()
@@ -48,7 +46,7 @@ public class EnemyAlien : MonoBehaviour
         Patrol();
     }
 
-    bool CheckForTarget()
+    private bool CheckForTarget()
     {
         Vector2 rayDir = movingRight ? Vector2.right : Vector2.left;
 
@@ -63,7 +61,7 @@ public class EnemyAlien : MonoBehaviour
         return false;
     }
 
-    void Patrol()
+    private void Patrol()
     {
         // move
         if (movingRight)
@@ -84,7 +82,7 @@ public class EnemyAlien : MonoBehaviour
         }
     }
 
-    IEnumerator AttackRoutine()
+    private IEnumerator AttackRoutine()
     {
         isAttacking = true;
         
@@ -96,18 +94,16 @@ public class EnemyAlien : MonoBehaviour
         ParticleEmitter.Instance.Emit("AlienGunLaser", gunPoint.position, !movingRight);
         AudioManager.Instance.PlaySFX("AlienShoot");
 
-        if (attackHitbox != null) attackHitbox.enabled = true;
         yield return new WaitForSeconds(0.125f); // hit active time
-        if (attackHitbox != null) attackHitbox.enabled = false;
 
         // reset cooldown
         attackTimer = attackCooldown;
 
-        yield return new WaitForSeconds(0.75f);
+        yield return new WaitForSeconds(1f);
         isAttacking = false;
     }
 
-    void Flip()
+    private void Flip()
     {
         movingRight = !movingRight;
         Vector3 scaler = transform.localScale;
@@ -115,19 +111,7 @@ public class EnemyAlien : MonoBehaviour
         transform.localScale = scaler;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
-            if (playerHealth != null)
-            {
-                playerHealth.TakeDamage(2, transform.position);
-            }
-        }
-    }
-
-    void OnDrawGizmosSelected()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;
         Vector2 rayDir = movingRight ? Vector2.right : Vector2.left;

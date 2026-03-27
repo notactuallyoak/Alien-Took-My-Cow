@@ -28,11 +28,16 @@ public class Boss : MonoBehaviour
     private bool isBusy = false;
     private int facingDirection = 1; // 1 = Right, -1 = Left
     private Transform target;
+    private EnemyBase enemyBase;
+    private int maxHealth;
     
 
     private void Start()
     {
         if (transform.localScale.x < 0) facingDirection = -1;
+
+        enemyBase = GetComponent<EnemyBase>();
+        maxHealth = enemyBase.health;
     }
 
     private void Update()
@@ -46,24 +51,6 @@ public class Boss : MonoBehaviour
             target = playerHit.transform;
             StartCoroutine(BossRoutine());
         }
-        else
-        {
-            target = null;
-        }
-    }
-
-    private bool CheckGround()
-    {
-        Vector2 origin = (Vector2)transform.position + new Vector2(facingDirection * 1f, 0f);
-        RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.down, groundCheckDistance, groundLayer);
-        return hit.collider != null;
-    }
-
-    private bool CheckWall()
-    {
-        Vector2 origin = transform.position;
-        RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.right * facingDirection, wallCheckDistance, groundLayer);
-        return hit.collider != null;
     }
 
     private IEnumerator BossRoutine()
@@ -76,55 +63,45 @@ public class Boss : MonoBehaviour
             yield break;
         }
 
+        // facing target before do anything
         FaceTarget(target.position);
 
-        if (Random.value > 0.7f)
-        {
-            yield return StartCoroutine(DoWindUp());
-            yield return StartCoroutine(DashAttack(fastDashSpeed, fastAttackDuration));
-        }
-        else
-        {
-            yield return StartCoroutine(DoWindUp());
-            yield return StartCoroutine(DashAttack(normalDashSpeed, normalAttackDuration));
-        }
+        bool doFastAttack = Random.value > 0.7f;
+        float speed = doFastAttack ? fastDashSpeed : normalDashSpeed;
+        float duration = doFastAttack ? fastAttackDuration : normalAttackDuration;
 
-        // Random Summon UFO or Laser
-        if (Random.value > 0.6f)
-        {
+        // Phase 1 : either normal charge or fast charge
+        yield return StartCoroutine(DoWindUp(doFastAttack));
+        yield return StartCoroutine(DashAttack(speed, duration, doFastAttack));
+
+        // Phase 2 hp reach 66% : ADD random summon UFO or Laser
+        if (enemyBase.health <= (maxHealth/1.5) && Random.value > 0.6f)
             yield return StartCoroutine(DoSummonUFO());
-        }
         else
-        {
             yield return StartCoroutine(DoSummonLaser());
-        }
 
         yield return new WaitForSeconds(recoveryTime);
 
         isBusy = false;
     }
 
-    private IEnumerator DoWindUp()
+    private IEnumerator DoWindUp(bool isFast)
     {
         anim.SetTrigger("WindUp");
         yield return new WaitForSeconds(windUpTime);
     }
 
-    private IEnumerator DashAttack(float speed, float duration)
+    private IEnumerator DashAttack(float speed, float duration, bool isFast)
     {
-        if (speed == normalAttackDuration)
-        {
-            anim.SetTrigger("NormalAttack");
-        }
-        else
-        {
+        if (isFast)
             anim.SetTrigger("FastAttack");
-        }
+        else
+            anim.SetTrigger("NormalAttack");
 
         float timer = 0f;
-
         while (timer < duration)
         {
+            // move
             transform.Translate(Vector2.right * facingDirection * speed * Time.deltaTime);
 
             bool isGroundAhead = CheckGround();
@@ -132,6 +109,7 @@ public class Boss : MonoBehaviour
 
             if (!isGroundAhead || isWallAhead)
             {
+                // if hit wall, stunt
                 break;
             }
 
@@ -151,31 +129,44 @@ public class Boss : MonoBehaviour
             if (hit.collider != null)
             {
                 spawnPos = hit.point;
-                spawnPos.y += 1;
+                spawnPos.y += 2;
             }
 
             Instantiate(ufoPrefab, spawnPos, Quaternion.identity);
         }
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.75f);
     }
 
     private IEnumerator DoSummonLaser()
     {
         for (int i = 0; i < 3; i++)
         {
-            Vector2 randomOffset = Random.insideUnitCircle * Random.Range(-7f, 10f);
+            Vector2 randomOffset = Random.insideUnitCircle * Random.Range(1f, 10f);
             Vector2 spawnPos = (Vector2)target.position + randomOffset;
 
-            float randomAngle = Random.Range(30f, 270f);
+            float randomAngle = Random.Range(-120f, 120f);
             Quaternion spawnRotation = Quaternion.Euler(0, 0, randomAngle);
 
             // spawn Laser
             Instantiate(laserPrefab, spawnPos, spawnRotation);
-
             yield return new WaitForSeconds(1f);
         }
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.75f);
+    }
+
+    private bool CheckGround()
+    {
+        Vector2 origin = (Vector2)transform.position + new Vector2(facingDirection * 1f, 0f);
+        RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.down, groundCheckDistance, groundLayer);
+        return hit.collider != null;
+    }
+
+    private bool CheckWall()
+    {
+        Vector2 origin = transform.position;
+        RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.right * facingDirection, wallCheckDistance, groundLayer);
+        return hit.collider != null;
     }
 
     private void Flip()
@@ -195,15 +186,6 @@ public class Boss : MonoBehaviour
         else if (targetPos.x < transform.position.x && facingDirection == 1)
         {
             Flip();
-        }
-    }
-
-        private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
-            playerHealth.TakeDamage(1, transform.position);
         }
     }
 

@@ -279,7 +279,7 @@ MonoBehaviour:
     loop: 0
   - name: EnemyTomatoFuse
     clip: {fileID: 8300000, guid: e1972bc96d21fce4b9dee5f1ed51d40c, type: 3}
-    volume: 0.5
+    volume: 0.75
     loop: 0
   - name: EnemyTomatoExplode
     clip: {fileID: 8300000, guid: 8df4091bf4c8e704091b242e8b355075, type: 3}

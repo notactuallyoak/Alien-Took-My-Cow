@@ -16,8 +16,20 @@ public class EnemyTomato : MonoBehaviour
     public LayerMask playerLayer;
     public Animator anim;
 
+    [Header("Timing Settings")]
+    public float moveDuration;
+    public float pauseDuration;
+
+    private float timer;
+    private bool isMoving = true;
+
     private bool movingRight = true;
     private bool isAttacking = false;
+
+    private void Start()
+    {
+        timer = moveDuration;
+    }
 
     private void Update()
     {
@@ -36,25 +48,45 @@ public class EnemyTomato : MonoBehaviour
         }
     }
 
-    void Patrol()
+    private void Patrol()
     {
-        // move
-        if (movingRight) transform.Translate(Vector2.right * speed * Time.deltaTime, Space.World);
-        else transform.Translate(Vector2.left * speed * Time.deltaTime, Space.World);
-
-        Vector2 rayDirection = movingRight ? Vector2.right : Vector2.left;
-        RaycastHit2D wallHit = Physics2D.Raycast(transform.position, rayDirection, checkDistance, groundLayer);
-
-        Vector2 groundCheckPos = (Vector2)transform.position + rayDirection * checkDistance;
-        RaycastHit2D groundHit = Physics2D.Raycast(groundCheckPos, Vector2.down, checkDistance, groundLayer);
-
-        if (wallHit.collider != null || groundHit.collider == null)
+        if (isMoving)
         {
-            Flip();
+            // move
+            if (movingRight) transform.Translate(Vector2.right * speed * Time.deltaTime, Space.World);
+            else transform.Translate(Vector2.left * speed * Time.deltaTime, Space.World);
+
+            Vector2 rayDirection = movingRight ? Vector2.right : Vector2.left;
+            RaycastHit2D wallHit = Physics2D.Raycast(transform.position, rayDirection, checkDistance, groundLayer);
+
+            Vector2 groundCheckPos = (Vector2)transform.position + rayDirection * checkDistance;
+            RaycastHit2D groundHit = Physics2D.Raycast(groundCheckPos, Vector2.down, checkDistance, groundLayer);
+
+            if (wallHit.collider != null || groundHit.collider == null)
+            {
+                Flip();
+            }
+
+            timer -= Time.deltaTime;
+            if (timer <= 0)
+            {
+                isMoving = false;
+                timer = pauseDuration;
+            }
+        }
+        else
+        {
+            // pause logic
+            timer -= Time.deltaTime;
+            if (timer <= 0)
+            {
+                isMoving = true;
+                timer = moveDuration;
+            }
         }
     }
 
-    IEnumerator ExplodeRoutine()
+    private IEnumerator ExplodeRoutine()
     {
         isAttacking = true; // stop moving
         anim.SetTrigger("Attack");
@@ -65,7 +97,7 @@ public class EnemyTomato : MonoBehaviour
         Explode();
     }
 
-    void Explode()
+    private void Explode()
     {
         ParticleEmitter.Instance.Emit("MuzzleFlash", transform.position, Quaternion.identity);
         ParticleEmitter.Instance.Emit("BigSmoke", transform.position, Quaternion.identity);
@@ -82,7 +114,6 @@ public class EnemyTomato : MonoBehaviour
                 playerHealth.TakeDamage(1, transform.position);
 
                 CameraController.Instance.CamShake(0.2f, 0.2f);
-                ParticleEmitter.Instance.Emit("WhiteFlash", transform.position, Quaternion.identity);
             }
         }
 
@@ -97,7 +128,7 @@ public class EnemyTomato : MonoBehaviour
         transform.localScale = scaler;
     }
 
-    void OnDrawGizmosSelected()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Vector2 rayDirection = movingRight ? Vector2.right : Vector2.left;

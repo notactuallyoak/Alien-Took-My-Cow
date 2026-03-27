@@ -1,7 +1,5 @@
 using System.Collections;
-using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
-using UnityEngineInternal;
 
 public class EnemyBase : MonoBehaviour
 {
@@ -9,11 +7,17 @@ public class EnemyBase : MonoBehaviour
     public int health;
 
     private bool canTakeDamage = true;
+    private SpriteRenderer sr;
+    private Collider2D[] myColliders;
+
+    private void Start()
+    {
+        sr = GetComponentInChildren<SpriteRenderer>();
+        myColliders = GetComponentsInChildren<Collider2D>();    // get all colliders in children (Hurtbox and Hitbox)
+    }
 
     public void TakeDamage(int dmg)
     {
-        if (health <= 0) return;
-
         StartCoroutine(DoDamage(dmg));
 
         if (health <= 0) Die();
@@ -24,26 +28,30 @@ public class EnemyBase : MonoBehaviour
         if (!canTakeDamage) yield break;
 
         health -= dmg;
+        AudioManager.Instance.PlaySFX("PlayerHit");
 
-        // flash red & debounce
-        SpriteRenderer sr = GetComponentInChildren<SpriteRenderer>();
-
-        sr.color = Color.red;
+        // debounce & flash red
         canTakeDamage = false;
+        sr.color = Color.red;
 
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.2f);
 
-        sr.color = Color.white;
         canTakeDamage = true;
+        sr.color = Color.white;
     }
 
     private void Die()
     {
+        foreach (var col in myColliders)
+        {
+            col.enabled = false;
+        }
+
         ParticleEmitter.Instance.Emit("WhiteFlash", transform.position, Quaternion.identity);
         ParticleEmitter.Instance.Emit("BigSmoke", transform.position, Quaternion.identity);
         ParticleEmitter.Instance.Emit("DeadStar", transform.position, Quaternion.identity);
         AudioManager.Instance.PlaySFX("EnemyDead");
 
-        Destroy(gameObject);
+        Destroy(gameObject, 0.1f);
     }
 }

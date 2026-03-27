@@ -5,6 +5,7 @@ public class EnemyPotato : MonoBehaviour
     [Header("Movement")]
     public float chaseSpeed;
     public float detectionRadius;
+    public float detectionDelay;
 
     [Header("Safety Checks (Prevent Falling)")]
     public float wallCheckDistance;
@@ -16,6 +17,8 @@ public class EnemyPotato : MonoBehaviour
 
     private Transform target;
     private bool isChasing = false;
+    private bool isLockedOn = false; // detected but not moving yet
+    private float detectionTimer = 0f;
 
     private void Update()
     {
@@ -23,12 +26,37 @@ public class EnemyPotato : MonoBehaviour
 
         if (playerHit != null)
         {
-            isChasing = true;
             target = playerHit.transform;
+
+            // when detected plyer, set timer
+            if (!isLockedOn && !isChasing)
+            {
+                isLockedOn = true;
+                detectionTimer = detectionDelay;
+            }
+
+            if (isLockedOn && !isChasing)
+            {
+                detectionTimer -= Time.deltaTime;
+
+                // face player while waiting
+                float faceDir = target.position.x - transform.position.x;
+                if (faceDir > 0) transform.localScale = new Vector3(1, 1, 1);
+                else transform.localScale = new Vector3(-1, 1, 1);
+
+
+                if (detectionTimer <= 0f)
+                {
+                    isChasing = true;
+                    isLockedOn = true;
+                    target = playerHit.transform;
+                }
+            }
         }
         else
         {
             isChasing = false;
+            isLockedOn = false;
             target = null;
         }
 
@@ -40,7 +68,7 @@ public class EnemyPotato : MonoBehaviour
         anim.SetBool("isChasing", isChasing);
     }
 
-    void ChaseWithSafety()
+    private void ChaseWithSafety()
     {
         float direction = target.position.x - transform.position.x;
         Vector2 moveDir = (direction > 0) ? Vector2.right : Vector2.left;
@@ -71,16 +99,7 @@ public class EnemyPotato : MonoBehaviour
             transform.localScale = new Vector3(-1, 1, 1);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
-            playerHealth.TakeDamage(1, transform.position);
-        }
-    }
-
-    void OnDrawGizmosSelected()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, detectionRadius);

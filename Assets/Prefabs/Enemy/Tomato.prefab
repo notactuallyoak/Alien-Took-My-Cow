@@ -30,7 +30,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 8333686529293883229}
   m_Father: {fileID: 1636144096943561616}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6248454369159328687
@@ -114,7 +115,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!1 &4158929182073401054
+--- !u!1 &2200985809352781896
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,40 +123,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1636144096943561616}
-  - component: {fileID: 752702008404074576}
-  - component: {fileID: 3600916968468665688}
-  - component: {fileID: 3694968797420488616}
+  - component: {fileID: 8333686529293883229}
+  - component: {fileID: 4013567314153530463}
   m_Layer: 7
-  m_Name: Tomato
+  m_Name: Hurtbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1636144096943561616
+--- !u!4 &8333686529293883229
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4158929182073401054}
+  m_GameObject: {fileID: 2200985809352781896}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1162901927448472399}
-  m_Father: {fileID: 0}
+  m_Children: []
+  m_Father: {fileID: 1162901927448472399}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &752702008404074576
+--- !u!61 &4013567314153530463
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4158929182073401054}
+  m_GameObject: {fileID: 2200985809352781896}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
@@ -183,7 +181,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.4}
+  m_Offset: {x: 0, y: -0.2}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -193,8 +191,42 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.45, y: 0.5}
+  m_Size: {x: 0.7, y: 0.6}
   m_EdgeRadius: 0
+--- !u!1 &4158929182073401054
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1636144096943561616}
+  - component: {fileID: 3600916968468665688}
+  - component: {fileID: 3694968797420488616}
+  m_Layer: 7
+  m_Name: Tomato
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1636144096943561616
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4158929182073401054}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1162901927448472399}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3600916968468665688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,7 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fafe7d61c054c494d8788386ae3a4011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBase
-  health: 2
+  health: 3
 --- !u!114 &3694968797420488616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,10 +257,12 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 832
-  detectionRadius: 1.125
+  detectionRadius: 1.25
   explosionRadius: 1.5
-  fuseTime: 1.5
+  fuseTime: 1
   playerLayer:
     serializedVersion: 2
     m_Bits: 8
   anim: {fileID: 1692086004946471538}
+  moveDuration: 0.03
+  pauseDuration: 0.04

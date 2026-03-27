@@ -52,17 +52,13 @@ public class PlayerController : MonoBehaviour
 
     [Header("Combat Settings")]
     public LayerMask whatIsDamageable;
-    [Space]
     public float runAttackDistance;
     public Vector2 runHitboxSize;
-    [Space]
     public float dashAttackDistance;
     public Vector2 dashHitboxSize;
-    [Space]
     public int rayCount;
     public float spreadAngle;
     public float rayDistance;
-    [Space]
     public float slamSmallRadius;
     public float slamBigRadius;
 
@@ -146,17 +142,11 @@ public class PlayerController : MonoBehaviour
 
     private void TryApplyDamage(Collider2D hitCollider, int damage)
     {
-        EnemyBase enemy = hitCollider.GetComponent<EnemyBase>();
-        if (enemy != null)
-        {
-            enemy.TakeDamage(damage);
-        }
+        EnemyBase enemy = hitCollider.GetComponentInParent<EnemyBase>();
+        if (enemy != null) enemy.TakeDamage(damage);
 
         Breakable breakable = hitCollider.GetComponent<Breakable>();
-        if (breakable != null)
-        {
-            breakable.TakeDamage();
-        }
+        if (breakable != null) breakable.TakeDamage();
     }
 
     private void HandleRunCombat()
@@ -176,7 +166,7 @@ public class PlayerController : MonoBehaviour
                         TryApplyDamage(hit.collider, runDamage);
                     }
                 }
-                runAttackTimer = 0.1f; // hit interval cd
+                runAttackTimer = 0.015f; // hit interval
             }
             else
             {
