@@ -72803,8 +72803,10 @@ MonoBehaviour:
   invincibilityDuration: 1.1
   blinkInterval: 0.025
   isInvincible: 0
-  knockbackForceX: 20
-  knockbackForceY: 12
+  knockbackForceX_Min: 5
+  knockbackForceY_Min: 5
+  knockbackForceX_Max: 20
+  knockbackForceY_Max: 12
   hurtDuration: 0.5
 --- !u!114 &1297092275
 MonoBehaviour:
@@ -72852,7 +72854,7 @@ MonoBehaviour:
   rayCount: 5
   spreadAngle: 30
   rayDistance: 2.2
-  slamSmallRadius: 0.6
+  slamSmallRadius: 0.4
   slamBigRadius: 1.1
   runDamage: 1
   dashDamage: 2

@@ -17,21 +17,24 @@ public class PlayerHealth : MonoBehaviour
     [HideInInspector] public bool isInvincible = false;
 
     [Header("Knockback Settings")]
-    public float knockbackForceX;
-    public float knockbackForceY;
+    public float knockbackForceX_Min;
+    public float knockbackForceY_Min;
+    public float knockbackForceX_Max;
+    public float knockbackForceY_Max;
+
     public float hurtDuration;
 
+    private PlayerController playerController;
     private SpriteRenderer playerSprite;
     private Rigidbody2D rb;
-    private PlayerController playerController;
 
     void Start()
     {
         currentHealth = maxHealth;
 
+        playerController = GetComponent<PlayerController>();
         playerSprite = GetComponentInChildren<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
-        playerController = GetComponent<PlayerController>();
 
         UpdateHeart();
     }
@@ -44,6 +47,8 @@ public class PlayerHealth : MonoBehaviour
         {
             currentHealth = maxHealth;
         }
+
+        UpdateHeart();
     }
 
     public void TakeDamage(int damage, Vector2 enemyPosition)
@@ -62,7 +67,7 @@ public class PlayerHealth : MonoBehaviour
         {
             AudioManager.Instance.PlaySFX("PlayerDeath");
             GameManager.Instance.GameOver();
-        } 
+        }
     }
 
     public void TakeDamage(int damage) // overload
@@ -92,12 +97,17 @@ public class PlayerHealth : MonoBehaviour
 
         if (rb != null) rb.gravityScale = 4; // reset gravity in case player got hurt during dash
 
+        // calc dynamic knockback force
+        float healthPercent = 1f - ((float)(currentHealth - 1) / (maxHealth - 1));
+        float currentForceX = Mathf.Lerp(knockbackForceX_Min, knockbackForceX_Max, healthPercent);
+        float currentForceY = Mathf.Lerp(knockbackForceY_Min, knockbackForceY_Max, healthPercent);
+
         Vector2 dir = (transform.position - (Vector3)hitSource).normalized;
         if (dir == Vector2.zero) dir = Vector2.up;
 
         // apply force
         rb.linearVelocity = Vector2.zero;
-        rb.AddForce(new Vector2(dir.x * knockbackForceX, knockbackForceY), ForceMode2D.Impulse);
+        rb.AddForce(new Vector2(dir.x * currentForceX, currentForceY), ForceMode2D.Impulse);
 
         StartCoroutine(KnockbackRoutine());
 
