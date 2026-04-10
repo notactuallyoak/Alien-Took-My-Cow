@@ -138,7 +138,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 832
   airAcceleration: 50
-  airDeceleration: 20
+  airDeceleration: 25
   whatIsDamageable:
     serializedVersion: 2
     m_Bits: 384
