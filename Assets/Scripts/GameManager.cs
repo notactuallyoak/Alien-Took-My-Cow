@@ -25,8 +25,18 @@ public class GameManager : MonoBehaviour
         Instance = this;
 
         // SETTINGS
+
+        // get the native resolution of the monitor
+        int screenWidth = Screen.currentResolution.width;
+        int screenHeight = Screen.currentResolution.height;
+
+        // set resolution to native, fullscreen
+        Screen.SetResolution(screenWidth, screenHeight, FullScreenMode.FullScreenWindow);
+
+        Application.runInBackground = true;
         Application.targetFrameRate = 90;
-        Screen.SetResolution(1920, 1080, true);
+        QualitySettings.vSyncCount = 0;
+        QualitySettings.antiAliasing = 0;
 
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
@@ -85,13 +95,13 @@ public class GameManager : MonoBehaviour
         {
             PlayerPrefs.SetFloat(bestTimeKey, currentLevelTime);
             PlayerPrefs.Save();
-            Debug.Log($"New Record! Time: {GetFormattedTime(currentLevelTime)}");
+            //Debug.Log($"New Record! Time: {GetFormattedTime(currentLevelTime)}");
             AudioManager.Instance.PlaySFX("PlayerBestTimer");
         }
         else
         {
-            PlayerPrefs.Save(); // mamke sure lasttime is saved
-            Debug.Log($"Level Finished. Time: {GetFormattedTime(currentLevelTime)}.");
+            PlayerPrefs.Save(); // make sure lasttime is saved
+            //Debug.Log($"Level Finished. Time: {GetFormattedTime(currentLevelTime)}.");
         }
 
         // unlock next level

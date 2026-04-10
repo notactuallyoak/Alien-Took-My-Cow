@@ -50,6 +50,10 @@ public class PlayerController : MonoBehaviour
     public LayerMask whatIsGround;
     private Vector2 GroundCheckPosition => (Vector2)transform.position + groundCheckOffset;
 
+    [Header("Air Control")]
+    public float airAcceleration;
+    public float airDeceleration;
+
     [Header("Combat Settings")]
     public LayerMask whatIsDamageable;
     public float runAttackDistance;
@@ -63,10 +67,10 @@ public class PlayerController : MonoBehaviour
     public float slamBigRadius;
 
     [Header("Damage Values")]
-    public int runDamage;
-    public int dashDamage;
-    public int jumpDamage;
-    public int slamDamage;
+    private int runDamage = 1;
+    private int dashDamage = 2;
+    private int jumpDamage = 1;
+    private int slamDamage = 3;
 
     private float runAttackTimer;
     private List<Collider2D> dashingHitEnemies = new List<Collider2D>(); // Track hits during dash
@@ -309,6 +313,7 @@ public class PlayerController : MonoBehaviour
         }
 
         isRunning = Input.GetKey(KeyCode.LeftShift);
+
         if (isRunning)
         {
             targetSpeed = (currentSpeed < machSpeed) ? machSpeed : runSpeed;
@@ -318,18 +323,37 @@ public class PlayerController : MonoBehaviour
             targetSpeed = Mathf.Abs(inputX) > 0 ? walkSpeed : 0f;
         }
 
-        if (currentSpeed < targetSpeed)
+        float moveDir = isRunning ? lastFacingDir : inputX;
+
+        if (isGrounded)
         {
-            currentSpeed += acceleration * Time.fixedDeltaTime;
+            // Ground: full control with normal acceleration/deceleration
+            if (currentSpeed < targetSpeed)
+            {
+                currentSpeed += acceleration * Time.fixedDeltaTime;
+            }
+            else
+            {
+                currentSpeed -= deceleration * Time.fixedDeltaTime;
+            }
+            currentSpeed = Mathf.Clamp(currentSpeed, 0, runSpeed);
+            rb.linearVelocity = new Vector2(moveDir * currentSpeed, rb.linearVelocity.y);
         }
         else
         {
-            currentSpeed -= deceleration * Time.fixedDeltaTime;
+            // Air: preserve momentum!
+            if (inputX != 0)
+            {
+                // Air control - can change direction but with less authority
+                float targetVelocity = moveDir * Mathf.Max(targetSpeed, currentSpeed);
+                rb.linearVelocity = new Vector2(
+                    Mathf.MoveTowards(rb.linearVelocity.x, targetVelocity, airAcceleration * Time.fixedDeltaTime),
+                    rb.linearVelocity.y
+                );
+                currentSpeed = Mathf.Abs(rb.linearVelocity.x);
+            }
+            // If no input in air, DON'T touch horizontal velocity - let momentum carry!
         }
-        currentSpeed = Mathf.Clamp(currentSpeed, 0, runSpeed);
-        float moveDir = isRunning ? lastFacingDir : inputX;
-
-        rb.linearVelocity = new Vector2(moveDir * currentSpeed, rb.linearVelocity.y);
     }
 
     private void Flip()
@@ -347,6 +371,9 @@ public class PlayerController : MonoBehaviour
 
         if (isGrounded)
         {
+            // sync currentSpeed with velocity on landing
+            currentSpeed = Mathf.Abs(rb.linearVelocity.x);
+
             coyoteTimeCounter = coyoteTime;
             extraJumps = extraJumpValue;
 
