@@ -8,9 +8,6 @@ public class PlayerHealth : MonoBehaviour
     private int currentHealth;
     private int previousHealth = -1;
 
-    [Header("UI Reference")]
-    public Animator heartAnimator;
-
     [Header("Invincibility Settings")]
     public float invincibilityDuration;
     public float blinkInterval;
@@ -81,7 +78,7 @@ public class PlayerHealth : MonoBehaviour
         if (currentHealth == previousHealth) return;
 
         // update anim parameter
-        heartAnimator.SetInteger("Health", currentHealth);
+        GameManager.Instance.UpdateHealthUI(currentHealth);
 
         previousHealth = currentHealth;
     }

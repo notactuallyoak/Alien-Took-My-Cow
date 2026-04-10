@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
 
     public List<string> nonGameScenes = new List<string>() { "LevelSelector", "MainMenu", "SplashScreen" };
 
+    // for heart animation in game level
+    public Animator heartAnimator;
+
     // timer data
     public float currentLevelTime { get; private set; }
     private bool isTimerRunning = false;
@@ -167,6 +170,14 @@ public class GameManager : MonoBehaviour
     public string GetCurrentFormattedTime()
     {
         return GetFormattedTime(currentLevelTime);
+    }
+
+    public void UpdateHealthUI(int currentHealth)
+    {
+        if(heartAnimator != null)
+        {
+            heartAnimator.SetInteger("Health", currentHealth);
+        }
     }
 
     public void GameOver()
