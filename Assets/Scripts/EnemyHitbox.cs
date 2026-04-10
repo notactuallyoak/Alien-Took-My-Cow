@@ -1,10 +1,10 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class EnemyHitbox : MonoBehaviour
 {
-    [Header("Stats")]
-    public int damage = 1;
-    public float knockbackPower = 1f;
+    private int damage = 1;
+    private float knockbackPower = 1f;
 
     private Collider2D hitCollider;
 
