@@ -23,7 +23,6 @@ public class GameManager : MonoBehaviour
             return;
         }
         Instance = this;
-        DontDestroyOnLoad(gameObject);
 
         // SETTINGS
         Application.targetFrameRate = 90;
@@ -54,6 +53,7 @@ public class GameManager : MonoBehaviour
         else
         {
             StartLevelTimer();
+            UpdateHealthUI();
         }
     }
 
@@ -172,7 +172,7 @@ public class GameManager : MonoBehaviour
         return GetFormattedTime(currentLevelTime);
     }
 
-    public void UpdateHealthUI(int currentHealth)
+    public void UpdateHealthUI(int currentHealth = 8)
     {
         if(heartAnimator != null)
         {
