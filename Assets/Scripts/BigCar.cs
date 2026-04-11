@@ -4,8 +4,8 @@ using System.Collections;
 public class BigCar : MonoBehaviour
 {
     [Header("Movement Settings")]
-    public float normalDashSpeed;
-    public float fastDashSpeed;
+    public float dashSpeed;
+    public float dashDuration;
     public float groundCheckDistance;
     public float wallCheckDistance;
     public LayerMask groundLayer;
@@ -15,29 +15,20 @@ public class BigCar : MonoBehaviour
     public float recoveryTime;
 
     [Header("Attack Timing")]
-    public float windUpTime;
-    public float normalAttackDuration;
-    public float fastAttackDuration;
+    private float windUpTime = 0.75f;
+    private float shakeIntensity = 0.1f;
 
     [Header("References")]
     public Animator anim;
     public LayerMask playerLayer;
-    public GameObject ufoPrefab;
-    public GameObject laserPrefab;
 
     private bool isBusy = false;
     private int facingDirection = 1; // 1 = Right, -1 = Left
     private Transform target;
-    private EnemyBase enemyBase;
-    private int maxHealth;
-    
 
     private void Start()
     {
         if (transform.localScale.x < 0) facingDirection = -1;
-
-        enemyBase = GetComponent<EnemyBase>();
-        maxHealth = enemyBase.health;
     }
 
     private void Update()
@@ -49,11 +40,11 @@ public class BigCar : MonoBehaviour
         if (playerHit != null)
         {
             target = playerHit.transform;
-            StartCoroutine(BossRoutine());
+            StartCoroutine(AttackRoutine());
         }
     }
 
-    private IEnumerator BossRoutine()
+    private IEnumerator AttackRoutine()
     {
         isBusy = true;
 
@@ -63,96 +54,61 @@ public class BigCar : MonoBehaviour
             yield break;
         }
 
-        // facing target before do anything
         FaceTarget(target.position);
 
-        bool doFastAttack = Random.value > 0.7f;
-        float speed = doFastAttack ? fastDashSpeed : normalDashSpeed;
-        float duration = doFastAttack ? fastAttackDuration : normalAttackDuration;
+        // wind up + Shake
+        yield return StartCoroutine(DoWindUp());
 
-        // Phase 1 : either normal charge or fast charge
-        yield return StartCoroutine(DoWindUp(doFastAttack));
-        yield return StartCoroutine(DashAttack(speed, duration, doFastAttack));
+        // dash
+        yield return StartCoroutine(DashAttack());
 
-        // Phase 2 hp reach 66% : ADD random summon UFO or Laser
-        if (enemyBase.health <= (maxHealth/1.5) && Random.value > 0.6f)
-            yield return StartCoroutine(DoSummonUFO());
-        else
-            yield return StartCoroutine(DoSummonLaser());
 
         yield return new WaitForSeconds(recoveryTime);
 
         isBusy = false;
     }
 
-    private IEnumerator DoWindUp(bool isFast)
+    private IEnumerator DoWindUp()
     {
-        anim.SetTrigger("WindUp");
-        yield return new WaitForSeconds(windUpTime);
+        anim.SetTrigger("Charge");
+        AudioManager.Instance.PlaySFX("BigCarCharge", 0.1f);
+
+        Vector3 originalPos = transform.position;
+        float timer = 0f;
+
+        while (timer < windUpTime)
+        {
+            Vector2 randomOffset = Random.insideUnitCircle * shakeIntensity;
+            transform.position = originalPos + new Vector3(randomOffset.x, randomOffset.y, 0f);
+
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        transform.position = originalPos;
     }
 
-    private IEnumerator DashAttack(float speed, float duration, bool isFast)
+    private IEnumerator DashAttack()
     {
-        if (isFast)
-            anim.SetTrigger("FastAttack");
-        else
-            anim.SetTrigger("NormalAttack");
+        anim.SetTrigger("Attack");
 
         float timer = 0f;
-        while (timer < duration)
+        while (timer < dashDuration)
         {
-            // move
-            transform.Translate(Vector2.right * facingDirection * speed * Time.deltaTime);
+            // move fast
+            transform.Translate(Vector2.right * facingDirection * dashSpeed * Time.deltaTime);
 
             bool isGroundAhead = CheckGround();
             bool isWallAhead = CheckWall();
 
+            // stop dashing if it hits a wall or edge
             if (!isGroundAhead || isWallAhead)
             {
-                // if hit wall, stunt
                 break;
             }
 
             timer += Time.deltaTime;
             yield return null;
         }
-    }
-
-    private IEnumerator DoSummonUFO()
-    {
-        if (ufoPrefab != null && target != null)
-        {
-            Vector2 spawnPos = target.position;
-
-            RaycastHit2D hit = Physics2D.Raycast(target.position, Vector2.down, 13f, groundLayer);
-
-            if (hit.collider != null)
-            {
-                spawnPos = hit.point;
-                spawnPos.y += 2;
-            }
-
-            Instantiate(ufoPrefab, spawnPos, Quaternion.identity);
-        }
-        yield return new WaitForSeconds(0.75f);
-    }
-
-    private IEnumerator DoSummonLaser()
-    {
-        for (int i = 0; i < 3; i++)
-        {
-            Vector2 randomOffset = Random.insideUnitCircle * Random.Range(1f, 10f);
-            Vector2 spawnPos = (Vector2)target.position + randomOffset;
-
-            float randomAngle = Random.Range(-120f, 120f);
-            Quaternion spawnRotation = Quaternion.Euler(0, 0, randomAngle);
-
-            // spawn Laser
-            Instantiate(laserPrefab, spawnPos, spawnRotation);
-            yield return new WaitForSeconds(1f);
-        }
-
-        yield return new WaitForSeconds(0.75f);
     }
 
     private bool CheckGround()
@@ -179,14 +135,8 @@ public class BigCar : MonoBehaviour
 
     private void FaceTarget(Vector3 targetPos)
     {
-        if (targetPos.x > transform.position.x && facingDirection == -1)
-        {
-            Flip();
-        }
-        else if (targetPos.x < transform.position.x && facingDirection == 1)
-        {
-            Flip();
-        }
+        if (targetPos.x > transform.position.x && facingDirection == -1) Flip();
+        else if (targetPos.x < transform.position.x && facingDirection == 1) Flip();
     }
 
     private void OnDrawGizmos()

@@ -309,3 +309,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: fb5bfb7e1364da8469ff5d2b947f9b00, type: 3}
     volume: 0.5
     loop: 0
+  - name: BigCarCharge
+    clip: {fileID: 8300000, guid: 72b58e813b9f6a745b620ccfbb9ae416, type: 3}
+    volume: 0.5
+    loop: 0
