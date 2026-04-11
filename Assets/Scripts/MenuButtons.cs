@@ -30,8 +30,8 @@ public class MenuButtons : MonoBehaviour
         sfxSlider.value = savedSFX;
 
         // apply values to the AudioManager
-        AudioManager.Instance.SetBGMVolume(savedBGM);
-        AudioManager.Instance.SetSFXVolume(savedSFX);
+        AudioManager.Instance.SetBGMVolume(ConvertToExponential(savedBGM));
+        AudioManager.Instance.SetSFXVolume(ConvertToExponential(savedSFX));
     }
 
     private void Update()
@@ -40,14 +40,8 @@ public class MenuButtons : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                if (!isPause)
-                {
-                    OpenOptions();
-                }
-                else
-                {
-                    CloseOptions();
-                }
+                if (!isPause) OpenOptions();
+                else CloseOptions();
             }
         }
     }
@@ -71,18 +65,18 @@ public class MenuButtons : MonoBehaviour
 
     public void OnBGMSliderChanged(float value)
     {
-        AudioManager.Instance.SetBGMVolume(value);
-
         // save to PlayerPrefs
         PlayerPrefs.SetFloat(PREF_BGM_VOL, value);
+
+        AudioManager.Instance.SetBGMVolume(ConvertToExponential(value));
     }
 
     public void OnSFXSliderChanged(float value)
     {
-        AudioManager.Instance.SetSFXVolume(value);
-
         // save to PlayerPrefs
         PlayerPrefs.SetFloat(PREF_SFX_VOL, value);
+
+        AudioManager.Instance.SetSFXVolume(ConvertToExponential(value));
     }
 
     public void OpenOptions()
@@ -118,5 +112,20 @@ public class MenuButtons : MonoBehaviour
     {
         PlayerPrefs.Save();
         Application.Quit();
+    }
+
+    private float ConvertToExponential(float linearValue)
+    {
+        // clamp to prevent NaN errors (just in case)
+        linearValue = Mathf.Clamp01(linearValue);
+
+        // The 'exponent' controls how aggressive the curve is.
+        // 1.0f = Linear (no change)
+        // 1.5f = Slight curve
+        // 2.0f = Standard exponential (Recommended)
+        // 3.0f = Extreme curve (quiet for a long time, then gets loud very fast at the end)
+        float exponent = 1.5f;
+
+        return Mathf.Pow(linearValue, exponent);
     }
 }
