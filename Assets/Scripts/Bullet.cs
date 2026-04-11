@@ -4,7 +4,6 @@ public class Bullet : MonoBehaviour
 {
     public float speed;
     public float lifeTime;
-    private int damage = 1;
 
     private void Start()
     {
@@ -25,7 +24,7 @@ public class Bullet : MonoBehaviour
             PlayerHealth player = other.GetComponent<PlayerHealth>();
             if (player != null)
             {
-                player.TakeDamage(damage, transform.position);
+                player.TakeDamage(1, transform.position);
             }
             Destroy(gameObject);
         }

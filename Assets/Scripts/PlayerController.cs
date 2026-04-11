@@ -382,7 +382,7 @@ public class PlayerController : MonoBehaviour
                 isSlamming = false;
 
                 anim.SetTrigger(animSlamLandHash);
-                CameraController.Instance?.CamShake(0.15f, 0.2f);
+                CameraController.Instance.CamShake(0.15f, 0.2f);
 
                 HandleSlamLandCombat();
 
