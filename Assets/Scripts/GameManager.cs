@@ -64,6 +64,7 @@ public class GameManager : MonoBehaviour
         {
             StartLevelTimer();
             UpdateHealthUI();
+            RestoreAudioSettings();
         }
     }
 
@@ -192,5 +193,23 @@ public class GameManager : MonoBehaviour
     {
         StopLevelTimer();
         LevelLoader.instance.LoadLevel(SceneManager.GetActiveScene().name);
+    }
+
+    private void RestoreAudioSettings()
+    {
+        if (AudioManager.Instance != null)
+        {
+            // read the RAW saved values from PlayerPrefs
+            float savedBGM = PlayerPrefs.GetFloat("BGMVolume", 0.5f);
+            float savedSFX = PlayerPrefs.GetFloat("SFXVolume", 0.75f);
+
+            // apply the exponential curve (same math you used in MenuButtons)
+            float curvedBGM = Mathf.Pow(savedBGM, 2f);
+            float curvedSFX = Mathf.Pow(savedSFX, 2f);
+
+            // force the AudioManager to update
+            AudioManager.Instance.SetBGMVolume(curvedBGM);
+            AudioManager.Instance.SetSFXVolume(curvedSFX);
+        }
     }
 }

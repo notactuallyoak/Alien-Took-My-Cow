@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class CameraController : MonoBehaviour
 {
@@ -21,6 +22,9 @@ public class CameraController : MonoBehaviour
     private float shakePower;
     private float shakeFadeTime;
 
+    private Camera cam;
+    private Coroutine sizeChangeCoroutine;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -31,6 +35,8 @@ public class CameraController : MonoBehaviour
         {
             Instance = this;
         }
+
+        cam = GetComponent<Camera>();
     }
 
     private void Start()
@@ -77,5 +83,28 @@ public class CameraController : MonoBehaviour
         shakePower = intensity;
         shakeTimeRemaining = duration;
         shakeFadeTime = duration;
+    }
+
+    public void ChangeCameraSize(float targetSize, float duration)
+    {
+        if (sizeChangeCoroutine != null) StopCoroutine(sizeChangeCoroutine);
+        sizeChangeCoroutine = StartCoroutine(SizeChangeRoutine(targetSize, duration));
+    }
+
+    private IEnumerator SizeChangeRoutine(float targetSize, float duration)
+    {
+        float startSize = cam.orthographicSize;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            // SmoothStep makes it ease in/out beautifully
+            float progress = Mathf.SmoothStep(0f, 1f, elapsedTime / duration);
+            cam.orthographicSize = Mathf.Lerp(startSize, targetSize, progress);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        cam.orthographicSize = targetSize;
     }
 }

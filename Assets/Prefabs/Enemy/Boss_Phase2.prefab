@@ -266,7 +266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c11c137509825264db38e37e1a0cb540, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossPhase2
-  moveSpeed: 10
+  moveSpeed: 20
   hitbox: {fileID: 4454208311422359762}
   finalGoalEndGame: {fileID: 3424756785584046327, guid: 090391e5fcaebb547b6e539aa1d4fb24, type: 3}
   meteoritePrefabs:

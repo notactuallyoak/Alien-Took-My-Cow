@@ -60,8 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossPhase1
   prefabBossPhase2: {fileID: 4309863434739282804, guid: 9ee64f6284590874db3244894ff10d5e, type: 3}
-  detectionRange: 24
-  moveSpeed: 5
+  moveSpeed: 10
   hitbox: {fileID: 2655781565089133390}
   meteoritePrefabs:
   - {fileID: 3241034447253237896, guid: 8cc9bbd23f87b4f4eb0ced4e8a2cfebd, type: 3}
