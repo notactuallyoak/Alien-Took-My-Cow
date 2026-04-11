@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Boss : MonoBehaviour
+public class BigCar : MonoBehaviour
 {
     [Header("Movement Settings")]
     public float normalDashSpeed;
