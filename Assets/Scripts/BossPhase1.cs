@@ -108,7 +108,7 @@ public class BossPhase1 : MonoBehaviour
 
             // pause before restart loop
             isAttacking = false;
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1.8f);
         }
     }
 
@@ -118,14 +118,14 @@ public class BossPhase1 : MonoBehaviour
         if (meteoritePrefabs.Length == 0) yield break;
         isAttacking = true;
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 7; i++)
         {
             if (target == null) yield break;
             isAttacking = true;
 
             // get player position + slight random X offset
-            float offsetX = Random.Range(-2f, 2f);
-            Vector3 spawnPos = target.position + new Vector3(offsetX, 5f, 0f);
+            float offsetX = Random.Range(-3f, 3f);
+            Vector3 spawnPos = target.position + new Vector3(offsetX, 6f, 0f);
 
             int randomIndex = Random.Range(0, meteoritePrefabs.Length);
             Instantiate(meteoritePrefabs[randomIndex], spawnPos, Quaternion.identity);
@@ -152,7 +152,7 @@ public class BossPhase1 : MonoBehaviour
 
             // pick a random point in a circle around the player
             float angle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
-            float radius = 4f;
+            float radius = 5f;
             Vector3 circleOffset = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)) * radius;
             Vector3 desiredPos = target.position + circleOffset;
 
@@ -173,7 +173,7 @@ public class BossPhase1 : MonoBehaviour
             Instantiate(ufoPrefab, desiredPos, Quaternion.identity);
 
             isAttacking = false; // allow movement between UFO spawns
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.4f);
         }
 
         isAttacking = false;
@@ -196,7 +196,7 @@ public class BossPhase1 : MonoBehaviour
 
         // wind up effect
         float shakeTime = 1f;
-        float shakeIntensity = 0.2f;
+        float shakeIntensity = 0.25f;
         float shakeTimer = 0f;
 
         AudioManager.Instance.PlaySFX("BossSlamWindUp");
@@ -251,7 +251,7 @@ public class BossPhase1 : MonoBehaviour
         isAttacking = true;
 
         // Spawn 4 lasers
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 6; i++)
         {
             isAttacking = true;
 

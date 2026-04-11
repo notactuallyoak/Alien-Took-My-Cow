@@ -172,13 +172,13 @@ public class BossPhase2 : MonoBehaviour
         if (meteoritePrefabs.Length == 0) yield break;
         isAttacking = true;
 
-        for (int i = 0; i < 7; i++) // 5 => 7 meteorites
+        for (int i = 0; i < 10; i++) // 7 => 10 meteorites
         {
             if (target == null) yield break;
             isAttacking = true;
 
-            float offsetX = Random.Range(-3f, 3f); // winder range
-            Vector3 spawnPos = target.position + new Vector3(offsetX, 5f, 0f);
+            float offsetX = Random.Range(-3f, 3f);
+            Vector3 spawnPos = target.position + new Vector3(offsetX, 6f, 0f);
 
             int randomIndex = Random.Range(0, meteoritePrefabs.Length);
             Instantiate(meteoritePrefabs[randomIndex], spawnPos, Quaternion.identity);
@@ -196,7 +196,7 @@ public class BossPhase2 : MonoBehaviour
         isAttacking = true;
 
         float angle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
-        float radius = 2f;
+        float radius = 3f;
         Vector3 circleOffset = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)) * radius;
         Vector3 desiredPos = target.position + circleOffset;
 
@@ -260,7 +260,7 @@ public class BossPhase2 : MonoBehaviour
 
         // AGGRESSIVE WIND UP (Shakes faster/harder for only 0.5 seconds)
         float shakeTime = 0.5f;
-        float shakeIntensity = 0.3f;
+        float shakeIntensity = 0.33f;
         float shakeTimer = 0f;
 
         AudioManager.Instance.PlaySFX("BossSlamWindUp");
@@ -310,8 +310,8 @@ public class BossPhase2 : MonoBehaviour
         if (target == null || laserPrefab == null) yield break;
         isAttacking = true;
 
-        // Spawn 6 lasers in a triangle around the player
-        for (int i = 0; i < 6; i++)
+        // Spawn 13 lasers in a triangle around the player
+        for (int i = 0; i < 13; i++)
         {
             isAttacking = true;
 
