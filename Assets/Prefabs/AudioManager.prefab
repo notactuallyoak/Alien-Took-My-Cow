@@ -301,6 +301,10 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: b0d9ada0813e1034cad0bb36acbb05df, type: 3}
     volume: 0.5
     loop: 0
+  - name: BossDead
+    clip: {fileID: 8300000, guid: b0763d70058063a419b428ae17a30870, type: 3}
+    volume: 0.5
+    loop: 0
   - name: ObjectSpawn
     clip: {fileID: 8300000, guid: fb5bfb7e1364da8469ff5d2b947f9b00, type: 3}
     volume: 0.5

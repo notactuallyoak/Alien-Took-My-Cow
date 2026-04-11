@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using Unity.Collections.LowLevel.Unsafe;
 
 public class BossPhase2 : MonoBehaviour
 {
@@ -10,6 +9,7 @@ public class BossPhase2 : MonoBehaviour
 
     [Header("Prefabs")]
     public Collider2D hitbox;
+    public GameObject finalGoalEndGame;
 
     [Header("Prefabs")]
     public GameObject[] meteoritePrefabs;
@@ -23,6 +23,7 @@ public class BossPhase2 : MonoBehaviour
     private Transform target;
     private bool isAttacking = false;
     private bool fightStarted = false;
+    private bool isDead = false;
 
     private void Start()
     {
@@ -61,6 +62,64 @@ public class BossPhase2 : MonoBehaviour
         {
             target = null;
         }
+
+        // dead
+        EnemyBase enemy = GetComponent<EnemyBase>();
+        if (enemy.health <= 10 && !isDead)
+        {
+            isDead = true;
+            StartCoroutine(DeathSequence());
+        }
+    }
+
+    private IEnumerator DeathSequence()
+    {
+        Vector3 originalPos = transform.position;
+
+        // SHAKE
+        float shakeTime = 3f;
+        float shakeIntensity = 0.5f;
+        float shakeTimer = 0f;
+
+        AudioManager.Instance.PlaySFX("BossSlamWindUp");
+
+        while (shakeTimer < shakeTime)
+        {
+            Vector2 randomOffset = Random.insideUnitCircle * shakeIntensity;
+            transform.position = originalPos + new Vector3(randomOffset.x, randomOffset.y, 0f);
+            shakeTimer += Time.deltaTime;
+            yield return null;
+        }
+        transform.position = originalPos;
+
+        // FALL TO GROUND
+        Vector2 groundCheck = new Vector2(transform.position.x, transform.position.y);
+        RaycastHit2D groundHit = Physics2D.Raycast(groundCheck + Vector2.up * 5f, Vector2.down, 50f, groundLayer);
+
+        if (groundHit.collider == null) { isAttacking = false; yield break; }
+
+        Vector3 groundPos = new Vector3(transform.position.x, groundHit.point.y, 0f);
+        float fallSpeed = 30f;
+
+        while (Vector2.Distance(transform.position, groundPos) > 0.2f)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, groundPos, fallSpeed * Time.deltaTime);
+            yield return null;
+        }
+        transform.position = groundPos;
+
+        ParticleEmitter.Instance.Emit("BigSmoke", groundPos, Quaternion.identity);
+        CameraController.Instance.CamShake(0.66f, 0.3f);
+        AudioManager.Instance.PlaySFX("BossSlamImpact", 0.1f);
+
+        ParticleEmitter.Instance.Emit("BossPhaseTransition", transform.position, Quaternion.identity);
+        ParticleEmitter.Instance.Emit("DeadStar", transform.position, Quaternion.identity);
+        AudioManager.Instance.PlaySFX("BossDead");
+
+        Vector3 spawnPos = transform.position + new Vector3(0, 0.5f, 0);
+        Instantiate(finalGoalEndGame, spawnPos, Quaternion.identity);
+
+        Destroy(gameObject);
     }
 
     private void StartAttackSequence()

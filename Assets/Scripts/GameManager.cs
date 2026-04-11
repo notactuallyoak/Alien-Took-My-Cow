@@ -116,8 +116,6 @@ public class GameManager : MonoBehaviour
                 PlayerPrefs.Save();
             }
         }
-
-        LevelLoader.instance.LoadLevel("LevelSelector");
     }
 
 

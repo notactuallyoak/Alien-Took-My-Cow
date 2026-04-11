@@ -253,7 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fafe7d61c054c494d8788386ae3a4011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBase
-  health: 52
+  health: 60
 --- !u!114 &4669878385686563160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,6 +268,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BossPhase2
   moveSpeed: 10
   hitbox: {fileID: 4454208311422359762}
+  finalGoalEndGame: {fileID: 3424756785584046327, guid: 090391e5fcaebb547b6e539aa1d4fb24, type: 3}
   meteoritePrefabs:
   - {fileID: 3241034447253237896, guid: 8cc9bbd23f87b4f4eb0ced4e8a2cfebd, type: 3}
   - {fileID: 3080672774905107763, guid: 42189fdd825d2f44caeaf9d0db42bc5d, type: 3}

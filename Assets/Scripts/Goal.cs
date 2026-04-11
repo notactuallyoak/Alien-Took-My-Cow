@@ -13,7 +13,7 @@ public class Goal : MonoBehaviour
         goalCollider = GetComponent<Collider2D>();
     }
 
-    private IEnumerator ReachGoal(Collider2D collision)
+    private IEnumerator ReachGoal()
     {
         GameManager.Instance.StopLevelTimer();
 
@@ -22,6 +22,8 @@ public class Goal : MonoBehaviour
 
         yield return new WaitForSeconds(3f);
         GameManager.Instance.FinishLevel();
+
+        LevelLoader.instance.LoadLevel("LevelSelector");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -34,7 +36,7 @@ public class Goal : MonoBehaviour
             playerHealth.isInvincible = true;
             playerHealth.enabled = false;
 
-            StartCoroutine(ReachGoal(collision));
+            StartCoroutine(ReachGoal());
         }
     }
 }
