@@ -259,7 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef563f0930287d74f8ccd2565fac8920, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAlien
-  patrolSpeed: 2
+  patrolSpeed: 2.25
   groundCheckDistance: 1
   wallCheckDistance: 1
   groundLayer:

@@ -81,8 +81,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94edc8a0a1e6b1d40b095b2eaebedf77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHitbox
-  damage: 1
-  knockbackPower: 2
 --- !u!1 &3158042834743219923
 GameObject:
   m_ObjectHideFlags: 0
@@ -245,7 +243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fafe7d61c054c494d8788386ae3a4011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBase
-  health: 5
+  health: 4
 --- !u!114 &1649835536978364960
 MonoBehaviour:
   m_ObjectHideFlags: 0

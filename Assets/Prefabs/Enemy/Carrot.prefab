@@ -228,7 +228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fafe7d61c054c494d8788386ae3a4011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBase
-  health: 5
+  health: 4
 --- !u!114 &2640754804998596322
 MonoBehaviour:
   m_ObjectHideFlags: 0
