@@ -116,6 +116,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (Time.timeScale == 0f) return;
+
         HandleTimers();
         HandleGroundCheck();
         HandleParticles();
@@ -138,6 +140,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (Time.timeScale == 0f) return;
+
         HandleMovement();
         HandleRunCombat();
 
