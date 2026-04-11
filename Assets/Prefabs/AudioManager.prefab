@@ -146,75 +146,79 @@ MonoBehaviour:
   bgmSounds:
   - name: MainMenu
     clip: {fileID: 8300000, guid: c7e358c6e0f674846ae649d950f5f938, type: 3}
-    volume: 0.5
+    volume: 0.25
     loop: 1
   - name: LevelSelector
     clip: {fileID: 8300000, guid: 9c7b2d2f25b94c54fbe30c2b6441250b, type: 3}
-    volume: 0.5
+    volume: 0.25
     loop: 1
   - name: Level1
     clip: {fileID: 8300000, guid: 773ee94a4d7610d438590ff8a52f16ef, type: 3}
-    volume: 0.5
+    volume: 0.25
     loop: 1
   - name: Level2
     clip: {fileID: 8300000, guid: de0617e797cfdb749a11e86e0cd7718a, type: 3}
-    volume: 0.5
+    volume: 0.25
     loop: 1
   - name: Level3
     clip: {fileID: 8300000, guid: f744f815c01b30346a923a06a806f238, type: 3}
-    volume: 0.5
+    volume: 0.25
     loop: 1
   - name: Level4
     clip: {fileID: 8300000, guid: bc9a60bcd631a124893211eb7c2bb93b, type: 3}
-    volume: 0.5
+    volume: 0.25
     loop: 1
   - name: Level5
     clip: {fileID: 8300000, guid: 8fbac69c21c34d44fb3a1b45be031451, type: 3}
-    volume: 0.5
+    volume: 0.25
     loop: 1
   - name: Level6
     clip: {fileID: 8300000, guid: 966184e48da88a0438cc4dcabe0fdec6, type: 3}
-    volume: 0.5
+    volume: 0.25
     loop: 1
   - name: Level7
     clip: {fileID: 8300000, guid: 0540caebcbbf02644afa8d1b8ac39685, type: 3}
-    volume: 0.5
+    volume: 0.25
     loop: 1
   - name: Level8
     clip: {fileID: 8300000, guid: ddee2f4a66087b548837cffc7e6c2c79, type: 3}
-    volume: 0.5
+    volume: 0.25
     loop: 1
   - name: Level10
     clip: {fileID: 8300000, guid: aae1c52a2dd729c488e5dab254270acf, type: 3}
-    volume: 0.5
+    volume: 0.25
     loop: 1
   - name: Level11
     clip: {fileID: 8300000, guid: e43b0d2bc35001e47b65d56710f6bbe8, type: 3}
-    volume: 0.5
+    volume: 0.25
     loop: 1
   - name: Level12
     clip: {fileID: 8300000, guid: 93edf18415345844f9b728e8c5b58a39, type: 3}
-    volume: 0.5
-    loop: 1
-  - name: Level12BossIntro
-    clip: {fileID: 8300000, guid: 43f23f93b6a3edd43a4481d2c8f74c8b, type: 3}
-    volume: 0.5
+    volume: 0.25
     loop: 1
   - name: Level12BossPhase1
     clip: {fileID: 8300000, guid: 4b587481f2dc14d429c6f3c4b5b2fa58, type: 3}
-    volume: 0.5
+    volume: 0.25
     loop: 1
   - name: Level12BossPhase2
     clip: {fileID: 8300000, guid: c989d5e710122414393e66b8599ff6fa, type: 3}
-    volume: 0.5
+    volume: 0.25
     loop: 1
   - name: Credit
     clip: {fileID: 8300000, guid: 03eb17306e59fbb4e98666d388d40c4b, type: 3}
-    volume: 0.5
+    volume: 0.25
     loop: 1
   sfxSounds:
   - name: PlayerWalk
     clip: {fileID: 8300000, guid: 70d7a13f6f1efd243a00f832a6c0c741, type: 3}
+    volume: 0.5
+    loop: 0
+  - name: PlayerPreRun
+    clip: {fileID: 8300000, guid: a88893392caa0fd49ab9cd1cfff787b5, type: 3}
+    volume: 0.5
+    loop: 0
+  - name: PlayerRun
+    clip: {fileID: 8300000, guid: 263456b1031dc5b489c0fe37e0e1de48, type: 3}
     volume: 0.5
     loop: 0
   - name: PlayerJump
@@ -271,7 +275,7 @@ MonoBehaviour:
     loop: 0
   - name: BossLaser
     clip: {fileID: 8300000, guid: 93248e953914da140ba7e0ff78fdf1f5, type: 3}
-    volume: 0.5
+    volume: 0.75
     loop: 0
   - name: PlayerBestTimer
     clip: {fileID: 8300000, guid: 4dfa2a2fa9a3b2d45a619c6eab0d0513, type: 3}
@@ -288,4 +292,32 @@ MonoBehaviour:
   - name: Intro
     clip: {fileID: 8300000, guid: b40898c23b1e1ab4caa7c76aa0069e73, type: 3}
     volume: 1
+    loop: 0
+  - name: Level12BossIntro
+    clip: {fileID: 8300000, guid: 43f23f93b6a3edd43a4481d2c8f74c8b, type: 3}
+    volume: 0.5
+    loop: 0
+  - name: BossPhaseChange
+    clip: {fileID: 8300000, guid: 6962222c8db85a3499b84a66941ee45b, type: 3}
+    volume: 0.5
+    loop: 0
+  - name: BossSlamWindUp
+    clip: {fileID: 8300000, guid: baf27c83ea8c20e429dd142d56071207, type: 3}
+    volume: 1
+    loop: 0
+  - name: BossSlamImpact
+    clip: {fileID: 8300000, guid: b0d9ada0813e1034cad0bb36acbb05df, type: 3}
+    volume: 0.5
+    loop: 0
+  - name: BossDead
+    clip: {fileID: 8300000, guid: b0763d70058063a419b428ae17a30870, type: 3}
+    volume: 0.5
+    loop: 0
+  - name: ObjectSpawn
+    clip: {fileID: 8300000, guid: fb5bfb7e1364da8469ff5d2b947f9b00, type: 3}
+    volume: 0.5
+    loop: 0
+  - name: BigCarCharge
+    clip: {fileID: 8300000, guid: 72b58e813b9f6a745b620ccfbb9ae416, type: 3}
+    volume: 0.5
     loop: 0

@@ -116,6 +116,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (Time.timeScale == 0f) return;
+
         HandleTimers();
         HandleGroundCheck();
         HandleParticles();
@@ -138,6 +140,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (Time.timeScale == 0f) return;
+
         HandleMovement();
         HandleRunCombat();
 
@@ -277,22 +281,24 @@ public class PlayerController : MonoBehaviour
         }
         wasRunning = isRunning;
 
-        if (isGrounded && !isHurt && currentSpeed > walkSpeed)
+        if (isGrounded && !isHurt && currentSpeed > 0)
         {
             if (runParticleTimer <= 0f)
             {
-                if (currentSpeed > walkSpeed && currentSpeed < machSpeed)
-                {
-                    ParticleEmitter.Instance.Emit("LittleSmoke", GroundCheckPosition, Quaternion.identity);
-                    AudioManager.Instance.PlaySFX("PlayerWalk");
-                }
-                else if (currentSpeed >= machSpeed)
-                {
-                    ParticleEmitter.Instance.Emit("Mach", GroundCheckPosition, !facingRight);
-                }
-                else if (isRunning)
+                if (currentSpeed >= machSpeed)
                 {
                     ParticleEmitter.Instance.Emit("Run", GroundCheckPosition, !facingRight);
+                    AudioManager.Instance.PlaySFX("PlayerRun", 0.1f);
+                }
+                else if (currentSpeed > walkSpeed)
+                {
+                    ParticleEmitter.Instance.Emit("Mach", GroundCheckPosition, !facingRight);
+                    AudioManager.Instance.PlaySFX("PlayerPreRun", 0.1f);
+                }
+                else
+                {
+                    ParticleEmitter.Instance.Emit("LittleSmoke", GroundCheckPosition, Quaternion.identity);
+                    AudioManager.Instance.PlaySFX("PlayerWalk", 0.1f);
                 }
                 runParticleTimer = runParticleInterval;
             }
@@ -382,7 +388,7 @@ public class PlayerController : MonoBehaviour
                 isSlamming = false;
 
                 anim.SetTrigger(animSlamLandHash);
-                CameraController.Instance?.CamShake(0.15f, 0.2f);
+                CameraController.Instance.CamShake(0.15f, 0.2f);
 
                 HandleSlamLandCombat();
 

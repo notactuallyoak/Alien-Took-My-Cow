@@ -77,3 +77,5 @@ MonoBehaviour:
     prefab: {fileID: 4745432220766746062, guid: 1e5450376653cf0488f3434512d2aad0, type: 3}
   - name: BlockBreak
     prefab: {fileID: 5254306854481339465, guid: 976140cf211c1fe4ca547a8d6934ce8b, type: 3}
+  - name: BossPhaseTransition
+    prefab: {fileID: 7755977027819436187, guid: 61e568d5f6c628642b5d28aebbc16e2e, type: 3}
