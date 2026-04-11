@@ -213,6 +213,14 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 70d7a13f6f1efd243a00f832a6c0c741, type: 3}
     volume: 0.5
     loop: 0
+  - name: PlayerPreRun
+    clip: {fileID: 8300000, guid: a88893392caa0fd49ab9cd1cfff787b5, type: 3}
+    volume: 0.5
+    loop: 0
+  - name: PlayerRun
+    clip: {fileID: 8300000, guid: 263456b1031dc5b489c0fe37e0e1de48, type: 3}
+    volume: 0.5
+    loop: 0
   - name: PlayerJump
     clip: {fileID: 8300000, guid: 3477059976f6a7441946a55b352194bd, type: 3}
     volume: 0.5
