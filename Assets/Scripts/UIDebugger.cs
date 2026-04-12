@@ -36,9 +36,18 @@ public class UIDebugger : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(toggleKey))
+        bool isWindows = (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor);
+
+        if (isWindows)
         {
-            showDebug = !showDebug;
+            if (Input.GetKeyDown(toggleKey))
+            {
+                showDebug = !showDebug;
+            }
+        }
+        else
+        {
+            showDebug = false;
         }
     }
 
@@ -81,35 +90,41 @@ public class UIDebugger : MonoBehaviour
         GUILayout.Label($"FPS: {(1f / Time.unscaledDeltaTime):F0}", labelStyle);
 
         GUILayout.Space(15);
+        Color oldColor = GUI.color;
 
-        // --- PLAYER CHEATS (NEW) ---
-        GUILayout.Label("<b>PLAYER CHEATS</b>", labelStyle);
-        GUILayout.BeginHorizontal();
-
-        if (GUILayout.Button("Toggle Invincible", buttonStyle))
+        PlayerHealth player = FindFirstObjectByType<PlayerHealth>();
+        if (player != null)
         {
-            PlayerHealth player = FindFirstObjectByType<PlayerHealth>();
-            if (player != null)
-            {
-                // Assuming PlayerHealth has a public bool isInvincible
-                // If not, you need to add 'public bool isInvincible;' to PlayerHealth.cs
-                player.isInvincible = !player.isInvincible;
-                Debug.Log($"Invincible: {player.isInvincible}");
-            }
-        }
+            // --- PLAYER CHEATS (NEW) ---
+            GUILayout.Label("<b>PLAYER CHEATS</b>", labelStyle);
+            GUILayout.BeginHorizontal();
 
-        if (GUILayout.Button("Heal +10 HP", buttonStyle))
-        {
-            PlayerHealth player = FindFirstObjectByType<PlayerHealth>();
-            if (player != null)
-            {
-                // Assuming PlayerHealth has a Heal function or public currentHealth
-                player.Heal(10);
-            }
-        }
-        GUILayout.EndHorizontal();
+            bool isGodMode = player.godMode;
 
-        GUILayout.Space(10);
+            GUI.color = isGodMode ? Color.green : Color.white;
+
+            string buttonText = isGodMode ? "God Mode: ON" : "God Mode: OFF";
+
+            if (GUILayout.Button(buttonText, buttonStyle))
+            {
+                if (player != null)
+                {
+                    player.godMode = !player.godMode;
+                }
+            }
+            GUI.color = oldColor; // reset the color back to normal so it doesnt mess up the next button
+
+            if (GUILayout.Button("Heal Full Health", buttonStyle))
+            {
+                if (player != null)
+                {
+                    player.Heal(10);
+                }
+            }
+            GUILayout.EndHorizontal();
+
+            GUILayout.Space(10);
+        }
 
         // --- SAVE CONTROL ---
         GUILayout.Label("<b>SAVE CONTROL</b>", labelStyle);
@@ -149,7 +164,6 @@ public class UIDebugger : MonoBehaviour
             GUILayout.BeginHorizontal();
             GUILayout.Label($"<b>{levelName}</b>", labelStyle, GUILayout.Width(100));
             bool isUnlocked = (GameManager.Instance != null) && GameManager.Instance.IsLevelUnlocked(i);
-            Color oldColor = GUI.color;
             GUI.color = isUnlocked ? Color.green : Color.red;
             GUILayout.Label(isUnlocked ? "UNLOCKED" : "LOCKED", labelStyle);
             GUI.color = oldColor;

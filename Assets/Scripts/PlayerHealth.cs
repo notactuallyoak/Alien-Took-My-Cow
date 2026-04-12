@@ -12,6 +12,7 @@ public class PlayerHealth : MonoBehaviour
     public float invincibilityDuration;
     public float blinkInterval;
     [HideInInspector] public bool isInvincible = false;
+    [HideInInspector] public bool godMode = false; // for debug cheats only
 
     [Header("Knockback Settings")]
     public float knockbackForceX_Min;
@@ -50,8 +51,9 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int damage, Vector2 enemyPosition)
     {
+        if (godMode) return;
         if (isInvincible || currentHealth <= 0) return;
-        if (playerController.isDashing || playerController.isSlamming || playerController.isHurt) return;
+        if (playerController.isDashing || playerController.isSlamming || playerController.isHurt) return; // I-frames
 
         currentHealth -= damage;
         CameraController.Instance?.CamShake(0.1f, 0.1f);
