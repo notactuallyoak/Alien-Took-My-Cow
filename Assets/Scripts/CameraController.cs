@@ -6,12 +6,12 @@ public class CameraController : MonoBehaviour
     public static CameraController Instance { get; private set; }
 
     private Transform target;
-    public float smoothSpeed;
-    public Vector3 offset;
+    private float smoothSpeed = 25f;
+    private Vector3 offset = new Vector3(0, 1.6f, -10);
 
     [Header("Look Ahead")]
-    public float lookAheadDistance;
-    public float lookAheadSpeed;
+    private float lookAheadDistance = 2;
+    private float lookAheadSpeed = 0.1f;
 
     private float currentLookAhead;
     private Rigidbody2D targetRb;
@@ -66,14 +66,16 @@ public class CameraController : MonoBehaviour
             shakeTimeRemaining -= Time.deltaTime;
 
             float currentPower = Mathf.Lerp(shakePower, 0, 1 - (shakeTimeRemaining / shakeFadeTime));
-            shakeOffset = Random.insideUnitCircle.normalized * currentPower;
+            shakeOffset = Random.insideUnitCircle * currentPower;
         }
         else
         {
-            shakeOffset = Vector2.Lerp(shakeOffset, Vector2.zero, smoothSpeed * Time.unscaledDeltaTime);
-        }
+            float t = 1f - Mathf.Exp(-smoothSpeed * Time.unscaledDeltaTime);
+            shakeOffset = Vector2.Lerp(shakeOffset, Vector2.zero, t);
 
-        // calc final desired position with look-ahead + offset
+        }
+        
+        // apply
         Vector3 desiredPosition = target.position + offset + new Vector3(currentLookAhead, 0, 0) + (Vector3)shakeOffset;
         transform.position = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
     }

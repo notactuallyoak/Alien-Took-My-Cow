@@ -56756,8 +56756,8 @@ Tilemap:
   - first: {x: 45, y: 13, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 19
-      m_TileSpriteIndex: 17
+      m_TileIndex: 6
+      m_TileSpriteIndex: 6
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -77017,7 +77017,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 2259496fd657ce54abe9e28b418ec0e7, type: 2}
   - m_RefCount: 26
     m_Data: {fileID: 11400000, guid: 0264df00b6b817f4da288a31bf8f48e3, type: 2}
-  - m_RefCount: 6786
+  - m_RefCount: 6787
     m_Data: {fileID: 11400000, guid: 8c72a27d65be78547b9d40dc864f5f37, type: 2}
   - m_RefCount: 25
     m_Data: {fileID: 11400000, guid: bdb5d2637ab84c242aa5b2b502eb059f, type: 2}
@@ -77043,7 +77043,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 9447dfd7b94f6fa4a8e0f08b394eb9b6, type: 2}
   - m_RefCount: 29
     m_Data: {fileID: 11400000, guid: a09d0d325bd6f4c47b82d42b96456372, type: 2}
-  - m_RefCount: 23
+  - m_RefCount: 22
     m_Data: {fileID: 11400000, guid: 672d7611603654749b49b2f6f14c5aee, type: 2}
   - m_RefCount: 22
     m_Data: {fileID: 11400000, guid: 79a7d21b6d54d2144970a16f9ad0cbed, type: 2}
@@ -77066,7 +77066,7 @@ Tilemap:
     m_Data: {fileID: -8010440586615673751, guid: 2dabc50b188e44d4b87c294f6ac7ef10, type: 3}
   - m_RefCount: 26
     m_Data: {fileID: 204389799, guid: 2dabc50b188e44d4b87c294f6ac7ef10, type: 3}
-  - m_RefCount: 6786
+  - m_RefCount: 6787
     m_Data: {fileID: 257724318, guid: 2dabc50b188e44d4b87c294f6ac7ef10, type: 3}
   - m_RefCount: 25
     m_Data: {fileID: 1885644027, guid: 2dabc50b188e44d4b87c294f6ac7ef10, type: 3}
@@ -77088,7 +77088,7 @@ Tilemap:
     m_Data: {fileID: -2079906865, guid: 2dabc50b188e44d4b87c294f6ac7ef10, type: 3}
   - m_RefCount: 210
     m_Data: {fileID: -2283603758944070324, guid: 2dabc50b188e44d4b87c294f6ac7ef10, type: 3}
-  - m_RefCount: 23
+  - m_RefCount: 22
     m_Data: {fileID: 1797569748, guid: 2dabc50b188e44d4b87c294f6ac7ef10, type: 3}
   - m_RefCount: 29
     m_Data: {fileID: -127976751, guid: 2dabc50b188e44d4b87c294f6ac7ef10, type: 3}
@@ -78195,14 +78195,6 @@ CompositeCollider2D:
         Y: 93500000
       - X: 126000000
         Y: 93500000
-    - - X: 456500000
-        Y: 130000000
-      - X: 456500000
-        Y: 140000000
-      - X: 460000000
-        Y: 140000000
-      - X: 460000000
-        Y: 130000000
     - - X: 296500000
         Y: 94000000
       - X: 296500000
@@ -78980,10 +78972,6 @@ CompositeCollider2D:
       - {x: 9.35, y: 9.400001}
       - {x: 9.400001, y: 9.35}
       - {x: 12.6, y: 9.35}
-    - - {x: 45.65, y: 13}
-      - {x: 45.65, y: 14}
-      - {x: 46, y: 14}
-      - {x: 46, y: 13}
     - - {x: 29.65, y: 9.400001}
       - {x: 29.65, y: 10.6}
       - {x: 29.6, y: 10.650001}
@@ -80796,7 +80784,7 @@ SpriteRenderer:
   m_SortingOrder: -99
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 665931edaba1b7b47a162f458c651a7e, type: 3}
-  m_Color: {r: 0.3, g: 0.3, b: 0.3, a: 1}
+  m_Color: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
@@ -82057,7 +82045,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -1.25, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.1, y: 1.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1810084027}
@@ -82949,7 +82937,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.2901961, g: 0.2901961, b: 0.18431373, a: 0}
+  m_BackGroundColor: {r: 0.19215688, g: 0.19215688, b: 0.11764707, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -82974,7 +82962,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 5.5
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -83017,10 +83005,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a083cd0fe960e14b84f946e962dc5ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraController
-  smoothSpeed: 1
-  offset: {x: 0, y: 1, z: -10}
-  lookAheadDistance: 2
-  lookAheadSpeed: 2
 --- !u!1001 &536393061
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -89999,7 +89983,7 @@ SpriteRenderer:
   m_SortingOrder: -98
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 927c2daab8af0564dbbd2cb83aad033a, type: 3}
-  m_Color: {r: 0.3, g: 0.3, b: 0.3, a: 1}
+  m_Color: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
@@ -95479,7 +95463,7 @@ SpriteRenderer:
   m_SortingOrder: -97
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 17676673fb9ed2248a7ac055ca528f79, type: 3}
-  m_Color: {r: 0.3, g: 0.3, b: 0.3, a: 1}
+  m_Color: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
@@ -96402,7 +96386,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1320862573278786920, guid: b77e7b60e3b922e4b82d6dc6d304ae3d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 81.39391
+      value: 79.625
       objectReference: {fileID: 0}
     - target: {fileID: 1320862573278786920, guid: b77e7b60e3b922e4b82d6dc6d304ae3d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -96442,7 +96426,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4869581634875777894, guid: b77e7b60e3b922e4b82d6dc6d304ae3d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8294238491550297577, guid: b77e7b60e3b922e4b82d6dc6d304ae3d, type: 3}
       propertyPath: m_Name
