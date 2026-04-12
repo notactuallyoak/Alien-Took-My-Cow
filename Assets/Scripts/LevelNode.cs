@@ -1,8 +1,9 @@
-using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class LevelNode : MonoBehaviour
+public class LevelNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     [Header("Settings")]
     public int levelIndex = 1;
@@ -15,9 +16,35 @@ public class LevelNode : MonoBehaviour
     public TextMeshProUGUI bestTimeText;
     public TextMeshProUGUI lastTimeText;
 
+    [Header("Hover Scale Settings")]
+    private Vector3 normalScale = new Vector3(1f, 1f, 1f);
+    private Vector3 hoverScale = new Vector3(1.1f, 1.1f, 1f); // 10% bigger
+    private float scaleSpeed = 20f; // How fast it grows/shrinks
+
+    private RectTransform rectTransform;
+    private Vector3 targetScale;
+
     private void Start()
     {
+        rectTransform = GetComponent<RectTransform>();
+
+        targetScale = normalScale;
+        rectTransform.localScale = normalScale;
+
         UpdateButton();
+    }
+
+    private void Update()
+    {
+        if (rectTransform.localScale != targetScale)
+        {
+            rectTransform.localScale = Vector3.Lerp(rectTransform.localScale, targetScale, scaleSpeed * Time.deltaTime);
+
+            if (Vector3.Distance(rectTransform.localScale, targetScale) < 0.01f)
+            {
+                rectTransform.localScale = targetScale;
+            }
+        }
     }
 
     public void UpdateButton()
@@ -54,6 +81,32 @@ public class LevelNode : MonoBehaviour
             // hide text when locked
             if (bestTimeText != null) bestTimeText.gameObject.SetActive(false);
             if (lastTimeText != null) lastTimeText.gameObject.SetActive(false);
+        }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (button.interactable)
+        {
+            targetScale = hoverScale;
+            AudioManager.Instance.PlaySFX("ButtonHover", 0.1f);
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (button.interactable)
+        {
+            targetScale = normalScale;
+        }
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (button.interactable)
+        {
+            AudioManager.Instance.PlaySFX("ButtonClick");
+            OnClickLevel();
         }
     }
 
